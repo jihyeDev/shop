@@ -83,14 +83,13 @@ public class MemberDao {
 			returnMember.setMemberNo(Integer.parseInt(rs.getString("memberNo")));
 			returnMember.setMemberId(rs.getString("memberId"));
 			returnMember.setMemberLevel(Integer.parseInt(rs.getString("memberLevel")));
-			// 전체 실행하지 않고 returnMember를 return
-			return returnMember;
 		}
 		
 		// 종료
 		rs.close();
 		stmt.close();
 		conn.close();
-		return null;
+		//returnMember 객체를 return
+		return returnMember;
 	}
 }

@@ -20,7 +20,7 @@
 	// 디버깅
 	if(returnMember==null){
 		System.out.println("로그인 실패");
-		response.sendRedirect("request.getContextPath()/loginForm.jsp");
+		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 	} else {
 		System.out.println("로그인 성공");
 		System.out.println(returnMember.getMemberNo());
