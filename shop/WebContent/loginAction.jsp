@@ -30,6 +30,6 @@
 		// request, session : jsp 내장객체
 		// 특정 사용자 공간(session)에 변수를 생성
 		session.setAttribute("loginMember",returnMember);
-		response.sendRedirect("request.getContextPath()/index.jsp");
+		response.sendRedirect(request.getContextPath()+"/index.jsp");
 	}
 %>

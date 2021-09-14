@@ -11,18 +11,18 @@
 	if(session.getAttribute("loginMember")!=null) {
 		System.out.println("이미 로그인 되어 있습니다. loginMember == " + session.getAttribute("loginMember"));
 		// 다시 브라우즈에게 다른 곳을 요청하도록 하는 메서드
-		response.sendRedirect("request.getContextPath()/index.jsp");
+		response.sendRedirect(request.getContextPath()+"/index.jsp");
 		// 페이지 전체 실행하지 말고 종료
 		return;
 	}
 	// 입력값 방어 코드
 	// 회원가입 입력값 유효성 검사
 	if(request.getParameter("memberId")==null || request.getParameter("memberPw")==null || request.getParameter("memberName")==null || request.getParameter("memberAge")==null || request.getParameter("memberGender")==null) {
-		response.sendRedirect("request.getContextPath()/insertMemberForm.jsp");
+		response.sendRedirect(request.getContextPath()+"/insertMemberForm.jsp");
 		return;
 	}
 	if(request.getParameter("memberId").equals("") || request.getParameter("memberPw").equals("") || request.getParameter("memberName").equals("") || request.getParameter("memberAge").equals("") || request.getParameter("memberGender").equals("")) {
-		response.sendRedirect("request.getContextPath()/insertMemberForm.jsp");
+		response.sendRedirect(request.getContextPath()+"/insertMemberForm.jsp");
 		return;
 	}
 	
@@ -54,5 +54,5 @@
 	// 회원가입하는 memberDao의 insertMember 메서드 호출
 	memberDao.insertMember(paramMember);
 	System.out.println("회원가입 성공");
-	response.sendRedirect("request.getContextPath()/loginForm.jsp");
+	response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 %>
