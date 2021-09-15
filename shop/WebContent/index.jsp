@@ -8,11 +8,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-	<!-- start: submenu include -->
+	<!-- start: mainMenu include -->
 	<div>
-		<jsp:include page="/partial/submenu.jsp"></jsp:include>
+		<jsp:include page="/partial/mainMenu.jsp"></jsp:include>
 	</div>
-	<!-- end : submenu include -->
+	<!-- end : mainMenu include -->
 	<h1 class="jumbotron">메인페이지</h1>
 	<%
 		// 로그인 전 = session의 loginMember가 null 일 때
@@ -29,6 +29,14 @@
 		<div>
 			<div><%=loginMember.getMemberId()%> 님 / Level : <%=loginMember.getMemberLevel()%></div><br>
 			<div><a class="btn btn-success" href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a></div>
+			<!-- 관리자 페이지로 가는 링크 -->
+	<%
+			if(loginMember.getMemberLevel() > 0) {
+	%>		
+			<div><a class="btn btn-success" href="<%=request.getContextPath()%>/admin/adminIndex.jsp">관리자 페이지</a></div>
+	<%
+			}
+	%>
 		</div>
 	<%
 		}

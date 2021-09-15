@@ -18,34 +18,39 @@
 		return;
 	}
 %>
-<h1>회원가입</h1>
-<form method="post" action="./insertMemberAction.jsp">
-<table>
-	<tr>
-		<td>ID</td>
-		<td><input type="text" name="memberId"></td>
-	</tr>
-	<tr>
-		<td>PASSWORD</td>
-		<td><input type="password" name="memberPw"></td>
-	</tr>
-	<tr>
-		<td>NAME</td>
-		<td><input type="text" name="memberName"></td>
-	</tr>
-	<tr>
-		<td>AGE</td>
-		<td><input type="text" name="memberAge"></td>
-	</tr>
-	<tr>
-		<td>GENDER</td>
-		<td>
-			<input type="radio" name="memberGender" value="남">남자 
-			<input type="radio" name="memberGender" value="여">여자
-		</td>
-	</tr>
-</table>
-<button class="btn btn-success" type="submit">가입</button>
+	<!-- start: mainMenu include -->
+	<div>
+		<jsp:include page="/partial/mainMenu.jsp"></jsp:include>
+	</div>
+	<!-- end : mainMenu include -->
+	<h1>회원가입</h1>
+	<form method="post" action="./insertMemberAction.jsp">
+	<table>
+		<tr>
+			<td>ID</td>
+			<td><input type="text" name="memberId"></td>
+		</tr>
+		<tr>
+			<td>PASSWORD</td>
+			<td><input type="password" name="memberPw"></td>
+		</tr>
+		<tr>
+			<td>NAME</td>
+			<td><input type="text" name="memberName"></td>
+		</tr>
+		<tr>
+			<td>AGE</td>
+			<td><input type="text" name="memberAge"></td>
+		</tr>
+		<tr>
+			<td>GENDER</td>
+			<td>
+				<input type="radio" name="memberGender" value="남">남자 
+				<input type="radio" name="memberGender" value="여">여자
+			</td>
+		</tr>
+	</table>
+	<button class="btn btn-success" type="submit">가입</button>
 </form>
 </body>
 </html>

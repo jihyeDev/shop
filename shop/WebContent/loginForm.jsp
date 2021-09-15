@@ -18,6 +18,11 @@
 		return;
 	}
 %>
+	<!-- start: mainMenu include -->
+	<div>
+		<jsp:include page="/partial/mainMenu.jsp"></jsp:include>
+	</div>
+	<!-- end : mainMenu include -->
 	<h1>로그인</h1>
 	<form method="post" action="./loginAction.jsp">
 		<div>memberId : </div>
