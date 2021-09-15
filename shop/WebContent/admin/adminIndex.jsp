@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="vo.*" %>
 <%
+	// adminPage의 방어코드
 	// session에 저장된 loginMember를 받아옴
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	// loginMember가 null이거나 memberLevel이 1이하 일 때 이 페이지를 들어올 수 없음
