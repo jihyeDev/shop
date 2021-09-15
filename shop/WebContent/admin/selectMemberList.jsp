@@ -123,7 +123,7 @@
 			// 제일 첫번째 페이지로 이동할때 = 1 page로 이동
 			if(currentPage != 1){
 			%>
-				<a href="./selectMemberList.jsp?currentPage=<%=1%>" class="btn btn-outline-secondary center-block">◀처음</a>
+				<a href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=1%>" class="btn btn-outline-secondary center-block">◀처음</a>
 			<%
 			}
 	
@@ -131,7 +131,7 @@
 			// 화면에 보여질 시작 페이지 번호가 화면에 보여질 페이지 번호의 갯수보다 크다면 이전 버튼을 생성
 			if(startPage > displayPage){
 			%>
-				<a href="./selectMemberList.jsp?currentPage=<%=startPage-displayPage%>" class="btn btn-outline-secondary">&lt;이전</a>
+				<a href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=startPage-displayPage%>" class="btn btn-outline-secondary">&lt;이전</a>
 			<%
 			}
 			
@@ -141,11 +141,11 @@
 			for(int i=startPage; i<=endPage; i++){
 				if(currentPage == i){
 			%>
-					<a href="./selectMemberList.jsp?currentPage=<%=i%>" class="btn btn-secondary"><%=i%></a>
+					<a href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=i%>" class="btn btn-secondary"><%=i%></a>
 			<%
 				} else if(endPage<lastPage || endPage == lastPage){
 			%>
-					<a href="./selectMemberList.jsp?currentPage=<%=i%>" class="btn btn-outline-secondary"><%=i%></a>
+					<a href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=i%>" class="btn btn-outline-secondary"><%=i%></a>
 			<%	
 				} else if(endPage>lastPage){
 					break;
@@ -156,7 +156,7 @@
 			// 화면에 보여질 마지막 페이지 번호가 마지막페이지보다 작다다면 이전 버튼을 생성
 			if(endPage < lastPage){
 			%>
-				<a href="./selectMemberList.jsp?currentPage=<%=startPage+displayPage%>" class="btn btn-outline-secondary">다음></a>
+				<a href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=startPage+displayPage%>" class="btn btn-outline-secondary">다음></a>
 			<%
 			}
 			
@@ -164,7 +164,7 @@
 			// 가장 마지막 페이지로 바로 이동하는 버튼
 			if(currentPage != lastPage){
 			%>
-				<a href="./selectMemberList.jsp?currentPage=<%=lastPage%>" class="btn btn-outline-secondary">끝▶</a>
+				<a href="<%=request.getContextPath()%>/admin/selectMemberList.jsp?currentPage=<%=lastPage%>" class="btn btn-outline-secondary">끝▶</a>
 			<%
 			}
 		%>

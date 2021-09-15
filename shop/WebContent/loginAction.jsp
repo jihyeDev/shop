@@ -23,9 +23,8 @@
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 	} else {
 		System.out.println("로그인 성공");
-		System.out.println(returnMember.getMemberNo());
-		System.out.println(returnMember.getMemberId());
-		System.out.println(returnMember.getMemberLevel());
+		System.out.println(returnMember.getMemberId()+"<--- login한 memberId");
+		System.out.println(returnMember.getMemberLevel()+"<--- login한 memberLevel");
 		
 		// request, session : jsp 내장객체
 		// 특정 사용자 공간(session)에 변수를 생성
