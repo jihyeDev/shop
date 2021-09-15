@@ -69,6 +69,7 @@
 			<tr>
 				<th>memberNo</th>
 				<th>memberLevel</th>
+				<th>memberId</th>
 				<th>memberName</th>
 				<th>memberAge</th>
 				<th>memberGender</th>
@@ -98,6 +99,7 @@
 								}
 							%>
 						</td>
+						<td><%=m.getMemberId()%></td>
 						<td><%=m.getMemberName()%></td>
 						<td><%=m.getMemberAge()%></td>
 						<td><%=m.getMemberGender()%></td>
