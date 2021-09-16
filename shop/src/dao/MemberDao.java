@@ -10,8 +10,6 @@ import vo.*;
 import commons.*;
 
 public class MemberDao {
-	// dbUtil 객체 생성
-	DBUtil dbUtil = new DBUtil();
 	
 	// [비회원] 회원가입을 하는 메서드
 	// Member 객체로 입력받아온 값을 DB에 insert 함
@@ -24,6 +22,8 @@ public class MemberDao {
 		System.out.println(member.getMemberGender() + "<--- MemberDao.insertMember parem : memberGender");
 		
 		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
 		// dbUtil의 getConnection메서드를 사용하여 DB 연결
 		Connection conn = dbUtil.getConnection();
 		System.out.println(conn + "<--- conn");
@@ -61,6 +61,8 @@ public class MemberDao {
 		System.out.println(member.getMemberPw() + "<--- MemberDao.deleteMember parem : memberPw");
 		
 		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
 		// dbUtil의 getConnection메서드를 사용하여 DB 연결
 		Connection conn = dbUtil.getConnection();
 		String sql = "SELECT member_no memberNo, member_id memberId, member_level memberLevel FROM member WHERE member_id=? AND member_pw=PASSWORD(?)";
@@ -100,6 +102,8 @@ public class MemberDao {
 		ArrayList<Member> list = new ArrayList<Member>();
 		
 		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
 		String sql = "SELECT member_no memberNo, member_id memberId, member_level memberLevel, member_name memberName, member_age memberAge, member_gender memberGender, update_date updateDate, create_date createDate FROM member ORDER BY createDate DESC LIMIT ?,?";
 		/*
@@ -143,6 +147,8 @@ public class MemberDao {
 		int totalCount = 0;
 		int lastPage = 0;
 			
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
 		String sql = "SELECT count(*) FROM member";
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -178,6 +184,8 @@ public class MemberDao {
 		ArrayList<Member> list = new ArrayList<Member>();
 			
 		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
 		String sql = "SELECT member_no memberNo, member_id memberId, member_level memberLevel, member_name memberName, member_age memberAge, member_gender memberGender, update_date updateDate, create_date createDate FROM member WHERE member_id LIKE ? ORDER BY createDate DESC LIMIT ?,?";
 		/*
@@ -221,7 +229,9 @@ public class MemberDao {
 	public int selectMemberListSearchLastPage(int ROW_PER_PAGE, String searchMemberId) throws ClassNotFoundException, SQLException{
 		int totalCount = 0;
 		int lastPage = 0;
-				
+		
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
 		String sql = "SELECT count(*) FROM member WHERE member_id LIKE ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -250,5 +260,129 @@ public class MemberDao {
 		conn.close();
 				
 		return lastPage;
+	}
+	
+	// [관리자] 특정회원의 정보를 SELECT하는 메서드
+	// memberNo를 받아와서 한 행을 SELECT 한 뒤 자료구조화
+	public Member selectMemberOne (int memberNo) throws ClassNotFoundException, SQLException {	
+		// member 객체를 사용하기 위해 null로 초기화
+		Member member = null;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(memberNo+" <-- 매개변수 memberNo");
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT member_no memberNo, member_id memberId, member_level memberLevel, member_name memberName, member_age memberAge, member_gender memberGender, update_date updateDate, create_date createDate FROM member WHERE member_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, memberNo);
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+			
+		// 데이터 가공 (자료구조화)
+		// ResultSet이라는 특수한 타입에서 객체라는 일반화된 타입으로 변환(가공)
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			// member 객체 생성 후 저장
+			member = new Member();
+			member.setMemberNo(Integer.parseInt(rs.getString("memberNo")));
+			member.setMemberId (rs.getString("memberId"));
+			member.setMemberLevel(Integer.parseInt(rs.getString("memberLevel")));
+			member.setMemberName (rs.getString("memberName"));
+			member.setMemberAge(Integer.parseInt(rs.getString("memberAge")));
+			member.setMemberGender (rs.getString("memberGender"));
+			member.setUpdateDate (rs.getString("UpdateDate"));
+			member.setCreateDate (rs.getString("CreateDate"));
+		}
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+			
+		//member를 return
+		return member;
+	}
+	
+	
+	// [관리자] 특정회원의 레벨을 변경하는 메서드
+	// memberNo과 수정된 level을 입력받아와서 수정
+	// Member member : memberNo값
+	// String MemberNewLevel : 변경할 memberLevel 값
+	public void updateMemberLevelByAdmin(Member member, int memberNewLevel) throws ClassNotFoundException, SQLException {
+		// 매개변수값은 무조건! 디버깅
+		System.out.println(member.getMemberNo() + "<--- MemberDao.updateMemberLevelByAdmin parem : memberNo");
+		System.out.println(memberNewLevel + "<--- MemberDao.updateMemberLevelByAdmin parem : memberNewLevel");
+						
+		// DB 실행
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "UPDATE member SET member_level=? WHERE member_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, memberNewLevel);
+		stmt.setInt(2, member.getMemberNo());
+						
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+						
+		// UPDATE 실행
+		stmt.executeUpdate();
+				
+		// 종료
+		stmt.close();
+		conn.close();
+	}
+	
+	// [관리자] 특정회원의 비밀번호를 변경하는 메서드
+	// memberNo과 수정된 비밀번호를 입력받아와서 비밀번호를 변경
+	// Member member : memberNo값
+	// String MemberNewPw : 변경할 memberPw 값
+	public void updateMemberPwByAdmin(Member member, String memberNewPw) throws ClassNotFoundException, SQLException {
+		// 매개변수값은 무조건! 디버깅
+		System.out.println(member.getMemberNo() + "<--- MemberDao.updateMemberPwByAdmin parem : memberNo");
+		System.out.println(memberNewPw + "<--- MemberDao.updateMemberPwByAdmin parem : memberNewPw");
+								
+		// DB 실행
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "UPDATE member SET member_pw=PASSWORD(?) WHERE member_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, memberNewPw);
+		stmt.setInt(2, member.getMemberNo());
+								
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+								
+		// UPDATE 실행
+		stmt.executeUpdate();
+						
+		// 종료
+		stmt.close();
+		conn.close();
+	}
+	
+	// [관리자] 특정회원을 삭제하는 메서드
+	// memberNo를 입력받아와서 삭제하는 메서드
+	public void deleteMemberByAdmin(int memberNo) throws ClassNotFoundException, SQLException{
+		// 매개변수값은 무조건! 디버깅
+		System.out.println(memberNo + "<--- MemberDao.deleteMemberByAdmin parem : memberNo");
+										
+		// DB 실행
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "DELETE FROM member WHERE member_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, memberNo);
+										
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+										
+		// DELETE 실행
+		stmt.executeUpdate();
+								
+		// 종료
+		stmt.close();
+		conn.close();
 	}
 }
