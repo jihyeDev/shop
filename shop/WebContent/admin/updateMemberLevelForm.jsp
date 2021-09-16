@@ -65,6 +65,7 @@
 	</div>
 	<!-- end : adminMenu include -->
 	<h1>관리자페이지</h1>
+	<h6>특정회원 레벨 수정</h6>
 	<form method="post" action="./updateMemberLevelAction.jsp">
 		<table>
 			<tr>

@@ -65,6 +65,7 @@
 	</div>
 	<!-- end : adminMenu include -->
 	<h1>관리자페이지</h1>
+	<h6>특정회원 비밀번호 수정</h6>
 	<form method="post" action="./updateMemberPwAction.jsp">
 		<table>
 			<tr>
@@ -83,23 +84,16 @@
 				<td>LEVEL</td>
 				<td>
 					<%
-						// LEVEL을 설정하는 select를 수정하기 전의 카테고리로
-						// selected 하기 위해 배열로 생성하여 비교
-						// "selected" 문자열을 저장하기 위한 용도의 배열
-						String[] levelSelected = new String[3];
-						if(returnMember.getMemberLevel()==0){
-							levelSelected[0] = "selected";
-						} else if(returnMember.getMemberLevel()==1){
-							levelSelected[1] = "selected";
-						} else if(returnMember.getMemberLevel()==2){
-							levelSelected[2] = "selected";
+						if(returnMember.getMemberLevel() == 0) {
+					%>
+							<input type="text" name="memberLevel" readonly value="0 회원">
+					<%
+						} else {
+					%>
+							<input type="text" name="memberLevel" readonly value="관리자">
+					<%
 						}
 					%>
-					<select name="memberLevel" >
-						<option value="0" <%=levelSelected[0]%>>0 회원</option>
-						<option value="1" <%=levelSelected[1]%>>1 관리자</option>
-						<option value="2" <%=levelSelected[2]%>>2 관리자</option>
-					</select>
 				</td>
 			</tr>
 			<tr>
