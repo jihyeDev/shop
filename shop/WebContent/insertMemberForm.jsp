@@ -24,11 +24,28 @@
 	</div>
 	<!-- end : mainMenu include -->
 	<h1>회원가입</h1>
-	<form method="post" action="./insertMemberAction.jsp">
+	<%
+		// 아이디 중복 검사를 완료한 memberIdCheck = 공백값이거나, 중복체크를 완료한 사용가능한 아이디 값
+		// selectMemberIdCheckAction.jsp 페이지에서 중복 값인지 검사하고 다시 이 페이지로 보내서 저장함
+		// memberIdCheck에 저장된 값을 ID 입력칸에 value로 넣어줌
+		String memberIdCheck = "";
+		if(request.getParameter("memberIdCheck") != null){
+			memberIdCheck = request.getParameter("memberIdCheck");
+		}
+	%>
+	<!-- 멤버아이디가 사용가능한지 중복 확인 폼 -->
+	<form method="post" action="<%=request.getContextPath()%>/selectMemberIdCheckAction.jsp">
+		ID : <input type="text" name="memberIdCheck"><button type="submit">아이디 중복 검사</button>
+	</form>
+	
+	<div><%=request.getParameter("idCheckResult") %></div><!-- null or 이미 사용중인 아이디 입니다 -->
+	
+	<!-- 회원가입 폼 -->
+	<form method="post" action="<%=request.getContextPath()%>/insertMemberAction.jsp">
 	<table>
 		<tr>
 			<td>ID</td>
-			<td><input type="text" name="memberId"></td>
+			<td><input type="text" name="memberId" readonly="readonly" value="<%=memberIdCheck%>"></td>
 		</tr>
 		<tr>
 			<td>PASSWORD</td>

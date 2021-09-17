@@ -11,6 +11,42 @@ import commons.*;
 
 public class MemberDao {
 	
+	// [비회원] 회원가입을 하기 전에 아이디 중복 검사를 하는 메서드
+	// 중복확인 할 memberIdCheck 값을 받아와서 SELECT 하고 memberId에 저장하여 리턴
+	// 리턴하는 memberId값이 null이면 사용 가능한 ID, 아니라면 이미 사용중인 ID
+	public String selectMemberId(String memberIdCheck) throws ClassNotFoundException, SQLException {
+		// memberId를 null값으로 지정
+		String memberId = null;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(memberIdCheck + "<--- MemberDao.selectMemberId parem : memberIdCheck");
+				
+		// DB 실행
+		DBUtil dbUtil = new DBUtil();
+		// dbUtil의 getConnection메서드를 사용하여 DB 연결
+		Connection conn = dbUtil.getConnection();
+		System.out.println(conn + "<--- conn");
+		String sql = "SELECT member_id memberId FROM member WHERE member_id=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, memberIdCheck);
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// SELECT 실행 값을 rs에 저장
+		ResultSet rs = stmt.executeQuery();
+		
+		if(rs.next()) {
+			memberId = rs.getString("memberId");
+		}
+				
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+		// memberId: null->사용 가능한 ID, 아니면 이미 사용중인 ID
+		return memberId;
+	}
+	
 	// [비회원] 회원가입을 하는 메서드
 	// Member 객체로 입력받아온 값을 DB에 insert 함
 	public void insertMember(Member member) throws ClassNotFoundException, SQLException {
