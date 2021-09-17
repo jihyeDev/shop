@@ -354,7 +354,7 @@ public class MemberDao {
 		// DB 실행
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "UPDATE member SET member_level=? WHERE member_no=?";
+		String sql = "UPDATE member SET member_level=?, update_date=now() WHERE member_no=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, memberNewLevel);
 		stmt.setInt(2, member.getMemberNo());
@@ -382,7 +382,7 @@ public class MemberDao {
 		// DB 실행
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "UPDATE member SET member_pw=PASSWORD(?) WHERE member_no=?";
+		String sql = "UPDATE member SET member_pw=PASSWORD(?), update_date=now() WHERE member_no=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, memberNewPw);
 		stmt.setInt(2, member.getMemberNo());

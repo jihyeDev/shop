@@ -122,7 +122,7 @@ public class CategoryDao {
 		// DB 실행
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "UPDATE category SET category_state=? WHERE category_name=?";
+		String sql = "UPDATE category SET category_state=?, update_date=now() WHERE category_name=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, categoryNewState);
 		stmt.setString(2, category.getCategoryName());
