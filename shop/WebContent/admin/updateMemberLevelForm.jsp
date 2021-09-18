@@ -59,82 +59,93 @@
 	}
 %>
 
-	<!-- start: adminMenu include -->
-	<div>
-		<jsp:include page="/partial/adminMenu.jsp"></jsp:include>
+	<div class="container-fluid">
+		<div class="row">
+
+			<!-- start: adminMenu include -->
+			<div class="col-sm-2 bg-light">
+				<jsp:include page="/partial/adminMenu.jsp"></jsp:include>
+			</div>
+			<!-- end : adminMenu include -->
+			
+			<div class="col-sm-10">
+				<h1>관리자페이지</h1>
+				<h6>특정회원 레벨 수정</h6>
+				
+				<form method="post" action="./updateMemberLevelAction.jsp">
+					<table>
+						<tr>
+							<td>NO</td>
+							<td><input type="text" name="memberNo" readonly value="<%=returnMember.getMemberNo()%>"></td>
+						</tr>
+						<tr>
+							<td>ID</td>
+							<td><input type="text" name="memberId" readonly value="<%=returnMember.getMemberId()%>"></td>
+						</tr>
+						<tr>
+							<td>LEVEL</td>
+							<td>
+								<%
+									// LEVEL을 설정하는 select를 수정하기 전의 카테고리로
+									// selected 하기 위해 배열로 생성하여 비교
+									// "selected" 문자열을 저장하기 위한 용도의 배열
+									String[] levelSelected = new String[3];
+									if(returnMember.getMemberLevel()==0){
+										levelSelected[0] = "selected";
+									} else if(returnMember.getMemberLevel()==1){
+										levelSelected[1] = "selected";
+									} else if(returnMember.getMemberLevel()==2){
+										levelSelected[2] = "selected";
+									}
+								%>
+								<select name="memberLevel">
+									<option value="0" <%=levelSelected[0]%>>0 회원</option>
+									<option value="1" <%=levelSelected[1]%>>1 관리자</option>
+									<option value="2" <%=levelSelected[2]%>>2 관리자</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>NAME</td>
+							<td><input type="text" name="memberName" readonly value="<%=returnMember.getMemberName()%>"></td>
+						</tr>
+						<tr>
+							<td>AGE</td>
+							<td><input type="text" name="memberAge" readonly value="<%=returnMember.getMemberAge()%>"></td>
+						</tr>
+						<tr>
+							<td>GENDER</td>
+							<td>
+								<%
+									if(returnMember.getMemberGender().equals("남")){
+								%>
+									<input type="radio" name="memberGender" readonly value="남" checked>남자 
+									<input type="radio" name="memberGender" readonly value="여">여자
+								<%
+									} else {
+								%>
+									<input type="radio" name="memberGender" readonly value="남">남자 
+									<input type="radio" name="memberGender" readonly value="여" checked>여자
+								<%
+									}
+								%>
+							</td>
+						</tr>
+						<tr>
+							<td>UPDATE DATE</td>
+							<td><input type="text" name="updateDate" readonly value="<%=returnMember.getUpdateDate()%>"></td>
+						</tr>
+						<tr>
+							<td>CREATE DATE</td>
+							<td><input type="text" name="createDate" readonly value="<%=returnMember.getCreateDate()%>"></td>
+						</tr>
+					</table>
+					<button type="submit" class="btn btn-outline-secondary center-block">수정</button>
+				</form>
+				
+			</div>
+			
+		</div>
 	</div>
-	<!-- end : adminMenu include -->
-	<h1>관리자페이지</h1>
-	<h6>특정회원 레벨 수정</h6>
-	<form method="post" action="./updateMemberLevelAction.jsp">
-		<table>
-			<tr>
-				<td>NO</td>
-				<td><input type="text" name="memberNo" readonly value="<%=returnMember.getMemberNo()%>"></td>
-			</tr>
-			<tr>
-				<td>ID</td>
-				<td><input type="text" name="memberId" readonly value="<%=returnMember.getMemberId()%>"></td>
-			</tr>
-			<tr>
-				<td>LEVEL</td>
-				<td>
-					<%
-						// LEVEL을 설정하는 select를 수정하기 전의 카테고리로
-						// selected 하기 위해 배열로 생성하여 비교
-						// "selected" 문자열을 저장하기 위한 용도의 배열
-						String[] levelSelected = new String[3];
-						if(returnMember.getMemberLevel()==0){
-							levelSelected[0] = "selected";
-						} else if(returnMember.getMemberLevel()==1){
-							levelSelected[1] = "selected";
-						} else if(returnMember.getMemberLevel()==2){
-							levelSelected[2] = "selected";
-						}
-					%>
-					<select name="memberLevel">
-						<option value="0" <%=levelSelected[0]%>>0 회원</option>
-						<option value="1" <%=levelSelected[1]%>>1 관리자</option>
-						<option value="2" <%=levelSelected[2]%>>2 관리자</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>NAME</td>
-				<td><input type="text" name="memberName" readonly value="<%=returnMember.getMemberName()%>"></td>
-			</tr>
-			<tr>
-				<td>AGE</td>
-				<td><input type="text" name="memberAge" readonly value="<%=returnMember.getMemberAge()%>"></td>
-			</tr>
-			<tr>
-				<td>GENDER</td>
-				<td>
-					<%
-						if(returnMember.getMemberGender().equals("남")){
-					%>
-						<input type="radio" name="memberGender" readonly value="남" checked>남자 
-						<input type="radio" name="memberGender" readonly value="여">여자
-					<%
-						} else {
-					%>
-						<input type="radio" name="memberGender" readonly value="남">남자 
-						<input type="radio" name="memberGender" readonly value="여" checked>여자
-					<%
-						}
-					%>
-				</td>
-			</tr>
-			<tr>
-				<td>UPDATE DATE</td>
-				<td><input type="text" name="updateDate" readonly value="<%=returnMember.getUpdateDate()%>"></td>
-			</tr>
-			<tr>
-				<td>CREATE DATE</td>
-				<td><input type="text" name="createDate" readonly value="<%=returnMember.getCreateDate()%>"></td>
-			</tr>
-		</table>
-		<button type="submit" class="btn btn-outline-secondary center-block">수정</button>
-	</form>
 </body>
 </html>

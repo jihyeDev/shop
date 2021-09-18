@@ -58,80 +58,90 @@
 		System.out.println(returnMember.getCreateDate()+"<---returnMember.getCreateDate()");
 	}
 %>
+	<div class="container-fluid">
+		<div class="row">
 
-	<!-- start: adminMenu include -->
-	<div>
-		<jsp:include page="/partial/adminMenu.jsp"></jsp:include>
+			<!-- start: adminMenu include -->
+			<div class="col-sm-2 bg-light">
+				<jsp:include page="/partial/adminMenu.jsp"></jsp:include>
+			</div>
+			<!-- end : adminMenu include -->
+			
+			<div class="col-sm-10">
+				<h1>관리자페이지</h1>
+				<h6>특정회원 비밀번호 수정</h6>
+				
+				<form method="post" action="./updateMemberPwAction.jsp">
+					<table>
+						<tr>
+							<td>NO</td>
+							<td><input type="text" name="memberNo" readonly value="<%=returnMember.getMemberNo()%>"></td>
+						</tr>
+						<tr>
+							<td>ID</td>
+							<td><input type="text" name="memberId" readonly value="<%=returnMember.getMemberId()%>"></td>
+						</tr>
+						<tr>
+							<td>PASSWORD</td>
+							<td><input type="text" name="memberPw"></td>
+						</tr>
+						<tr>
+							<td>LEVEL</td>
+							<td>
+								<%
+									if(returnMember.getMemberLevel() == 0) {
+								%>
+										<input type="text" name="memberLevel" readonly value="0 회원">
+								<%
+									} else {
+								%>
+										<input type="text" name="memberLevel" readonly value="관리자">
+								<%
+									}
+								%>
+							</td>
+						</tr>
+						<tr>
+							<td>NAME</td>
+							<td><input type="text" name="memberName" readonly value="<%=returnMember.getMemberName()%>"></td>
+						</tr>
+						<tr>
+							<td>AGE</td>
+							<td><input type="text" name="memberAge" readonly value="<%=returnMember.getMemberAge()%>"></td>
+						</tr>
+						<tr>
+							<td>GENDER</td>
+							<td>
+								<%
+									if(returnMember.getMemberGender().equals("남")){
+								%>
+									<input type="radio" name="memberGender" readonly value="남" checked>남자 
+									<input type="radio" name="memberGender" readonly value="여">여자
+								<%
+									} else {
+								%>
+									<input type="radio" name="memberGender" readonly value="남">남자 
+									<input type="radio" name="memberGender" readonly value="여" checked>여자
+								<%
+									}
+								%>
+							</td>
+						</tr>
+						<tr>
+							<td>UPDATE DATE</td>
+							<td><input type="text" name="updateDate" readonly value="<%=returnMember.getUpdateDate()%>"></td>
+						</tr>
+						<tr>
+							<td>CREATE DATE</td>
+							<td><input type="text" name="createDate" readonly value="<%=returnMember.getCreateDate()%>"></td>
+						</tr>
+					</table>
+					<button type="submit" class="btn btn-outline-secondary center-block">수정</button>
+				</form>
+				
+			</div>
+			
+		</div>
 	</div>
-	<!-- end : adminMenu include -->
-	<h1>관리자페이지</h1>
-	<h6>특정회원 비밀번호 수정</h6>
-	<form method="post" action="./updateMemberPwAction.jsp">
-		<table>
-			<tr>
-				<td>NO</td>
-				<td><input type="text" name="memberNo" readonly value="<%=returnMember.getMemberNo()%>"></td>
-			</tr>
-			<tr>
-				<td>ID</td>
-				<td><input type="text" name="memberId" readonly value="<%=returnMember.getMemberId()%>"></td>
-			</tr>
-			<tr>
-				<td>PASSWORD</td>
-				<td><input type="text" name="memberPw"></td>
-			</tr>
-			<tr>
-				<td>LEVEL</td>
-				<td>
-					<%
-						if(returnMember.getMemberLevel() == 0) {
-					%>
-							<input type="text" name="memberLevel" readonly value="0 회원">
-					<%
-						} else {
-					%>
-							<input type="text" name="memberLevel" readonly value="관리자">
-					<%
-						}
-					%>
-				</td>
-			</tr>
-			<tr>
-				<td>NAME</td>
-				<td><input type="text" name="memberName" readonly value="<%=returnMember.getMemberName()%>"></td>
-			</tr>
-			<tr>
-				<td>AGE</td>
-				<td><input type="text" name="memberAge" readonly value="<%=returnMember.getMemberAge()%>"></td>
-			</tr>
-			<tr>
-				<td>GENDER</td>
-				<td>
-					<%
-						if(returnMember.getMemberGender().equals("남")){
-					%>
-						<input type="radio" name="memberGender" readonly value="남" checked>남자 
-						<input type="radio" name="memberGender" readonly value="여">여자
-					<%
-						} else {
-					%>
-						<input type="radio" name="memberGender" readonly value="남">남자 
-						<input type="radio" name="memberGender" readonly value="여" checked>여자
-					<%
-						}
-					%>
-				</td>
-			</tr>
-			<tr>
-				<td>UPDATE DATE</td>
-				<td><input type="text" name="updateDate" readonly value="<%=returnMember.getUpdateDate()%>"></td>
-			</tr>
-			<tr>
-				<td>CREATE DATE</td>
-				<td><input type="text" name="createDate" readonly value="<%=returnMember.getCreateDate()%>"></td>
-			</tr>
-		</table>
-		<button type="submit" class="btn btn-outline-secondary center-block">수정</button>
-	</form>
 </body>
 </html>

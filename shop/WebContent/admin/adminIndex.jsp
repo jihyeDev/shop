@@ -15,14 +15,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-	<!-- start: adminMenu include -->
-	<div>
-		<jsp:include page="/partial/adminMenu.jsp"></jsp:include>
+	<div class="container-fluid">
+		<div class="row">
+		
+			<!-- start: adminMenu include -->
+			<div class="col-sm-2 bg-light">
+				<jsp:include page="/partial/adminMenu.jsp"></jsp:include>
+			</div>
+			<!-- end : adminMenu include -->
+			
+			<div class="col-sm-10">
+				<h1>관리자페이지</h1>
+				<div><%=loginMember.getMemberId()%>님 반갑습니다</div>
+			</div>
+			
+		</div>
 	</div>
-	<!-- end : adminMenu include -->
-	<h1>관리자페이지</h1>
-	<div><%=loginMember.getMemberId()%>님 반갑습니다</div>
 </body>
 </html>
