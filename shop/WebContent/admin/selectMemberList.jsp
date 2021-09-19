@@ -67,20 +67,21 @@
 			</div>
 			<!-- end : adminMenu include -->
 			
-			<div class="col-sm-10">
+			<div class="col-sm-10 mt-5">
 			
-				<h1>회원 목록</h1>
-				<table border="1">
+				<h3 class="font-weight-bold">회원목록</h3>
+				
+				<table class="table table-bordered table-sm text-center mt-5">
 					<thead>
 						<tr>
-							<th>memberNo</th>
-							<th>memberLevel</th>
-							<th>memberId</th>
-							<th>memberName</th>
-							<th>memberAge</th>
-							<th>memberGender</th>
-							<th>updateDate</th>
-							<th>createDate</th>
+							<th>NO</th>
+							<th>LEVEL</th>
+							<th>ID</th>
+							<th>NAME</th>
+							<th>AGE</th>
+							<th>GENDER</th>
+							<th>UPDATE</th>
+							<th>JOINDATE</th>
 							<th>등급수정</th>
 							<th>PW수정</th>
 							<th>강제탈퇴</th>
@@ -94,15 +95,14 @@
 								<tr>
 									<td><%=m.getMemberNo()%></td>
 									<td>
-										<%=m.getMemberLevel()%>
 										<%
 											if(m.getMemberLevel() == 0) {
 										%>
-												<span>회원</span>
+												<span>회원 Level.<%=m.getMemberLevel()%></span>
 										<%
 											} else if(m.getMemberLevel() == 1) {
 										%>
-												<span>관리자</span>
+												<span>관리자 Level.<%=m.getMemberLevel()%></span>
 										<%
 											}
 										%>
@@ -115,15 +115,15 @@
 									<td><%=m.getCreateDate()%></td>
 									<td>
 										<!-- 로그인된 관리자의 비밀번호를 확인 후 특정회원의 등급을 수정 -->
-										<a href="<%=request.getContextPath()%>/admin/updateMemberLevelForm.jsp?memberNo=<%=m.getMemberNo()%>">등급수정</a>
+										<a class="btn btn-light btn-sm" href="<%=request.getContextPath()%>/admin/updateMemberLevelForm.jsp?memberNo=<%=m.getMemberNo()%>">등급수정</a>
 									</td>
 									<td>
 										<!-- 로그인된 관리자의 비밀번호를 확인 후 특정회원의 비밀번호를 수정 -->
-										<a href="<%=request.getContextPath()%>/admin/updateMemberPwForm.jsp?memberNo=<%=m.getMemberNo()%>">PW수정</a>
+										<a class="btn btn-light btn-sm" href="<%=request.getContextPath()%>/admin/updateMemberPwForm.jsp?memberNo=<%=m.getMemberNo()%>">PW수정</a>
 									</td>
 									<td>
 										<!-- 로그인된 관리자의 비밀번호를 확인 후 특정회원을 강제 탈퇴 -->
-										<a href="<%=request.getContextPath()%>/admin/deleteMember.jsp?memberNo=<%=m.getMemberNo()%>">강제탈퇴</a>
+										<a class="btn btn-light btn-sm" href="<%=request.getContextPath()%>/admin/deleteMember.jsp?memberNo=<%=m.getMemberNo()%>">강제탈퇴</a>
 									</td>
 								</tr>
 						<%
@@ -214,12 +214,12 @@
 						<%
 						}
 						%>
-					
+						
 				<!-- member_id로 검색 -->
-				<div>
+				<div class="float-right">
 					<form action="<%=request.getContextPath()%>/admin/selectMemberList.jsp" method="get">
-						memberID : <input type="text" name="searchMemberId">
-						<button type="submit">검색</button>
+						Search with ID <input type="text" name="searchMemberId" placeholder="검색어를 입력해주세요">
+						<button class="btn btn-dark btn-sm" type="submit">검색</button>
 					</form>
 				</div>
 				

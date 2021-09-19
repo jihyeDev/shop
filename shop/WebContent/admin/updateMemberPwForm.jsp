@@ -67,47 +67,53 @@
 			</div>
 			<!-- end : adminMenu include -->
 			
-			<div class="col-sm-10">
-				<h1>관리자페이지</h1>
-				<h6>특정회원 비밀번호 수정</h6>
+			<div class="col-sm-10 mt-5">
+				<h3 class="font-weight-bold">회원목록 <small class="font-weight-light text-secondary">_ 특정회원 비밀번호 수정</small></h3>
 				
-				<form method="post" action="./updateMemberPwAction.jsp">
-					<table>
+				<form method="post" action="<%=request.getContextPath()%>/admin/updateMemberPwAction.jsp">
+					<table class="table mt-5 w-50">
 						<tr>
 							<td>NO</td>
-							<td><input type="text" name="memberNo" readonly value="<%=returnMember.getMemberNo()%>"></td>
+							<td><input type="text" name="memberNo" class="form-control" readonly="readonly" value="<%=returnMember.getMemberNo()%>"></td>
 						</tr>
 						<tr>
 							<td>ID</td>
-							<td><input type="text" name="memberId" readonly value="<%=returnMember.getMemberId()%>"></td>
+							<td><input type="text" name="memberId" class="form-control" readonly="readonly" value="<%=returnMember.getMemberId()%>"></td>
 						</tr>
-						<tr>
-							<td>PASSWORD</td>
-							<td><input type="text" name="memberPw"></td>
+						<tr class="table-secondary">
+							<td>NEW PASSWORD <span class="text-danger">*</span></td>
+							<td><input type="text" class="form-control" name="memberPw"></td>
 						</tr>
 						<tr>
 							<td>LEVEL</td>
 							<td>
 								<%
-									if(returnMember.getMemberLevel() == 0) {
-								%>
-										<input type="text" name="memberLevel" readonly value="0 회원">
-								<%
-									} else {
-								%>
-										<input type="text" name="memberLevel" readonly value="관리자">
-								<%
+									// LEVEL을 설정하는 select를 수정하기 전의 카테고리로
+									// selected 하기 위해 배열로 생성하여 비교
+									// "selected" 문자열을 저장하기 위한 용도의 배열
+									String[] levelSelected = new String[3];
+									if(returnMember.getMemberLevel()==0){
+										levelSelected[0] = "selected";
+									} else if(returnMember.getMemberLevel()==1){
+										levelSelected[1] = "selected";
+									} else if(returnMember.getMemberLevel()==2){
+										levelSelected[2] = "selected";
 									}
 								%>
+								<select name="memberLevel" class="custom-select" disabled>
+									<option value="0" <%=levelSelected[0]%>>회원 Level.0</option>
+									<option value="1" <%=levelSelected[1]%>>관리자 Level.1</option>
+									<option value="2" <%=levelSelected[2]%>>관리자 Level.2</option>
+								</select>
 							</td>
 						</tr>
 						<tr>
 							<td>NAME</td>
-							<td><input type="text" name="memberName" readonly value="<%=returnMember.getMemberName()%>"></td>
+							<td><input type="text" name="memberName" class="form-control" readonly="readonly" value="<%=returnMember.getMemberName()%>"></td>
 						</tr>
 						<tr>
 							<td>AGE</td>
-							<td><input type="text" name="memberAge" readonly value="<%=returnMember.getMemberAge()%>"></td>
+							<td><input type="text" name="memberAge" class="form-control" readonly="readonly" value="<%=returnMember.getMemberAge()%>"></td>
 						</tr>
 						<tr>
 							<td>GENDER</td>
@@ -115,13 +121,13 @@
 								<%
 									if(returnMember.getMemberGender().equals("남")){
 								%>
-									<input type="radio" name="memberGender" readonly value="남" checked>남자 
-									<input type="radio" name="memberGender" readonly value="여">여자
+									<input type="radio" name="memberGender" disabled value="남" checked>남자 
+									<input type="radio" name="memberGender" disabled value="여">여자
 								<%
 									} else {
 								%>
-									<input type="radio" name="memberGender" readonly value="남">남자 
-									<input type="radio" name="memberGender" readonly value="여" checked>여자
+									<input type="radio" name="memberGender" disabled value="남">남자 
+									<input type="radio" name="memberGender" disabled value="여" checked>여자
 								<%
 									}
 								%>
@@ -129,11 +135,11 @@
 						</tr>
 						<tr>
 							<td>UPDATE DATE</td>
-							<td><input type="text" name="updateDate" readonly value="<%=returnMember.getUpdateDate()%>"></td>
+							<td><input type="text" name="updateDate" class="form-control" readonly="readonly" value="<%=returnMember.getUpdateDate()%>"></td>
 						</tr>
 						<tr>
 							<td>CREATE DATE</td>
-							<td><input type="text" name="createDate" readonly value="<%=returnMember.getCreateDate()%>"></td>
+							<td><input type="text" name="createDate" class="form-control" readonly="readonly" value="<%=returnMember.getCreateDate()%>"></td>
 						</tr>
 					</table>
 					<button type="submit" class="btn btn-outline-secondary center-block">수정</button>

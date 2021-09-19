@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>admin.jsp</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -27,8 +27,8 @@
 			</div>
 			<!-- end : adminMenu include -->
 			
-			<div class="col-sm-10">
-				<h1>관리자페이지</h1>
+			<div class="col-sm-10 mt-5">
+				<h3 class="font-weight-bold">관리자 페이지</h3>
 				<div><%=loginMember.getMemberId()%>님 반갑습니다</div>
 			</div>
 			

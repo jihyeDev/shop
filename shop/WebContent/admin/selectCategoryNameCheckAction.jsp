@@ -38,6 +38,6 @@
 	if(result == null) {
 		response.sendRedirect(request.getContextPath()+"/admin/insertCategoryForm.jsp?categoryNameCheck="+categoryNameCheck);
 	} else {
-		response.sendRedirect(request.getContextPath()+"/admin/insertCategoryForm.jsp?nameCheckResult=This NAME is already taken"+categoryNameCheck);
+		response.sendRedirect(request.getContextPath()+"/admin/insertCategoryForm.jsp?nameCheckResult=Y");
 	}
 %>
