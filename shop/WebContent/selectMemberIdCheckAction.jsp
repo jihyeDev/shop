@@ -36,6 +36,6 @@
 	if(result == null) {
 		response.sendRedirect(request.getContextPath()+"/insertMemberForm.jsp?memberIdCheck="+memberIdCheck);
 	} else {
-		response.sendRedirect(request.getContextPath()+"/insertMemberForm.jsp?idCheckResult=This ID is already taken"+memberIdCheck);
+		response.sendRedirect(request.getContextPath()+"/insertMemberForm.jsp?idCheckResult=Y");
 	}
 %>

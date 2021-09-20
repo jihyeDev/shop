@@ -26,5 +26,8 @@
 		<li class="nav-item">
 			<a class="nav-link text-secondary pt-2 px-3" href="">QnA게시판 관리</a>
 		</li>
+		<li>
+			<a class="nav-link mt-5 px-3" href="<%=request.getContextPath()%>/index.jsp" style="color:#722ED1;"><small>shop 바로가기</small></a>
+		</li>
 	</ul>
 </div>

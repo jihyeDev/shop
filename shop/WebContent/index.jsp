@@ -29,7 +29,7 @@
 		%>
 			<div>
 				<div><%=loginMember.getMemberId()%> 님 / Level : <%=loginMember.getMemberLevel()%></div><br>
-				<div><a class="btn btn-success" href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a></div>
+				<div><a class="btn btn-success" href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a></div><br>
 				<!-- 관리자 페이지로 가는 링크 -->
 		<%
 				if(loginMember.getMemberLevel() > 0) {

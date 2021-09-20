@@ -18,18 +18,29 @@
 		return;
 	}
 %>
-	<!-- start: mainMenu include -->
-	<div>
-		<jsp:include page="/partial/mainMenu.jsp"></jsp:include>
+	<div class="container pt-3">
+		
+		<!-- start: mainMenu include -->
+		<div>
+			<jsp:include page="/partial/mainMenu.jsp"></jsp:include>
+		</div>
+		<!-- end : mainMenu include -->
+		
+		<h1 class="jumbotron">LOGIN</h1>
+		
+		<form method="post" action="./loginAction.jsp">
+			<table class="table mt-5 w-50">
+				<tr>
+					<td>ID </td>
+					<td><input type="text" name="memberId" class="form-control"></td>
+				<tr>
+				<tr>
+					<td>PASSWORD</td>
+					<td><input type="password" name="memberPw" class="form-control"></td>
+				</tr>
+			</table>
+			<div><button class="btn btn-success" type="submit">로그인</button></div>
+		</form>
 	</div>
-	<!-- end : mainMenu include -->
-	<h1>로그인</h1>
-	<form method="post" action="./loginAction.jsp">
-		<div>memberId : </div>
-		<div><input type="text" name="memberId"></div>
-		<div>memberPw : </div>
-		<div><input type="password" name="memberPw"></div>
-		<div><button class="btn btn-success" type="submit">로그인</button></div>
-	</form>
 </body>
 </html>
