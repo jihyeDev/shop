@@ -37,8 +37,12 @@
 	paramMember.setMemberNo(memberNo);
 	
 	// 특정회원의 PW를 수정하는 memberDao의 updateMemberPwByAdmin 메서드 호출
-	memberDao.updateMemberPwByAdmin(paramMember, memberNewPw);
-	System.out.println("PASSWORD 수정 성공!");
+	if(memberDao.updateMemberPwByAdmin(paramMember, memberNewPw)) {
+		System.out.println("PASSWORD 수정 성공!");
+		
+	} else {
+		System.out.println("PASSWORD 수정 실패");
+	}
 	response.sendRedirect(request.getContextPath()+"/admin/selectMemberList.jsp");
 	
 %>

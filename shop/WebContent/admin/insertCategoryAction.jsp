@@ -41,7 +41,10 @@
 	paramCategory.setCategoryState(categoryState);
 	
 	// 카테고리를 입력하는 categoryDao의 insertCategory 메서드 호출
-	categoryDao.insertCategory(paramCategory);
-	System.out.println("카테고리 입력 성공");
+	if(categoryDao.insertCategory(paramCategory)) {
+		System.out.println("카테고리 입력 성공");
+	} else {
+		System.out.println("카테고리 입력 실패");
+	}
 	response.sendRedirect(request.getContextPath()+"/admin/selectCategoryList.jsp");
 %>

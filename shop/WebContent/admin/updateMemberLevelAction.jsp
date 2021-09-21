@@ -37,8 +37,11 @@
 	paramMember.setMemberNo(memberNo);
 	
 	// 특정회원의 레벨을 수정하는 memberDao의 updateMemberLevelByAdmin 메서드 호출
-	memberDao.updateMemberLevelByAdmin(paramMember,memberNewLevel);
-	System.out.println("Level 수정 성공!");
+	if(memberDao.updateMemberLevelByAdmin(paramMember,memberNewLevel)) {
+		System.out.println("Level 수정 성공!");
+	} else {
+		System.out.println("Level 수정 실패");
+	}
 	response.sendRedirect(request.getContextPath()+"/admin/selectMemberList.jsp");
 	
 %>

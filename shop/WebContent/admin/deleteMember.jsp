@@ -33,8 +33,11 @@
 	
 	
 	// 특정회원을 강제 탈퇴(삭제)시키는 memberDao의 deleteMemberByAdmin 메서드 호출
-	memberDao.deleteMemberByAdmin(memberNo);
-	System.out.println("강제 탈퇴 성공!");
+	if(memberDao.deleteMemberByAdmin(memberNo)) {
+		System.out.println("강제 탈퇴 성공!");
+	} else {
+		System.out.println("강제 탈퇴 실패");
+	}
 	response.sendRedirect(request.getContextPath()+"/admin/selectMemberList.jsp");
 	
 %>

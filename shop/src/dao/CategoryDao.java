@@ -85,7 +85,9 @@ public class CategoryDao {
 	
 	// [카테고리] 카테고리를 입력하는 메서드
 	// Category 객체로 입력받아온 값을 category table에 INSERT 함
-	public void insertCategory(Category category) throws ClassNotFoundException, SQLException {
+	public boolean insertCategory(Category category) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
 		// 매개변수 값을 디버깅
 		System.out.println(category.getCategoryName() + "<--- CategoryDao.insertCategory parem : categoryName");
 		System.out.println(category.getCategoryState() + "<--- CategoryDao.insertCategory parem : categoryState");
@@ -103,18 +105,25 @@ public class CategoryDao {
 		System.out.println(stmt + "<--- stmt");
 		
 		// INSERT 실행
-		stmt.executeUpdate();
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
 		
 		// 종료
 		stmt.close();
 		conn.close();
+		
+		return result;
 	}
 	
 	// [카테고리] 특정 카테고리의 사용현황을 변경하는 메서드
 	// categoryName과 수정된 사용현황을 입력받아와서 수정
 	// Category category : categoryName 값
 	// String CategoryNewState : 변경한 사용현황의 값
-	public void updateCategoryState(Category category, String categoryNewState) throws ClassNotFoundException, SQLException {
+	public boolean updateCategoryState(Category category, String categoryNewState) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
 		// 매개변수값은 무조건! 디버깅
 		System.out.println(category.getCategoryName() + "<--- CategoryDao.updateCategoryState parem : categoryName");
 		System.out.println(categoryNewState + "<--- CategoryDao.updateCategoryState parem : categoryNewState");
@@ -131,10 +140,15 @@ public class CategoryDao {
 		System.out.println(stmt + "<--- stmt");
 						
 		// UPDATE 실행
-		stmt.executeUpdate();
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
 				
 		// 종료
 		stmt.close();
 		conn.close();
+		
+		return result;
 	}
 }

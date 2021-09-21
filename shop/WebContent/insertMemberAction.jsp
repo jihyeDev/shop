@@ -52,7 +52,11 @@
 	paramMember.setMemberGender(memberGender);
 	
 	// 회원가입하는 memberDao의 insertMember 메서드 호출
-	memberDao.insertMember(paramMember);
-	System.out.println("회원가입 성공");
-	response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
+	if(memberDao.insertMember(paramMember)){
+		System.out.println("회원가입 성공");
+		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
+	} else {
+		System.out.println("회원가입 실패");
+		response.sendRedirect(request.getContextPath()+"/insertMemberForm.jsp");
+	}
 %>

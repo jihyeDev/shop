@@ -49,7 +49,9 @@ public class MemberDao {
 	
 	// [비회원] 회원가입을 하는 메서드
 	// Member 객체로 입력받아온 값을 DB에 insert 함
-	public void insertMember(Member member) throws ClassNotFoundException, SQLException {
+	public boolean insertMember(Member member) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
 		// 매개변수 값을 디버깅
 		System.out.println(member.getMemberId() + "<--- MemberDao.insertMember parem : memberId");
 		System.out.println(member.getMemberPw() + "<--- MemberDao.insertMember parem : memberPw");
@@ -79,11 +81,17 @@ public class MemberDao {
 		System.out.println(stmt + "<--- stmt");
 		
 		// INSERT 실행
-		stmt.executeUpdate();
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
 		
 		// 종료
 		stmt.close();
 		conn.close();
+		
+		// 성공 : result = true, 실패 : false
+		return result;
 	}
 	
 	// [회원] 로그인하는 메서드
@@ -346,7 +354,9 @@ public class MemberDao {
 	// memberNo과 수정된 level을 입력받아와서 수정
 	// Member member : memberNo값
 	// String MemberNewLevel : 변경할 memberLevel 값
-	public void updateMemberLevelByAdmin(Member member, int memberNewLevel) throws ClassNotFoundException, SQLException {
+	public boolean updateMemberLevelByAdmin(Member member, int memberNewLevel) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
 		// 매개변수값은 무조건! 디버깅
 		System.out.println(member.getMemberNo() + "<--- MemberDao.updateMemberLevelByAdmin parem : memberNo");
 		System.out.println(memberNewLevel + "<--- MemberDao.updateMemberLevelByAdmin parem : memberNewLevel");
@@ -363,18 +373,25 @@ public class MemberDao {
 		System.out.println(stmt + "<--- stmt");
 						
 		// UPDATE 실행
-		stmt.executeUpdate();
-				
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
 		// 종료
 		stmt.close();
 		conn.close();
+		
+		// 성공 : result = true, 실패 : false
+		return result;
 	}
 	
 	// [관리자] 특정회원의 비밀번호를 변경하는 메서드
 	// memberNo과 수정된 비밀번호를 입력받아와서 비밀번호를 변경
 	// Member member : memberNo값
 	// String MemberNewPw : 변경할 memberPw 값
-	public void updateMemberPwByAdmin(Member member, String memberNewPw) throws ClassNotFoundException, SQLException {
+	public boolean updateMemberPwByAdmin(Member member, String memberNewPw) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
 		// 매개변수값은 무조건! 디버깅
 		System.out.println(member.getMemberNo() + "<--- MemberDao.updateMemberPwByAdmin parem : memberNo");
 		System.out.println(memberNewPw + "<--- MemberDao.updateMemberPwByAdmin parem : memberNewPw");
@@ -391,16 +408,23 @@ public class MemberDao {
 		System.out.println(stmt + "<--- stmt");
 								
 		// UPDATE 실행
-		stmt.executeUpdate();
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
 						
 		// 종료
 		stmt.close();
 		conn.close();
+		
+		return result;
 	}
 	
 	// [관리자] 특정회원을 삭제하는 메서드
 	// memberNo를 입력받아와서 삭제하는 메서드
-	public void deleteMemberByAdmin(int memberNo) throws ClassNotFoundException, SQLException{
+	public boolean deleteMemberByAdmin(int memberNo) throws ClassNotFoundException, SQLException{
+		boolean result = false;
+		
 		// 매개변수값은 무조건! 디버깅
 		System.out.println(memberNo + "<--- MemberDao.deleteMemberByAdmin parem : memberNo");
 										
@@ -415,10 +439,15 @@ public class MemberDao {
 		System.out.println(stmt + "<--- stmt");
 										
 		// DELETE 실행
-		stmt.executeUpdate();
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
 								
 		// 종료
 		stmt.close();
 		conn.close();
+		
+		return result;
 	}
 }

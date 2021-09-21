@@ -37,8 +37,11 @@
 	paramCategory.setCategoryName(categoryName);
 	
 	// 특정 카테고리의 사용현황을 수정하는 categoryDao의 updateCategoryState 메서드 호출
-	categoryDao.updateCategoryState(paramCategory, categoryNewState);
-	System.out.println("사용현황 수정 성공!");
+	if(categoryDao.updateCategoryState(paramCategory, categoryNewState)) {
+		System.out.println("사용현황 수정 성공!");
+	} else {
+		System.out.println("사용현황 수정 실패");
+	}
 	response.sendRedirect(request.getContextPath()+"/admin/selectCategoryList.jsp");
 	
 %>
