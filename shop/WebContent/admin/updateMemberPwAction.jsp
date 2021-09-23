@@ -29,7 +29,7 @@
 	// request 값 저장
 	int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 	String memberNewPw = request.getParameter("memberPw");
-	// requst 매개값 디버깅 코드
+	// request 매개값 디버깅 코드
 	System.out.println(memberNo+" <-- memberNo");
 	System.out.println(memberNewPw+" <-- memberNewPw");
 	// Member 객체 생성 후, 받아온 값 저장

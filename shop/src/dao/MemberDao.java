@@ -254,8 +254,8 @@ public class MemberDao {
 			member.setMemberName (rs.getString("memberName"));
 			member.setMemberAge(rs.getInt("memberAge"));
 			member.setMemberGender (rs.getString("memberGender"));
-			member.setUpdateDate (rs.getString("UpdateDate"));
-			member.setCreateDate (rs.getString("CreateDate"));
+			member.setUpdateDate (rs.getString("updateDate"));
+			member.setCreateDate (rs.getString("createDate"));
 			list.add(member);
 		}
 		// 종료
