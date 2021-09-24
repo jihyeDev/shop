@@ -54,7 +54,7 @@
 	int beginRow = (currentPage-1) * ROW_PER_PAGE;
 	
 	// 선택된 카테고리가 없을때는 전체 전자책을 SELECT하고, 페이징하는 ebookDao의 selectEbookList메서드 호출
-	// 선택된 카테고리가 있을때는 LIKE 연산자를 사용한 sql문을 실행하고 리스트를 리턴한 selectEbookListByCategory메서드 호출
+	// 선택된 카테고리가 있을때는 where를 사용한 sql문을 실행하고 리스트를 리턴한 selectEbookListByCategory메서드 호출
 	// ebookList라는 리스트를 사용하기 위해 생성
 	ArrayList<Ebook> ebookList = new ArrayList<Ebook>();
 	if(categoryName.equals("")) { // 선택된 카테고리가 없을때
@@ -84,7 +84,11 @@
 				<h3 class="font-weight-bold">
 					전자책 관리
 					<%
-						if(categoryName.equals("") != true){
+						if(categoryName.equals("")){
+					%>
+							<small class="font-weight-light text-secondary">_ 전체목록</small>
+					<%
+						} else {
 					%>
 							<small class="font-weight-light text-secondary">_ <%=categoryName%></small>
 					<%
@@ -124,6 +128,7 @@
 							<th>CATEGORY</th>
 							<th>TITLE</th>
 							<th>STATE</th>
+							<th>DETAIL PAGE</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -134,8 +139,9 @@
 								<tr>
 									<td><%=e.getEbookNo()%></td>
 									<td><%=e.getCategoryName()%></td>
-									<td><a class="text-body" href="<%=request.getContextPath()%>/admin/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>"><%=e.getEbookTitle()%></a></td>
+									<td><%=e.getEbookTitle()%></td>
 									<td><%=e.getEbookState()%></td>
+									<td><a class="btn btn-light btn-sm" href="<%=request.getContextPath()%>/admin/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>">상세페이지</a></td>
 								</tr>
 						<%
 							}
