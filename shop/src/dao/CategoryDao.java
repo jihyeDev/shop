@@ -11,7 +11,7 @@ import commons.*;
 
 public class CategoryDao {
 	
-	// [카테고리] 카테고리 목록을 출력하는 메서드
+	// [관리자] 카테고리 목록을 출력하는 메서드
 	// SELECT 한 값을 자료구조화 하여 list 생성 후 리턴
 	public ArrayList<Category> selectCategoryListAllByPage () throws ClassNotFoundException, SQLException {
 		// list라는 리스트를 사용하기 위해 생성
@@ -47,7 +47,7 @@ public class CategoryDao {
 		return list;
 	}
 	
-	// [카테고리] 카테고리를 입력하기 전에 카테고리 이름의 중복 검사를 하는 메서드
+	// [관리자] 카테고리를 입력하기 전에 카테고리 이름의 중복 검사를 하는 메서드
 	// 중복확인 할 categoryNameCheck 값을 받아와서 SELECT 하고 categoryName에 저장하여 리턴
 	// 리턴하는 categoryName값이 null이면 사용 가능한 카테고리 이름, 아니라면 이미 사용중인 카테고리 이름
 	public String selectCategoryName(String categoryNameCheck) throws ClassNotFoundException, SQLException {
@@ -83,7 +83,7 @@ public class CategoryDao {
 		return categoryName;
 	}
 	
-	// [카테고리] 카테고리를 입력하는 메서드
+	// [관리자] 카테고리를 입력하는 메서드
 	// Category 객체로 입력받아온 값을 category table에 INSERT 함
 	public boolean insertCategory(Category category) throws ClassNotFoundException, SQLException {
 		boolean result = false;
@@ -117,7 +117,7 @@ public class CategoryDao {
 		return result;
 	}
 	
-	// [카테고리] 특정 카테고리의 사용현황을 변경하는 메서드
+	// [관리자] 특정 카테고리의 사용현황을 변경하는 메서드
 	// categoryName과 수정된 사용현황을 입력받아와서 수정
 	// Category category : categoryName 값
 	// String CategoryNewState : 변경한 사용현황의 값

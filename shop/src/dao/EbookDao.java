@@ -11,7 +11,7 @@ import commons.*;
 
 public class EbookDao {
 	
-	// [전자책] 전자책 목록을 SELECT하는 메서드
+	// [관리자] 전자책 목록을 SELECT하는 메서드
 	// SELECT 한 값을 자료구조화 하여 list 생성 후 리턴
 	public ArrayList<Ebook> selectEbookList(int beginRow, int rowPerPage) throws ClassNotFoundException, SQLException{
 		// list라는 리스트를 사용하기 위해 생성
@@ -49,7 +49,7 @@ public class EbookDao {
 		return list;
 	}
 	
-	// [전자책] 선택된 카테고리가 있을 때 전자책 목록을 SELECT하는 메서드
+	// [관리자] 선택된 카테고리가 있을 때 전자책 목록을 SELECT하는 메서드
 	// SELECT 한 값을 자료구조화 하여 list 생성 후 리턴
 	public ArrayList<Ebook> selectEbookListByCategory(int beginRow, int rowPerPage, String categoryName) throws ClassNotFoundException, SQLException{
 		// list라는 리스트를 사용하기 위해 생성
@@ -88,7 +88,7 @@ public class EbookDao {
 		return list;
 	}
 	
-	// [전자책] 전자책 관리 페이지의 마지막 페이지를 구하는 메서드
+	// [관리자] 전자책 관리 페이지의 마지막 페이지를 구하는 메서드
 	// totalCount(전체 행)의 값을 구해서 마지막 페이지의 값을 리턴해줌
 	// ROW_PER_PAGE : 한 페이지에 보여줄 행의 값
 	public int selectEbookListLastPage(int ROW_PER_PAGE) throws ClassNotFoundException, SQLException{
@@ -126,7 +126,7 @@ public class EbookDao {
 		return lastPage;
 	}
 
-	// [전자책] 전자책 관리 페이지의 선택된 카테고리가 있을 시 마지막 페이지를 구하는 메서드
+	// [관리자] 전자책 관리 페이지의 선택된 카테고리가 있을 시 마지막 페이지를 구하는 메서드
 	// totalCount(전체 행)의 값을 구해서 마지막 페이지의 값을 리턴해줌
 	// ROW_PER_PAGE : 한 페이지에 보여줄 행의 값
 	public int selectEbookListByCategoryLastPage(int ROW_PER_PAGE, String categoryName) throws ClassNotFoundException, SQLException{
@@ -165,7 +165,7 @@ public class EbookDao {
 		return lastPage;
 	}
 	
-	// [전자책] 전자책의 상세 정보를 SELECT하는 메서드
+	// [관리자] 전자책의 상세 정보를 SELECT하는 메서드
 	// ebookNo를 받아온 뒤 그 ebookNo을 기준으로 정보를 SELECT 함
 	// ebook이라는 객체에 저장하여서 리턴 해줌
 	public Ebook selecteEbookOne (int ebookNo) throws ClassNotFoundException, SQLException {	
@@ -214,7 +214,7 @@ public class EbookDao {
 		return ebook;
 	}
 	
-	// [전자책] 특정 전자책의 이미지를 수정하는 메서드
+	// [관리자] 특정 전자책의 이미지를 수정하는 메서드
 	// ebook이라는 객체로 ebookNo과 ebookImg(새로운 이미지)를 불러옴
 	public boolean updateEbookImg(Ebook ebook) throws ClassNotFoundException, SQLException {
 		boolean result = false;
@@ -223,7 +223,7 @@ public class EbookDao {
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "UPDATE ebook SET ebook_img=? WHERE ebook_no=?";
+		String sql = "UPDATE ebook SET ebook_img=? update_date=now() WHERE ebook_no=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, ebook.getEbookImg());
 		stmt.setInt(2, ebook.getEbookNo());

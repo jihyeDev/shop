@@ -11,7 +11,7 @@ import commons.*;
 
 public class OrderDao {
 	
-	// [주문관리] 주문 목록 전체를 SELECT 하는 메서드
+	// [관리자] 주문 목록 전체를 SELECT 하는 메서드
 	// 페이징을 하기 위해 beginRow와 rowPerPage를 담아와서 LIMIT의 값에 담아줌
 	// JOIN SQL문
 	public ArrayList<OrderEbookMember> selectOrderList(int beginRow, int rowPerPage) throws ClassNotFoundException, SQLException {
@@ -61,7 +61,7 @@ public class OrderDao {
 		return list;
 	}
 	
-	// [주문관리] memberId를 통해서 주문을 검색하는 메서드
+	// [관리자] memberId를 통해서 주문을 검색하는 메서드
 	// 페이징을 하기 위해 beginRow와 rowPerPage를 담아와서 LIMIT의 값에 담아줌
 	// JOIN + WHERE 절 사용
 	public ArrayList<OrderEbookMember> selectOrderListBySearchMemberId(int beginRow, int rowPerPage, String searchMemberId) throws ClassNotFoundException, SQLException {
@@ -112,7 +112,7 @@ public class OrderDao {
 		return list;
 	}
 	
-	// [주문관리] 주문 관리 페이지의 마지막 페이지를 구하는 메서드
+	// [관리자] 주문 관리 페이지의 마지막 페이지를 구하는 메서드
 	// totalCount(전체 행)의 값을 구해서 마지막 페이지의 값을 리턴해줌
 	// ROW_PER_PAGE : 한 페이지에 보여줄 행의 값
 	public int selectOrderListLastPage(int ROW_PER_PAGE) throws ClassNotFoundException, SQLException{
@@ -150,7 +150,7 @@ public class OrderDao {
 		return lastPage;
 	}
 
-	// [주문관리] 주문 관리 페이지의 검색 후의 마지막 페이지를 구하는 메서드
+	// [관리자] 주문 관리 페이지의 검색 후의 마지막 페이지를 구하는 메서드
 	// totalCount(전체 행)의 값을 구해서 마지막 페이지의 값을 리턴해줌
 	// ROW_PER_PAGE : 한 페이지에 보여줄 행의 값
 	public int selectOrderListSearchLastPage(int ROW_PER_PAGE, String searchMemberId) throws ClassNotFoundException, SQLException{
