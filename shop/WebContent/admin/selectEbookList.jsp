@@ -30,6 +30,15 @@
 	// 디버깅
 	System.out.println("categoryName(선택한 카테고리) : "+categoryName);
 	
+	// 검색어
+	String searchEbookTitle = "";
+	// searchEbookTitle이 null이 아니라면 값을 받아서 검색어(searchEbookName)로 사용
+	if(request.getParameter("searchEbookTitle") != null) { 
+		searchEbookTitle = request.getParameter("searchEbookTitle");
+	}
+	// 디버깅
+	System.out.println("searchEbookTitle(검색어) : "+searchEbookTitle);
+	
 	// 페이지번호 = 전달 받은 값이 없으면 currentPage를 1로 디폴트
 	int currentPage = 1;
 	// current가 null이 아니라면 값을 int 타입으로로 바꾸어서 페이지 번호로 사용
@@ -46,11 +55,14 @@
 	
 	// 선택된 카테고리가 없을때는 전체 전자책을 SELECT하고, 페이징하는 ebookDao의 selectEbookList메서드 호출
 	// 선택된 카테고리가 있을때는 where를 사용한 sql문을 실행하고 리스트를 리턴한 selectEbookListByCategory메서드 호출
+	// 검색어가 있을 때는 검색어를 넘겨서 검색한뒤 return해주는 selectEbookListBySearch메서드 호출
 	// ebookList라는 리스트를 사용하기 위해 생성
 	ArrayList<Ebook> ebookList = new ArrayList<Ebook>();
-	if(categoryName.equals("")) { // 선택된 카테고리가 없을때
+	if(request.getParameter("searchEbookTitle") != null) { // 검색어가 있을때
+		ebookList = ebookDao.selectEbookListBySearch(beginRow, ROW_PER_PAGE, searchEbookTitle);
+	} else if(categoryName.equals("")) { // 선택된 카테고리가 없을때
 		ebookList = ebookDao.selectEbookList(beginRow, ROW_PER_PAGE);
-	} else { // 선택된 카테고리가 있을때
+	}else { // 선택된 카테고리가 있을때
 		ebookList = ebookDao.selectEbookListByCategory(beginRow, ROW_PER_PAGE, categoryName);
 	}
 %>
@@ -219,6 +231,13 @@
 						<%
 						}
 						%>
+				<!-- ebook_title로 검색 -->
+				<div class="float-right">
+					<form action="<%=request.getContextPath()%>/admin/selectEbookList.jsp" method="get">
+						Search with TITLE <input type="text" name="searchEbookTitle" placeholder="검색어를 입력해주세요">
+						<button class="btn btn-dark btn-sm" type="submit">검색</button>
+					</form>
+				</div>
 				
 			</div>
 			
