@@ -16,6 +16,11 @@ public class EbookDao {
 	public ArrayList<Ebook> selectEbookList(int beginRow, int rowPerPage) throws ClassNotFoundException, SQLException{
 		// list라는 리스트를 사용하기 위해 생성
 		ArrayList<Ebook> list = new ArrayList<Ebook>();
+		
+		// 매개변수 값을 디버깅
+		System.out.println(beginRow + "<--- EbookDao.selectEbookList parem : beginRow");
+		System.out.println(rowPerPage + "<--- EbookDao.selectEbookList parem : rowPerPage");
+		
 		// DB 실행
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
@@ -56,6 +61,12 @@ public class EbookDao {
 	public ArrayList<Ebook> selectEbookListByCategory(int beginRow, int rowPerPage, String categoryName) throws ClassNotFoundException, SQLException{
 		// list라는 리스트를 사용하기 위해 생성
 		ArrayList<Ebook> list = new ArrayList<Ebook>();
+		
+		// 매개변수 값을 디버깅
+		System.out.println(beginRow + "<--- EbookDao.selectEbookListByCategory parem : beginRow");
+		System.out.println(rowPerPage + "<--- EbookDao.selectEbookListByCategory parem : rowPerPage");
+		System.out.println(categoryName + "<--- EbookDao.selectEbookListByCategory parem : categoryName");
+		
 		// DB 실행
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
@@ -95,6 +106,12 @@ public class EbookDao {
 	public ArrayList<Ebook> selectEbookListBySearch(int beginRow, int rowPerPage, String searchEbookTitle) throws ClassNotFoundException, SQLException{
 		// list라는 리스트를 사용하기 위해 생성
 		ArrayList<Ebook> list = new ArrayList<Ebook>();
+		
+		// 매개변수 값을 디버깅
+		System.out.println(beginRow + "<--- EbookDao.selectEbookListBySearch parem : beginRow");
+		System.out.println(rowPerPage + "<--- EbookDao.selectEbookListBySearch parem : rowPerPage");
+		System.out.println(searchEbookTitle + "<--- EbookDao.selectEbookListBySearch parem : searchEbookTitle");
+		
 		// DB 실행
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
@@ -137,6 +154,9 @@ public class EbookDao {
 	public int selectEbookListLastPage(int ROW_PER_PAGE) throws ClassNotFoundException, SQLException{
 		int totalCount = 0;
 		int lastPage = 0;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(ROW_PER_PAGE + "<--- EbookDao.selectEbookListLastPage parem : ROW_PER_PAGE");
 			
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
@@ -176,6 +196,10 @@ public class EbookDao {
 		int totalCount = 0;
 		int lastPage = 0;
 		
+		// 매개변수 값을 디버깅
+		System.out.println(ROW_PER_PAGE + "<--- EbookDao.selectEbookListByCategoryLastPage parem : ROW_PER_PAGE");
+		System.out.println(categoryName + "<--- EbookDao.selectEbookListByCategoryLastPage parem : categoryName");
+		
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
@@ -214,6 +238,10 @@ public class EbookDao {
 	public int selectEbookListBySearchLastPage(int ROW_PER_PAGE, String searchEbookTitle) throws ClassNotFoundException, SQLException{
 		int totalCount = 0;
 		int lastPage = 0;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(ROW_PER_PAGE + "<--- EbookDao.selectEbookListBySearchLastPage parem : ROW_PER_PAGE");
+		System.out.println(searchEbookTitle + "<--- EbookDao.selectEbookListBySearchLastPage parem : searchEbookTitle");
 			
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
@@ -301,6 +329,10 @@ public class EbookDao {
 	public boolean updateEbookImg(Ebook ebook) throws ClassNotFoundException, SQLException {
 		boolean result = false;
 		
+		// 매개변수 값을 디버깅
+		System.out.println(ebook.getEbookImg() + "<--- EbookDao.updateEbookImg parem : ebookImg");
+		System.out.println(ebook.getEbookNo() + "<--- EbookDao.updateEbookImg parem : ebookNo");
+		
 		// DB 실행
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
@@ -322,6 +354,160 @@ public class EbookDao {
 		stmt.close();
 		conn.close();
 				
+		// 성공 : result = true, 실패 : false
+		return result;
+	}
+	
+	// [관리자] 특정 전자책의 가격를 수정하는 메서드
+	// ebook이라는 객체로 ebookNo과 ebookPrice(수정할 가격)을 불러옴
+	public boolean updateEbookPrice(Ebook ebook) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(ebook.getEbookPrice() + "<--- EbookDao.updateEbookPrice parem : ebookPrice");
+		System.out.println(ebook.getEbookNo() + "<--- EbookDao.updateEbookPrice parem : ebookNo");
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "UPDATE ebook SET ebook_price=?, update_date=now() WHERE ebook_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, ebook.getEbookPrice());
+		stmt.setInt(2, ebook.getEbookNo());
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// UPDATE 실행
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
+		// 종료
+		stmt.close();
+		conn.close();
+				
+		// 성공 : result = true, 실패 : false
+		return result;
+	}
+	
+	// [관리자] 특정 전자책을 삭제하는 메서드
+	// ebook이라는 객체로 ebookNo을 불러옴
+	public boolean deleteEbook(Ebook ebook) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(ebook.getEbookNo() + "<--- EbookDao.deleteEbook parem : ebookNo");
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "DELETE FROM ebook WHERE ebook_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, ebook.getEbookNo());
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// DELETE 실행
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
+		// 종료
+		stmt.close();
+		conn.close();
+				
+		// 성공 : result = true, 실패 : false
+		return result;
+	}
+	
+	// [관리자] 전자책을 입력하기 전에 전자책의 중복 검사를 제목을 통해 하는 메서드
+	// 중복확인 할 ebookTitleCheck 값을 받아와서 SELECT 하고 ebookTitle에 저장하여 리턴
+	// 리턴하는 ebookTitle값이 null이면 입력 가능한 전자책, 아니라면 입력된 전자책
+	public String selectEbookTitle(String ebookTitleCheck) throws ClassNotFoundException, SQLException {
+		// ebookTitle을 null값으로 지정
+		String ebookTitle = null;
+			
+		// 매개변수 값을 디버깅
+		System.out.println(ebookTitleCheck + "<--- ebookDao.selectEbookTitle parem : ebookTitleCheck");
+					
+		// DB 실행
+		DBUtil dbUtil = new DBUtil();
+		// dbUtil의 getConnection메서드를 사용하여 DB 연결
+		Connection conn = dbUtil.getConnection();
+		System.out.println(conn + "<--- conn");
+		String sql = "SELECT ebook_title ebookTitle FROM ebook WHERE ebook_title=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, ebookTitleCheck);
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+			
+		// SELECT 실행 값을 rs에 저장
+		ResultSet rs = stmt.executeQuery();
+			
+		if(rs.next()) {
+			ebookTitle = rs.getString("ebookTitle");
+		}
+					
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+		// ebookTitle: null-> 입력가능한 전자책, 아니면 이미 입력된 전자책
+		return ebookTitle;
+	}
+	
+	// [관리자] 전자책을 입력(추가) 하는 메서드
+	// Ebook 객체로 입력받아온 값을 DB에 insert 함
+	public boolean insertEbook(Ebook ebook) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(ebook.getEbookISBN() + "<--- EbookDao.insertEbook parem : ebookInsb");
+		System.out.println(ebook.getCategoryName() + "<--- EbookDao.insertEbook parem : categoryName");
+		System.out.println(ebook.getEbookTitle() + "<--- EbookDao.insertEbook parem : ebookTitle");
+		System.out.println(ebook.getEbookAuthor() + "<--- EbookDao.insertEbook parem : ebookAuthor");
+		System.out.println(ebook.getEbookCompany() + "<--- EbookDao.insertEbook parem : ebookCompany");
+		System.out.println(ebook.getEbookPageCount() + "<--- EbookDao.insertEbook parem : ebookPageCount");
+		System.out.println(ebook.getEbookPrice() + "<--- EbookDao.insertEbook parem : ebookPrice");
+		System.out.println(ebook.getEbookImg() + "<--- EbookDao.insertEbook parem : ebookImg");
+		System.out.println(ebook.getEbookSummary() + "<--- EbookDao.insertEbook parem : ebookSummary");
+		System.out.println(ebook.getEbookState() + "<--- EbookDao.insertEbook parem : ebookState");
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		// dbUtil의 getConnection메서드를 사용하여 DB 연결
+		Connection conn = dbUtil.getConnection();
+		System.out.println(conn + "<--- conn");
+		String sql = "INSERT INTO ebook(ebook_isbn, category_name, ebook_title, ebook_author, ebook_company, ebook_page_count, ebook_price, ebook_img, ebook_summary, ebook_state, create_date, update_date) VALUES (?,?,?,?,?,?,?,?,?,?,NOW(),NOW())";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, ebook.getEbookISBN());
+		stmt.setString(2, ebook.getCategoryName());
+		stmt.setString(3, ebook.getEbookTitle());
+		stmt.setString(4, ebook.getEbookAuthor());
+		stmt.setString(5, ebook.getEbookCompany());
+		stmt.setInt(6, ebook.getEbookPageCount());
+		stmt.setInt(7, ebook.getEbookPrice());
+		stmt.setString(8, ebook.getEbookImg());
+		stmt.setString(9, ebook.getEbookSummary());
+		stmt.setString(10, ebook.getEbookState());
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// INSERT 실행
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
+		
+		// 종료
+		stmt.close();
+		conn.close();
+		
 		// 성공 : result = true, 실패 : false
 		return result;
 	}

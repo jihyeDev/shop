@@ -28,7 +28,7 @@
 	}
 	
 	// 입력값 방어 코드
-	// 레벨을 수정할 특정회원의 ebookNo을 입력 받았는지 유효성 검사
+	// 이미지를 수정할 전자책의 ebookNo을 입력 받았는지 유효성 검사
 	if(request.getParameter("ebookNo")==null || request.getParameter("ebookNo").equals("")) {
 		response.sendRedirect(request.getContextPath()+"/admin/selectEbookList.jsp");
 		return;
@@ -47,14 +47,14 @@
 	// 디버깅과 실패시 인덱스 페이지로, 성공시 출력
 	if(returnEbook==null){
 		System.out.println("전자책 정보 불러오기 실패");
-		response.sendRedirect(request.getContextPath()+"/admin/selectMemberList.jsp");
+		response.sendRedirect(request.getContextPath()+"/admin/selectEbookList.jsp");
 	} else {
 		System.out.println("전자책 정보 불러오기 성공");
-		System.out.println(returnEbook.getEbookNo()+"<--- returnMember.getEbookNo()");
-		System.out.println(returnEbook.getEbookTitle()+"<--- returnMember.getEbookTitle()");
-		System.out.println(returnEbook.getEbookImg()+"<---returnMember.getEbookImg()");
-		System.out.println(returnEbook.getUpdateDate()+"<---returnMember.getUpdateDate()");
-		System.out.println(returnEbook.getCreateDate()+"<---returnMember.getCreateDate()");
+		System.out.println(returnEbook.getEbookNo()+"<--- returnEbook.getEbookNo()");
+		System.out.println(returnEbook.getEbookTitle()+"<--- returnEbook.getEbookTitle()");
+		System.out.println(returnEbook.getEbookImg()+"<---returnEbook.getEbookImg()");
+		System.out.println(returnEbook.getUpdateDate()+"<---returnEbook.getUpdateDate()");
+		System.out.println(returnEbook.getCreateDate()+"<---returnEbook.getCreateDate()");
 	}
 %>
 
@@ -90,7 +90,7 @@
 							<td><img src="<%=request.getContextPath()%>/image/<%=returnEbook.getEbookImg()%>"></td>
 						</tr>
 						<tr>
-							<td>NEW IMG</td>
+							<td>NEW IMG <span class="text-danger">*</span></td>
 							<td><input type="file" name="ebookImg"></td>
 						</tr>
 						<tr>

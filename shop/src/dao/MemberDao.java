@@ -190,6 +190,9 @@ public class MemberDao {
 	public int selectMemberListLastPage(int ROW_PER_PAGE) throws ClassNotFoundException, SQLException{
 		int totalCount = 0;
 		int lastPage = 0;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(ROW_PER_PAGE + "<--- MemberDao.selectMemberListLastPage parem : ROW_PER_PAGE");
 			
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();

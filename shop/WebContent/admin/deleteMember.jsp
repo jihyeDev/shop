@@ -19,7 +19,7 @@
 	}
 	
 	// 입력값 방어 코드
-	// 레벨을 수정할 특정회원의 memberNo과 수정할 레벨을 입력 받았는지 유효성 검사
+	// 삭제할 특정회원의 memberNo을 입력 받았는지 유효성 검사
 	if(request.getParameter("memberNo")==null || request.getParameter("memberNo").equals("")) {
 		response.sendRedirect(request.getContextPath()+"/admin/selectMemberList.jsp");
 		return;

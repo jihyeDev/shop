@@ -79,7 +79,7 @@ public class CategoryDao {
 		rs.close();
 		stmt.close();
 		conn.close();
-		// memberIdcategoryName: null->사용 가능한 카테고리 이름, 아니면 이미 사용중인 카테고리 이름
+		// categoryName : null->사용 가능한 카테고리 이름, 아니면 이미 사용중인 카테고리 이름
 		return categoryName;
 	}
 	

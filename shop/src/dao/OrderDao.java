@@ -17,6 +17,10 @@ public class OrderDao {
 	public ArrayList<OrderEbookMember> selectOrderList(int beginRow, int rowPerPage) throws ClassNotFoundException, SQLException {
 		ArrayList<OrderEbookMember> list = new ArrayList<>();
 		
+		// 매개변수 값을 디버깅
+		System.out.println(beginRow + "<--- OrderDao.selectOrderList parem : beginRow");
+		System.out.println(rowPerPage + "<--- OrderDao.selectOrderList parem : rowPerPage");
+		
 		// DB 실행
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
@@ -66,6 +70,11 @@ public class OrderDao {
 	// JOIN + WHERE 절 사용
 	public ArrayList<OrderEbookMember> selectOrderListBySearchMemberId(int beginRow, int rowPerPage, String searchMemberId) throws ClassNotFoundException, SQLException {
 		ArrayList<OrderEbookMember> list = new ArrayList<>();
+		
+		// 매개변수 값을 디버깅
+		System.out.println(beginRow + "<--- OrderDao.selectOrderListBySearchMemberId parem : beginRow");
+		System.out.println(rowPerPage + "<--- OrderDao.selectOrderListBySearchMemberId parem : rowPerPage");
+		System.out.println(searchMemberId + "<--- OrderDao.selectOrderListBySearchMemberId parem : searchMemberId");
 		
 		// DB 실행
 		// dbUtil 객체 생성
@@ -118,6 +127,9 @@ public class OrderDao {
 	public int selectOrderListLastPage(int ROW_PER_PAGE) throws ClassNotFoundException, SQLException{
 		int totalCount = 0;
 		int lastPage = 0;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(ROW_PER_PAGE + "<--- OrderDao.selectOrderListLastPage parem : ROW_PER_PAGE");
 			
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
@@ -156,6 +168,10 @@ public class OrderDao {
 	public int selectOrderListSearchLastPage(int ROW_PER_PAGE, String searchMemberId) throws ClassNotFoundException, SQLException{
 		int totalCount = 0;
 		int lastPage = 0;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(ROW_PER_PAGE + "<--- OrderDao.selectOrderListSearchLastPage parem : ROW_PER_PAGE");
+		System.out.println(searchMemberId + "<--- OrderDao.selectOrderListSearchLastPage parem : searchMemberId");
 			
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
