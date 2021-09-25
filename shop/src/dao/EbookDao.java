@@ -25,7 +25,7 @@ public class EbookDao {
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "SELECT ebook_no ebookNo, category_name categoryName, ebook_title ebookTitle, ebook_state ebookState, ebook_img ebookImg, ebook_price ebookPrice FROM ebook ORDER BY create_date DESC LIMIT ?, ?";
+		String sql = "SELECT ebook_no ebookNo, category_name categoryName, ebook_title ebookTitle, ebook_state ebookState, ebook_img ebookImg, ebook_price ebookPrice, ebook_author ebookAuthor, ebook_company ebookCompany FROM ebook ORDER BY create_date DESC LIMIT ?, ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, beginRow);
 		stmt.setInt(2, rowPerPage);
@@ -45,6 +45,8 @@ public class EbookDao {
 			ebook.setEbookState (rs.getString("ebookState"));
 			ebook.setEbookImg (rs.getString("ebookImg"));
 			ebook.setEbookPrice (rs.getInt("ebookPrice"));
+			ebook.setEbookAuthor (rs.getString("ebookAuthor"));
+			ebook.setEbookCompany (rs.getString("ebookCompany"));
 			list.add(ebook);
 		}
 		// 종료

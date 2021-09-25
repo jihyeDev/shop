@@ -8,6 +8,18 @@
 <meta charset="UTF-8">
 <title>index.jsp</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+#ebookList {
+	background-color : #f4f4f5;
+}
+#ebookList:hover {
+	background-color : #28a745;
+	color : white;
+	box-shadow : 0px 0px 15px rgba(140, 140, 140, 0.75);
+	transition : all 0.3s ease-in-out;
+	margin-top : -5px;
+}
+</style>
 </head>
 <body>
 	<div class="container pt-3">
@@ -16,34 +28,7 @@
 			<jsp:include page="/partial/mainMenu.jsp"></jsp:include>
 		</div>
 		<!-- end : mainMenu include -->
-		<h1 class="jumbotron">메인페이지</h1>
-		<%
-			// 로그인 전 = session의 loginMember가 null 일 때
-			if(session.getAttribute("loginMember")==null) {
-		%>
-			<div><a class="btn btn-success" href="<%=request.getContextPath()%>/loginForm.jsp">로그인</a></div><br>
-			<div><a class="btn btn-success" href="<%=request.getContextPath()%>/insertMemberForm.jsp">회원가입</a></div>
-		<%
-			// 로그인 후
-			// loginMember 객체에 session의 loginMember를 저장
-			} else {
-				Member loginMember = (Member)session.getAttribute("loginMember");
-		%>
-				<div>
-					<div><%=loginMember.getMemberId()%> 님 / Level : <%=loginMember.getMemberLevel()%></div><br>
-					<div><a class="btn btn-success" href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a></div><br>
-					<!-- 관리자 페이지로 가는 링크 -->
-		<%
-					if(loginMember.getMemberLevel() > 0) {
-		%>		
-					<div><a class="btn btn-success" href="<%=request.getContextPath()%>/admin/adminIndex.jsp">관리자 페이지</a></div>
-		<%
-					}
-		%>
-				</div>
-		<%
-			}
-		%>
+		<h1 class="jumbotron bg-white text-center">메인페이지</h1>
 		
 		<!-- 상품 목록 -->
 		<%
@@ -86,32 +71,26 @@
 				ebookList = ebookDao.selectEbookList(beginRow, ROW_PER_PAGE);
 			} else { // 검색을 했을 때
 				ebookList = ebookDao.selectEbookListBySearch(beginRow, ROW_PER_PAGE, searchEbookTitle);
-			}
+			} 
 		%>
-			<table border="1">
-	      		<tr>
-	         		<%
-			            int j = 0;
-			            for(Ebook e : ebookList) {
-	         		%>
-		         			<td>
-		         				<div>
-		         					<img src="<%=request.getContextPath()%>/image/<%=e.getEbookImg()%>" width="200" height="200">
-		         				</div>
-		         				<div><%=e.getEbookTitle()%></div>
-		         				<div>₩ <%=e.getEbookPrice()%></div>
-		         			</td>
-	         		<%
-		         			j+=1; // for문 끝날때마다 i는 1씩 증가
-		         			if(j%5 == 0) {
-	         		%>
-	         				</tr><tr><!-- 줄바꿈 -->
-	         		<%
-	         				}
-		         		}
-		         	%>
-		         </tr>
-			</table>
+			<div class="row">
+		<%
+				for(Ebook e : ebookList) {
+		%>
+			    <div class="col-sm-3 p-3">
+			    	<div id="ebookList"class="col mr-3 rounded-lg p-4 mb-2">
+				    	<div>
+	       					<img src="<%=request.getContextPath()%>/image/<%=e.getEbookImg()%>" width="200" height="200">
+	       				</div>
+	       				<div class="font-weight-bold mt-2"><%=e.getEbookTitle()%></div>
+	       				<small class="mt-2"><%=e.getEbookAuthor()%> | <%=e.getEbookCompany()%></small>
+	       				<div class="font-weight-bold mt-3"><%=e.getEbookPrice()%><small class="font-weight-normal">원</small></div>
+       				</div>
+			    </div>
+		<%
+				}
+		%>
+			</div>
 		<%
 			// 마지막 페이지(lastPage)를 구하는 ebookDao의 메서드 호출
 			// int 타입의 lastPage에 저장
