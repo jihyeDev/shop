@@ -18,15 +18,6 @@
 		return;
 	}
 	
-	// 검색어
-	String searchEbookTitle = "";
-	// searchEbookTitle이 null이 아니라면 값을 받아서 검색어(searchEbookName)로 사용
-	if(request.getParameter("searchEbookTitle") != null) { 
-		searchEbookTitle = request.getParameter("searchEbookTitle");
-	}
-	// 디버깅
-	System.out.println("searchEbookTitle(검색어) : "+searchEbookTitle);
-	
 	// categoryName을 다 불러오기 위한 selectCategoryListAllByPage 메서드를 불러옴
 	CategoryDao categoryDao = new CategoryDao();
 	ArrayList<Category> categoryList = categoryDao.selectCategoryListAllByPage();
@@ -113,12 +104,9 @@
 	   				</form>
 	   			</div>
 				
-				<!-- ebook_title로 검색 -->
+				<!-- 전자책 추가하기 -->
 				<div class="float-right">
-					<form action="<%=request.getContextPath()%>/admin/selectEbookList.jsp" method="get">
-						Search with TITLE <input type="text" name="searchEbookTitle" placeholder="검색어를 입력해주세요">
-						<button class="btn btn-dark btn-sm" type="submit">검색</button>
-					</form>
+					<a class="btn btn-dark" href="<%=request.getContextPath()%>/admin/insertEbookForm.jsp">전자책 추가</a>
 				</div>
 				
 				<table class="table table-bordered table-sm text-center mt-5">

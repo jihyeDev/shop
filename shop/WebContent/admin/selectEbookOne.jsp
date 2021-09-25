@@ -119,7 +119,7 @@
 					</tr>
 					<tr>
 						<td>PRICE</td>
-						<td><%=returnEbook.getEbookPrice()%></td>
+						<td><%=returnEbook.getEbookPrice()%> 원</td>
 					</tr>
 					<tr>
 						<td>UPDATE</td>
@@ -134,7 +134,7 @@
 				
 				<a class="btn btn-outline-secondary center-block" href="<%=request.getContextPath()%>/admin/selectEbookList.jsp">전자책목록</a>
 				<a class="btn btn-outline-secondary center-block" href="<%=request.getContextPath()%>/admin/updateEbookImgForm.jsp?ebookNo=<%=returnEbook.getEbookNo()%>">이미지수정</a>
-				<a class="btn btn-outline-secondary center-block" href="<%=request.getContextPath()%>/admin/updateEbookPrice.jsp?ebookNo=<%=returnEbook.getEbookNo()%>">가격수정</a>
+				<a class="btn btn-outline-secondary center-block" href="<%=request.getContextPath()%>/admin/updateEbookPriceForm.jsp?ebookNo=<%=returnEbook.getEbookNo()%>">가격수정</a>
 				<a class="btn btn-outline-secondary center-block" href="<%=request.getContextPath()%>/admin/deleteEbookForm.jsp?ebookNo=<%=returnEbook.getEbookNo()%>">삭제</a>
 				<br>
 				
