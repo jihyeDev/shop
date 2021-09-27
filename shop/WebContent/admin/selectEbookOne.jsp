@@ -42,10 +42,10 @@
 	// 성공시 : returnEbook라는 객체에 저장시켜서 출력함
 	// 실패시 : null
 	Ebook returnEbook = ebookDao.selecteEbookOne(ebookNo);
-	// 디버깅과 실패시 인덱스 페이지로, 성공시 출력
+	// 디버깅과 실패시 전자책 관리 페이지로, 성공시 출력
 	if(returnEbook==null){
 		System.out.println("전자책 정보 불러오기 실패");
-		response.sendRedirect(request.getContextPath()+"/admin/selectMemberList.jsp");
+		response.sendRedirect(request.getContextPath()+"/admin/selectEbookList.jsp");
 	} else {
 		System.out.println("전자책 정보 불러오기 성공");
 		System.out.println(returnEbook.getEbookNo()+"<--- returnMember.getEbookNo()");

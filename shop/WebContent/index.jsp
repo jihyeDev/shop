@@ -19,6 +19,12 @@
 	transition : all 0.3s ease-in-out;
 	margin-top : -5px;
 }
+#ebookList a {
+	color : black;
+}
+#ebookList:hover a {
+	color : white;
+}
 </style>
 </head>
 <body>
@@ -28,6 +34,8 @@
 			<jsp:include page="/partial/mainMenu.jsp"></jsp:include>
 		</div>
 		<!-- end : mainMenu include -->
+		<hr>
+		
 		<h1 class="jumbotron bg-white text-center">메인페이지</h1>
 		
 		<!-- 상품 목록 -->
@@ -77,12 +85,18 @@
 		<%
 				for(Ebook e : ebookList) {
 		%>
-			    <div class="col-sm-3 p-3">
+			    <div class="col-sm-3 p-3" >
 			    	<div id="ebookList"class="col mr-3 rounded-lg p-4 mb-2">
 				    	<div>
-	       					<img src="<%=request.getContextPath()%>/image/<%=e.getEbookImg()%>" width="200" height="200">
+	       					<a href="<%=request.getContextPath()%>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>">
+	       						<img src="<%=request.getContextPath()%>/image/<%=e.getEbookImg()%>" width="200" height="200">
+	       					</a>
 	       				</div>
-	       				<div class="font-weight-bold mt-2"><%=e.getEbookTitle()%></div>
+	       				<div class="font-weight-bold mt-2">
+	       					<a href="<%=request.getContextPath()%>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>">
+	       						<%=e.getEbookTitle()%>
+	       					</a>
+	       				</div>
 	       				<small class="mt-2"><%=e.getEbookAuthor()%> | <%=e.getEbookCompany()%></small>
 	       				<div class="font-weight-bold mt-3"><%=e.getEbookPrice()%><small class="font-weight-normal">원</small></div>
        				</div>
