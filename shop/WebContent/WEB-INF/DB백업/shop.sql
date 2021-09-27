@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `ebook` (
   PRIMARY KEY (`ebook_no`),
   KEY `FK_ebook_category` (`category_name`),
   CONSTRAINT `FK_ebook_category` FOREIGN KEY (`category_name`) REFERENCES `category` (`category_name`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1004 DEFAULT CHARSET=utf8mb3;
 
 -- 테이블 데이터 shop.ebook:~1,000 rows (대략적) 내보내기
 DELETE FROM `ebook`;
@@ -448,7 +448,7 @@ INSERT INTO `ebook` (`ebook_no`, `ebook_isbn`, `category_name`, `ebook_title`, `
 	(381, '544177906-3', 'IT', 'Vagram', 'Winona', 'Edgewire', 412, 8972, 'noimage.png', 'faucibus orci luctus et ultrices posuere cubilia curae duis faucibus accumsan odio curabitur convallis duis consequat dui', '구편절판', '2021-05-08 00:00:00', '2021-09-23 00:00:00'),
 	(382, '999389699-3', 'IT', 'Hatity', 'Rafaelia', 'Ozu', 376, 14431, 'noimage.png', 'aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam congue', '구편절판', '2021-09-15 00:00:00', '2021-09-23 00:00:00'),
 	(383, '793484910-9', 'IT', 'Matsoft', 'Minny', 'Zoonoodle', 268, 18205, 'noimage.png', 'sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque', '품절', '2021-01-17 00:00:00', '2021-09-23 00:00:00'),
-	(384, '612276287-3', 'IT', 'Toughjoyfax', 'Kerrie', 'Thoughtsphere', 598, 12691, 'x9788971968413.jpg', 'nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed vel enim', '절판', '2021-09-22 00:00:00', '2021-09-24 17:28:32'),
+	(384, '612276287-3', 'IT', 'Toughjoyfax', 'Kerrie', 'Thoughtsphere', 598, 5000, 'x9788971968413.jpg', 'nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed vel enim', '절판', '2021-09-22 00:00:00', '2021-09-24 23:49:47'),
 	(385, '999759925-X', '만화', 'Job', 'Joann', 'Blogpad', 248, 16628, 'noimage.png', 'pellentesque ultrices mattis odio donec vitae nisi nam ultrices libero non mattis pulvinar', '품절', '2021-06-23 00:00:00', '2021-09-23 00:00:00'),
 	(386, '081855991-8', '여행', 'Konklux', 'Goldie', 'Skyndu', 484, 12200, 'noimage.png', 'donec posuere metus vitae ipsum aliquam non mauris morbi non lectus aliquam sit amet diam in magna bibendum imperdiet', '품절', '2021-07-07 00:00:00', '2021-09-23 00:00:00'),
 	(387, '055745132-9', '만화', 'Solarbreeze', 'Whitney', 'Feedmix', 884, 9038, 'noimage.png', 'quis orci eget orci vehicula condimentum curabitur in libero ut', '구편절판', '2021-09-02 00:00:00', '2021-09-23 00:00:00'),
@@ -1064,7 +1064,9 @@ INSERT INTO `ebook` (`ebook_no`, `ebook_isbn`, `category_name`, `ebook_title`, `
 	(997, '544481551-6', '소설', 'Tres-Zap', 'Marwin', 'Buzzshare', 888, 5548, 'noimage.png', 'dui luctus rutrum nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus', '절판', '2020-12-30 00:00:00', '2021-09-23 00:00:00'),
 	(998, '787556697-5', 'IT', 'Lotlux', 'Carlynne', 'Tavu', 786, 15627, 'noimage.png', 'nisi at nibh in hac habitasse platea dictumst aliquam augue quam sollicitudin', '구편절판', '2020-10-07 00:00:00', '2021-09-23 00:00:00'),
 	(999, '285800185-5', '외국어', 'Bitchip', 'Yank', 'Shuffledrive', 249, 25992, 'noimage.png', 'bibendum felis sed interdum venenatis turpis enim blandit mi in porttitor pede justo', '품절', '2021-05-08 00:00:00', '2021-09-23 00:00:00'),
-	(1000, '945595328-5', '소설', 'Cookley', 'Reese', 'Buzzdog', 763, 16826, 'noimage.png', 'elementum nullam varius nulla facilisi cras non velit nec nisi vulputate nonummy maecenas tincidunt lacus', '구편절판', '2021-02-04 00:00:00', '2021-09-23 00:00:00');
+	(1000, '945595328-5', '소설', 'Cookley', 'Reese', 'Buzzdog', 763, 16826, 'noimage.png', 'elementum nullam varius nulla facilisi cras non velit nec nisi vulputate nonummy maecenas tincidunt lacus', '구편절판', '2021-02-04 00:00:00', '2021-09-23 00:00:00'),
+	(1001, '123456789', 'IT', 'JIHYE CHOE', '최지혜', '지혜최', 322, 8500, 'x97889719684135.jpg', '이것은 지혜의 IT 관련 책입니다', '판매중', '2021-09-25 01:44:50', '2021-09-25 01:44:50'),
+	(1002, '987654321', '경제', 'TAE', '태혁진', '태 아카데미', 823, 500000, 'x97889719684136.jpg', '태혁진의 경제 책', '판매중', '2021-09-25 01:48:29', '2021-09-25 01:48:29');
 /*!40000 ALTER TABLE `ebook` ENABLE KEYS */;
 
 -- 테이블 shop.member 구조 내보내기
@@ -1260,6 +1262,26 @@ INSERT INTO `orders` (`order_no`, `ebook_no`, `member_no`, `order_price`, `creat
 	(49, 3, 9, 1000, '2021-09-24 00:00:00', '2021-09-24 00:00:00'),
 	(50, 6, 7, 1000, '2021-09-24 00:00:00', '2021-09-24 00:00:00');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+
+-- 테이블 shop.order_comment 구조 내보내기
+DROP TABLE IF EXISTS `order_comment`;
+CREATE TABLE IF NOT EXISTS `order_comment` (
+  `order_no` int(11) NOT NULL,
+  `ebook_no` int(11) NOT NULL,
+  `order_score` int(11) NOT NULL,
+  `order_comment_content` text NOT NULL,
+  `create_date` datetime NOT NULL,
+  `update_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- 테이블 데이터 shop.order_comment:~3 rows (대략적) 내보내기
+DELETE FROM `order_comment`;
+/*!40000 ALTER TABLE `order_comment` DISABLE KEYS */;
+INSERT INTO `order_comment` (`order_no`, `ebook_no`, `order_score`, `order_comment_content`, `create_date`, `update_date`) VALUES
+	(1, 2, 4, '헤헤', '2021-09-27 16:36:38', '2021-09-27 16:36:38'),
+	(1, 2, 2, 'ㅎㅎ', '2021-09-27 16:38:05', '2021-09-27 16:38:05'),
+	(42, 10, 1, '별점 신기하다 test', '2021-09-27 17:45:10', '2021-09-27 17:45:10');
+/*!40000 ALTER TABLE `order_comment` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;

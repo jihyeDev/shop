@@ -12,6 +12,31 @@
 #article {
 	background-color : #f4f4f5;
 }
+#score fieldset{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    border: 0; /* 필드셋 테두리 제거 */
+}
+#score input[type=radio]{
+    display: none; /* 라디오박스 감춤 */
+}
+#score label{
+    font-size: 1em; /* 이모지 크기 */
+    color: transparent; /* 기존 이모지 컬러 제거 */
+    text-shadow: 0 0 0 #f4f4f5; /* 새 이모지 색상 부여 */
+}
+#score{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    direction: rtl; /* 이모지 순서 반전(Right-To-Left) */
+}
+#score label:hover{
+    text-shadow: 0 0 0 #28a745; /* 마우스 호버 */
+}
+#score label:hover ~ label{
+    text-shadow: 0 0 0 #28a745; /* 마우스 호버 뒤에오는 이모지들 */
+}
+#score input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 #28a745; /* 마우스 클릭 체크 */
+}
 </style>
 </head>
 <body>
@@ -112,15 +137,25 @@
 				<input type="hidden" name="ebookNo" value="<%=ebookNo%>">
 				<table class="table mt-5">
 					<tr>
-						<td>SCORE</td>
-						<td>10/<input type="text" name="orderScore"></td>
+						<td style="width:10%">GRADE</td>
+						<td>
+							<div id="score">
+								<fieldset>
+							        <input type="radio" name="orderScore" value="5" id="rate1"><label for="rate1">⭐</label>
+							        <input type="radio" name="orderScore" value="4" id="rate2"><label for="rate2">⭐</label>
+							        <input type="radio" name="orderScore" value="3" id="rate3"><label for="rate3">⭐</label>
+							        <input type="radio" name="orderScore" value="2" id="rate4"><label for="rate4">⭐</label>
+							        <input type="radio" name="orderScore" value="1" id="rate5" checked><label for="rate5">⭐</label>
+						        </fieldset>
+							</div>
+						</td>
 					</tr>
 					<tr>
 						<td>COMMENT</td>
 						<td><textarea name="orderCommentContent" class="form-control"></textarea>
 					</tr>
 				</table>
-				<button class="btn btn-success" type="submit">입력</button>
+				<button class="btn btn-success float-right" type="submit">입력</button>
 			</form>
 		</div>
 	
