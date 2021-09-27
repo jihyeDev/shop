@@ -70,7 +70,7 @@
 			final int ROW_PER_PAGE = 20;
 			int beginRow = (currentPage-1) * ROW_PER_PAGE;
 			
-			// 목록
+			// 전체 목록
 			// 검색을 하지 않았을 때는 전체 전자책을 SELECT하고, 페이징하는 ebookDao의 selectEbookList메서드 호출
 			// 검색을 했을 때는 LIKE 연산자를 사용한 sql문을 실행하고 리스트를 리턴한 selectEbookListByCategory메서드 호출
 			// ebookList라는 리스트를 사용하기 위해 생성
@@ -80,7 +80,69 @@
 			} else { // 검색을 했을 때
 				ebookList = ebookDao.selectEbookListBySearch(beginRow, ROW_PER_PAGE, searchEbookTitle);
 			} 
+			
+			// 인기 목록 5개(많이 주문된 5개의 ebook)
+			ArrayList<Ebook> popularEbookList = ebookDao.selectPopularEbookList();
+			
+			// 최신 전자책 목록 5개(가장 최근 update된 5개의 ebook)
+			ArrayList<Ebook> createEbookList = ebookDao.selectCreateEbookList();
 		%>
+		
+		
+			<h2>인기 상품 목록</h2>
+			<div class="row">
+		<%
+				for(Ebook e : popularEbookList) {
+		%>
+			    <div class="col-sm-3 p-3" >
+			    	<div id="ebookList"class="col mr-3 rounded-lg p-4 mb-2">
+				    	<div>
+	       					<a href="<%=request.getContextPath()%>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>">
+	       						<img src="<%=request.getContextPath()%>/image/<%=e.getEbookImg()%>" width="200" height="200">
+	       					</a>
+	       				</div>
+	       				<div class="font-weight-bold mt-2">
+	       					<a href="<%=request.getContextPath()%>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>">
+	       						<%=e.getEbookTitle()%>
+	       					</a>
+	       				</div>
+	       				<small class="mt-2"><%=e.getEbookAuthor()%> | <%=e.getEbookCompany()%></small>
+	       				<div class="font-weight-bold mt-3"><%=e.getEbookPrice()%><small class="font-weight-normal">원</small></div>
+       				</div>
+			    </div>
+		<%
+				}
+		%>
+			</div>
+			
+			<h2>최신 상품 목록</h2>
+			<div class="row">
+		<%
+				for(Ebook e : createEbookList) {
+		%>
+			    <div class="col-sm-3 p-3" >
+			    	<div id="ebookList"class="col mr-3 rounded-lg p-4 mb-2">
+				    	<div>
+	       					<a href="<%=request.getContextPath()%>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>">
+	       						<img src="<%=request.getContextPath()%>/image/<%=e.getEbookImg()%>" width="200" height="200">
+	       					</a>
+	       				</div>
+	       				<div class="font-weight-bold mt-2">
+	       					<a href="<%=request.getContextPath()%>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>">
+	       						<%=e.getEbookTitle()%>
+	       					</a>
+	       				</div>
+	       				<small class="mt-2"><%=e.getEbookAuthor()%> | <%=e.getEbookCompany()%></small>
+	       				<div class="font-weight-bold mt-3"><%=e.getEbookPrice()%><small class="font-weight-normal">원</small></div>
+       				</div>
+			    </div>
+		<%
+				}
+		%>
+			</div>
+			
+			
+			<!-- 전체 상품 목록 -->
 			<div class="row">
 		<%
 				for(Ebook e : ebookList) {

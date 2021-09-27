@@ -103,6 +103,86 @@ public class EbookDao {
 		return list;
 	}
 	
+	// [사용자] 전자책 중에 가장 많이 주문된 5개의 전자책을 SELECT하는 메서드
+	// SELECT 한 값을 자료구조화 하여 list 생성 후 리턴
+	public ArrayList<Ebook> selectPopularEbookList() throws ClassNotFoundException, SQLException {
+		// list라는 리스트를 사용하기 위해 생성
+		ArrayList<Ebook> list = new ArrayList<Ebook>();
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT t.ebook_no ebookNo, e.category_name categoryName, e.ebook_title ebookTitle, e.ebook_img ebookImg, e.ebook_price ebookPrice, e.ebook_author ebookAuthor, e.ebook_company ebookCompany FROM ebook e INNER JOIN (SELECT ebook_no, COUNT(ebook_no) cnt FROM orders GROUP BY ebook_no ORDER BY COUNT(ebook_no) DESC LIMIT 0,5) t ON e.ebook_no = t.ebook_no ORDER BY cnt DESC;";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// 데이터 가공 (자료구조화)
+		// ResultSet이라는 특수한 타입에서 ArrayList라는 일반화된 타입으로 변환(가공)
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			// ebook 객체 생성 후 저장
+			Ebook ebook = new Ebook();
+			ebook.setEbookNo (rs.getInt("ebookNo"));
+			ebook.setCategoryName (rs.getString("categoryName"));
+			ebook.setEbookTitle (rs.getString("ebookTitle"));
+			ebook.setEbookImg (rs.getString("ebookImg"));
+			ebook.setEbookPrice (rs.getInt("ebookPrice"));
+			ebook.setEbookAuthor (rs.getString("ebookAuthor"));
+			ebook.setEbookCompany (rs.getString("ebookCompany"));
+			list.add(ebook);
+		}
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+				
+		//list를 return
+		return list;
+	}
+	
+	// [사용자] 전자책 중에 최근 올라온 5개의 전자책을 SELECT하는 메서드
+	// SELECT 한 값을 자료구조화 하여 list 생성 후 리턴
+	public ArrayList<Ebook> selectCreateEbookList() throws ClassNotFoundException, SQLException {
+		// list라는 리스트를 사용하기 위해 생성
+		ArrayList<Ebook> list = new ArrayList<Ebook>();
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT ebook_no ebookNo, category_name categoryName, ebook_title ebookTitle, ebook_img ebookImg, ebook_price ebookPrice, ebook_author ebookAuthor, ebook_company ebookCompany FROM ebook ORDER BY create_date DESC LIMIT 0,5;";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// 데이터 가공 (자료구조화)
+		// ResultSet이라는 특수한 타입에서 ArrayList라는 일반화된 타입으로 변환(가공)
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			// ebook 객체 생성 후 저장
+			Ebook ebook = new Ebook();
+			ebook.setEbookNo (rs.getInt("ebookNo"));
+			ebook.setCategoryName (rs.getString("categoryName"));
+			ebook.setEbookTitle (rs.getString("ebookTitle"));
+			ebook.setEbookImg (rs.getString("ebookImg"));
+			ebook.setEbookPrice (rs.getInt("ebookPrice"));
+			ebook.setEbookAuthor (rs.getString("ebookAuthor"));
+			ebook.setEbookCompany (rs.getString("ebookCompany"));
+			list.add(ebook);
+		}
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+				
+		//list를 return
+		return list;
+	}
+	
 	// [사용자] 검색하였을 때 전자책 목록을 SELECT하는 메서드
 	// LIKE를 이용하여 SELECT 한 값을 자료구조화 하고 list 생성 후 리턴
 	public ArrayList<Ebook> selectEbookListBySearch(int beginRow, int rowPerPage, String searchEbookTitle) throws ClassNotFoundException, SQLException{

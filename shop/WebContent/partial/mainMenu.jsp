@@ -35,6 +35,7 @@
 		<%
 					}
 		%>
+					<a class="btn btn-success btn-sm" href="<%=request.getContextPath()%>/selectOrderListByMember.jsp">주문목록</a>
 				</li>
 		<%
 			}

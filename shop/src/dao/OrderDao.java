@@ -204,4 +204,56 @@ public class OrderDao {
 				
 		return lastPage;
 	}
+	
+	// [회원] 자신의 주문 목록 전체를 SELECT 하는 메서드
+	// 자신의 memberNo을 매개변수로 받아와서 WHERE절을 사용해 select해준다.
+	// JOIN SQL문
+	public ArrayList<OrderEbookMember> selectOrderListByMember(int memberNo) throws ClassNotFoundException, SQLException {
+		ArrayList<OrderEbookMember> list = new ArrayList<>();
+		
+		// 매개변수 값을 디버깅
+		System.out.println(memberNo + "<--- OrderDao.selectOrderListByMember parem : memberNo");
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT o.order_no orderNo, e.ebook_no ebookNo, e.ebook_title ebookTitle, m.member_no memberNo, m.member_id memberId, o.order_price orderPrice, o.create_date createDate FROM orders o INNER JOIN ebook e INNER JOIN member m ON o.ebook_no = e.ebook_no AND o.member_no = m.member_no WHERE m.member_no=? ORDER BY o.create_date DESC";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, memberNo);
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// 데이터 가공 (자료구조화)
+		// ResultSet이라는 특수한 타입에서 ArrayList라는 일반화된 타입으로 변환(가공)
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			OrderEbookMember oem = new OrderEbookMember();
+			Order o = new Order();
+			o.setOrderNo(rs.getInt("orderNo"));
+			o.setOrderPrice(rs.getInt("orderPrice"));
+			o.setCreateDate(rs.getString("createDate"));
+			oem.setOrder(o);
+			
+			Ebook e = new Ebook();
+			e.setEbookNo(rs.getInt("ebookNo"));
+			e.setEbookTitle(rs.getString("ebookTitle"));
+			oem.setEbook(e);
+			
+			Member m = new Member();
+			m.setMemberNo(rs.getInt("memberNo"));
+			m.setMemberId(rs.getString("memberId"));
+			oem.setMember(m);
+			
+			list.add(oem);
+		}
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+						
+		//list를 return
+		return list;
+	}
 }
