@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -28,19 +29,35 @@
 		
 		<h1 class="jumbotron">LOGIN</h1>
 		
-		<form method="post" action="./loginAction.jsp">
+		<form id="loginForm" method="post" action="./loginAction.jsp">
 			<table class="table mt-5 w-50">
 				<tr>
 					<td>ID </td>
-					<td><input type="text" name="memberId" class="form-control"></td>
+					<td><input type="text" id="memberId" name="memberId" class="form-control"></td>
 				<tr>
 				<tr>
 					<td>PASSWORD</td>
-					<td><input type="password" name="memberPw" class="form-control"></td>
+					<td><input type="password" id="memberPw" name="memberPw" class="form-control"></td>
 				</tr>
 			</table>
-			<div><button class="btn btn-success" type="submit">로그인</button></div>
+			<div><button id="loginBtn" type="button" class="btn btn-success">로그인</button></div>
 		</form>
 	</div>
+	
+	<script>
+		$('#loginBtn').click(function(){
+			// 버튼을 click했을 때
+			if($('#memberId').val() == '') { // id가 공백이면
+				alert('ID를 입력하세요');
+				return;
+			} else if($('#memberPw').val() == '') { // pw가 공백이면
+				alert('PW를 입력하세요');
+				return;
+			} else{
+				$('#loginForm').submit(); // <button type="button"> -> <button type="submit">
+			}
+		});
+	</script>
+	
 </body>
 </html>
