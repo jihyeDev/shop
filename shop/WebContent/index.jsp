@@ -244,7 +244,7 @@
 						
 			// 끝으로 버튼
 			// 가장 마지막 페이지로 바로 이동하는 버튼
-			if(currentPage != lastPage){
+			if(currentPage != lastPage && endPage != 0){
 			%>
 				<a href="<%=request.getContextPath()%>/index.jsp?currentPage=<%=lastPage%>&searchEbookTitle=<%=searchEbookTitle%>" class="btn btn-outline-secondary">끝▶</a>
 			<%
