@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입폼</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -69,35 +70,57 @@
 		</form>
 		
 		<!-- 회원가입 폼 -->
-		<form method="post" action="<%=request.getContextPath()%>/insertMemberAction.jsp">
+		<form id="joinForm" method="post" action="<%=request.getContextPath()%>/insertMemberAction.jsp">
 			<table class="table mt-5 w-50">
 				<tr>
 					<td>ID</td>
-					<td><input type="text" name="memberId" class="form-control" readonly="readonly" value="<%=memberIdCheck%>"></td>
+					<td><input type="text" id="memberId" name="memberId" class="form-control" readonly="readonly" value="<%=memberIdCheck%>"></td>
 				</tr>
 				<tr>
 					<td>PASSWORD</td>
-					<td><input type="password" name="memberPw" class="form-control"></td>
+					<td><input type="password" id="memberPW" name="memberPw" class="form-control"></td>
 				</tr>
 				<tr>
 					<td>NAME</td>
-					<td><input type="text" name="memberName" class="form-control"></td>
+					<td><input type="text" id="memberName" name="memberName" class="form-control"></td>
 				</tr>
 				<tr>
 					<td>AGE</td>
-					<td><input type="text" name="memberAge" class="form-control"></td>
+					<td><input type="text" id="memberAge" name="memberAge" class="form-control"></td>
 				</tr>
 				<tr>
 					<td>GENDER</td>
 					<td>
-						<input type="radio" name="memberGender" value="남">남자 
-						<input type="radio" name="memberGender" value="여">여자
+						<input type="radio" class="memberGender" name="memberGender" value="남">남자 
+						<input type="radio" class="memberGender" name="memberGender" value="여">여자
 					</td>
 				</tr>
 			</table>
-			<button class="btn btn-success" type="submit">가입</button>
+			<button id="btn" class="btn btn-success" type="button">가입</button>
 		</form>
 		<br>
 	</div>
+	<script>
+	$('#btn').click(function(){
+		if($('#memberId').val() == '') {
+			alert('ID를 입력하세요!');
+			return;
+		}
+		if ($('#memberPw').val() == '') {
+			alert('PW를 입력하세요!');
+			return;
+		}
+		if ($('#memberName').val() == '') {
+			alert('NAME를 입력하세요!');
+			return;
+		} 
+		let memberGedner = $('.memberGender:checked'); // . 클래스속성으로 부르면 리턴값은 배열
+		if (memberGender.length == 0) {
+			alert('GENDER를 선택하세요!');
+			return;
+		}
+		$('#joinForm').submit();
+	})
+	</script>
 </body>
 </html>

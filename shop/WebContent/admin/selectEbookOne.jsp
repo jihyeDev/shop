@@ -26,7 +26,7 @@
 	}
 	
 	// 입력값 방어 코드
-	// 레벨을 수정할 특정회원의 ebookNo을 입력 받았는지 유효성 검사
+	// 상세정보를 확인할 특정 전자책의 ebookNo를 입력 받았는지 유효성 검사
 	if(request.getParameter("ebookNo")==null || request.getParameter("ebookNo").equals("")) {
 		response.sendRedirect(request.getContextPath()+"/admin/selectEbookList.jsp");
 		return;

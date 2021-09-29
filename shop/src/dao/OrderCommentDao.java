@@ -11,7 +11,7 @@ import commons.*;
 
 public class OrderCommentDao {
 	// [회원] 후기를 입력(추가) 하는 메서드
-	// Ebook 객체로 입력받아온 값을 DB에 insert 함
+	// OrderComment 객체로 입력받아온 값을 DB에 insert 함
 	public boolean insertOrderComment(OrderComment comment) throws ClassNotFoundException, SQLException {
 		boolean result = false;
 		

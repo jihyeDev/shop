@@ -44,7 +44,7 @@
 	OrderCommentDao orderCommentDao = new OrderCommentDao();
 	
 	// 입력값 방어 코드
-	// 레벨을 수정할 특정회원의 ebookNo을 입력 받았는지 유효성 검사
+	// 상세정보를 확인할 특정 전자책의 ebookNo을 입력 받았는지 유효성 검사
 	if(request.getParameter("ebookNo")==null || request.getParameter("ebookNo").equals("")) {
 		response.sendRedirect(request.getContextPath()+"/selectEbookList.jsp");
 		return;
@@ -200,12 +200,15 @@
 				// 디버깅
 				System.out.println("startPage(화면에 보여질 시작 페이지 번호) : "+startPage+", endPage(화면에 보여질 마지막 페이지 번호) : "+endPage);
 				%>
-				<table class="table mt-1">
-					<tr>
-						<td style="width:15%; text-align:center">GRADE</td>
-						<td>COMMENT</td>
-						<td style="width:10%; text-align:center">DATE</td>
-					</tr>
+				<table class="table table-sm mt-1">
+					<thead style="text-align:center;">
+						<tr>
+							<td style="width:15%;">GRADE</td>
+							<td>COMMENT</td>
+							<td style="width:20%;">DATE</td>
+						</tr>
+					</thead>
+					<tbody>
 					<%
 						for(OrderComment c : commentList) {
 					%>
@@ -244,6 +247,7 @@
 					<%
 						}
 					%>
+					</tbody>
 				</table>
 				
 				<%
