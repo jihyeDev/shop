@@ -24,7 +24,7 @@
 			<a class="nav-link text-secondary pt-2 px-3" href="">상품평 관리</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link text-secondary pt-2 px-3" href="">공지게시판 관리</a>
+			<a class="nav-link text-secondary pt-2 px-3" href="<%=request.getContextPath()%>/admin/selectNoticeList.jsp">공지게시판 관리</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link text-secondary pt-2 px-3" href="">QnA게시판 관리</a>

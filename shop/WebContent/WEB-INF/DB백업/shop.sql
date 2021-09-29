@@ -1193,6 +1193,25 @@ INSERT INTO `member` (`member_no`, `member_id`, `member_pw`, `member_level`, `me
 	(103, '502444530-9', '*A4B6157319038724E3560894F7F932C8886EBFCF', 0, 'Rolfe', 30, '여', '2021-09-15 00:00:00', '2021-09-15 00:00:00');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 
+-- 테이블 shop.notice 구조 내보내기
+DROP TABLE IF EXISTS `notice`;
+CREATE TABLE IF NOT EXISTS `notice` (
+  `notice_no` int(11) NOT NULL AUTO_INCREMENT,
+  `notice_title` varchar(500) NOT NULL,
+  `notice_content` text NOT NULL,
+  `member_no` int(11) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `update_date` datetime NOT NULL,
+  PRIMARY KEY (`notice_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+
+-- 테이블 데이터 shop.notice:~1 rows (대략적) 내보내기
+DELETE FROM `notice`;
+/*!40000 ALTER TABLE `notice` DISABLE KEYS */;
+INSERT INTO `notice` (`notice_no`, `notice_title`, `notice_content`, `member_no`, `create_date`, `update_date`) VALUES
+	(1, '쇼핑몰 서버 작업 공지 (9/29 04:00~06:00)', '안녕하세요. <br>e북 쇼핑몰 입니다.<br><br>쇼핑몰 서버점검 작업 관련 공지 드립니다.<br><br>작업시간: 9월 29일 (수) 새벽 04:00 ~ 06:00<br>작업내용: 서버 점검 작업<br><br>해당 작업시간에는 사이트 접속이 불가능하며, 도서 다운로드 시 오류가 발생할 수 있습니다.<br>서버점검 시간은 작업에 따라 시간이 단축 또는 연장될 수 있습니다.<br><br>더 좋은 서비스로 보답 드릴 것을 약속드리며 회원님들의 많은 양해 부탁드립니다.<br><br>e북 쇼핑몰 드림.', 4, '2021-09-29 12:03:14', '2021-09-29 14:09:19');
+/*!40000 ALTER TABLE `notice` ENABLE KEYS */;
+
 -- 테이블 shop.orders 구조 내보내기
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
@@ -1205,9 +1224,9 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`order_no`),
   KEY `FK_orders_ebook` (`ebook_no`),
   KEY `FK_orders_member` (`member_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 shop.orders:~50 rows (대략적) 내보내기
+-- 테이블 데이터 shop.orders:~51 rows (대략적) 내보내기
 DELETE FROM `orders`;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
 INSERT INTO `orders` (`order_no`, `ebook_no`, `member_no`, `order_price`, `create_date`, `update_date`) VALUES
@@ -1260,7 +1279,8 @@ INSERT INTO `orders` (`order_no`, `ebook_no`, `member_no`, `order_price`, `creat
 	(47, 2, 5, 1000, '2021-09-24 00:00:00', '2021-09-24 00:00:00'),
 	(48, 1, 5, 1000, '2021-09-24 00:00:00', '2021-09-24 00:00:00'),
 	(49, 3, 9, 1000, '2021-09-24 00:00:00', '2021-09-24 00:00:00'),
-	(50, 6, 7, 1000, '2021-09-24 00:00:00', '2021-09-24 00:00:00');
+	(50, 6, 7, 1000, '2021-09-24 00:00:00', '2021-09-24 00:00:00'),
+	(51, 6, 5, 21397, '2021-09-28 16:04:29', '2021-09-28 16:04:29');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
 -- 테이블 shop.order_comment 구조 내보내기
@@ -1274,14 +1294,60 @@ CREATE TABLE IF NOT EXISTS `order_comment` (
   `update_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 shop.order_comment:~3 rows (대략적) 내보내기
+-- 테이블 데이터 shop.order_comment:~10 rows (대략적) 내보내기
 DELETE FROM `order_comment`;
 /*!40000 ALTER TABLE `order_comment` DISABLE KEYS */;
 INSERT INTO `order_comment` (`order_no`, `ebook_no`, `order_score`, `order_comment_content`, `create_date`, `update_date`) VALUES
 	(1, 2, 4, '헤헤', '2021-09-27 16:36:38', '2021-09-27 16:36:38'),
 	(1, 2, 2, 'ㅎㅎ', '2021-09-27 16:38:05', '2021-09-27 16:38:05'),
-	(42, 10, 1, '별점 신기하다 test', '2021-09-27 17:45:10', '2021-09-27 17:45:10');
+	(42, 10, 1, '별점 신기하다 test', '2021-09-27 17:45:10', '2021-09-27 17:45:10'),
+	(6, 6, 5, '1111', '2021-09-28 13:41:32', '2021-09-28 13:41:35'),
+	(17, 6, 3, '2222', '2021-09-28 13:41:42', '2021-09-28 13:41:41'),
+	(24, 6, 5, '3333', '2021-09-28 13:42:26', '2021-09-28 13:42:28'),
+	(27, 6, 4, '4444', '2021-09-28 13:42:51', '2021-09-28 13:42:50'),
+	(34, 6, 3, '5555', '2021-09-28 13:43:16', '2021-09-28 13:43:18'),
+	(37, 6, 4, '6666', '2021-09-28 13:43:28', '2021-09-28 13:43:27'),
+	(43, 6, 5, '7777', '2021-09-28 13:43:49', '2021-09-28 13:43:53');
 /*!40000 ALTER TABLE `order_comment` ENABLE KEYS */;
+
+-- 테이블 shop.qna 구조 내보내기
+DROP TABLE IF EXISTS `qna`;
+CREATE TABLE IF NOT EXISTS `qna` (
+  `qna_no` int(11) NOT NULL AUTO_INCREMENT,
+  `qna_category` enum('전자책관련','개인정보관련','기타') NOT NULL,
+  `qna_title` varchar(500) NOT NULL,
+  `qna_content` text NOT NULL,
+  `qna_secret` enum('Y','N') NOT NULL,
+  `member_no` int(11) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `update_date` datetime NOT NULL,
+  PRIMARY KEY (`qna_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+
+-- 테이블 데이터 shop.qna:~2 rows (대략적) 내보내기
+DELETE FROM `qna`;
+/*!40000 ALTER TABLE `qna` DISABLE KEYS */;
+INSERT INTO `qna` (`qna_no`, `qna_category`, `qna_title`, `qna_content`, `qna_secret`, `member_no`, `create_date`, `update_date`) VALUES
+	(1, '전자책관련', 'test', 'test', 'N', 1, '2021-09-29 15:03:04', '2021-09-29 15:03:07'),
+	(2, '기타', 'test2', 'test2', 'Y', 5, '2021-09-29 16:21:30', '2021-09-29 16:21:31');
+/*!40000 ALTER TABLE `qna` ENABLE KEYS */;
+
+-- 테이블 shop.qna_comment 구조 내보내기
+DROP TABLE IF EXISTS `qna_comment`;
+CREATE TABLE IF NOT EXISTS `qna_comment` (
+  `qna_no` int(11) NOT NULL,
+  `qna_comment_content` text NOT NULL,
+  `member_no` int(11) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `update_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- 테이블 데이터 shop.qna_comment:~1 rows (대략적) 내보내기
+DELETE FROM `qna_comment`;
+/*!40000 ALTER TABLE `qna_comment` DISABLE KEYS */;
+INSERT INTO `qna_comment` (`qna_no`, `qna_comment_content`, `member_no`, `create_date`, `update_date`) VALUES
+	(1, 'ㅎㅇ', 4, '2021-09-29 17:20:38', '2021-09-29 17:20:38');
+/*!40000 ALTER TABLE `qna_comment` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
