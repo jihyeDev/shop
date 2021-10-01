@@ -78,7 +78,8 @@
 							<th>EBOOK TITLE</th>
 							<th>ORDER PRICE</th>
 							<th>MEMBER ID</th>
-							<th>CREATE DATE</th>
+							<th>ORDER DATE</th>
+							<th>CANSEL ORDER</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -92,6 +93,8 @@
 									<td><%=oem.getOrder().getOrderPrice()%></td>
 									<td><%=oem.getMember().getMemberId()%></td>
 									<td><%=oem.getOrder().getCreateDate()%></td>
+									<!-- 주문을 취소하는 PAGE로 연결하는 버튼 -->
+									<td><a class="btn btn-light btn-sm" href="<%=request.getContextPath()%>/admin/deleteOrder.jsp?orderNo=<%=oem.getOrder().getOrderNo()%>">주문취소</a></td>
 								</tr>
 						<%
 							}

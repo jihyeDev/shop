@@ -102,25 +102,30 @@
 	</div>
 	<script>
 	$('#btn').click(function(){
-		if($('#memberId').val() == '') {
-			alert('ID를 입력하세요!');
-			return;
-		}
-		if ($('#memberPw').val() == '') {
-			alert('PW를 입력하세요!');
-			return;
-		}
-		if ($('#memberName').val() == '') {
-			alert('NAME를 입력하세요!');
-			return;
-		} 
-		let memberGedner = $('.memberGender:checked'); // . 클래스속성으로 부르면 리턴값은 배열
-		if (memberGender.length == 0) {
-			alert('GENDER를 선택하세요!');
-			return;
-		}
-		$('#joinForm').submit();
-	})
+			if($('#memberId').val() == '') {
+				alert('ID를 입력하세요!');
+				return;
+			}
+			if($('#memberPw').val() == '') {
+				alert('PASSWORD를 입력하세요!');
+				return;
+			}
+			if($('#memberName').val() == '') {
+				alert('NAME를 입력하세요!');
+				return;
+			}
+			if($('#memberAge').val() == '') {
+				alert('AGE를 입력하세요!');
+				return;
+			}
+			let memberGedner = $('.memberGender:checked'); // . 클래스속성으로 부르면 리턴값은 배열
+			if(memberGedner.length == 0) {
+				alert('GENDER를 선택하세요!');
+				return;
+			}
+			
+			$('#joinForm').submit();
+		});
 	</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "dao.*"%>
 <%@ page import = "vo.*"%>
+<%@ page import = "java.net.URLEncoder" %>
 <%
 	// selectCategoryNameCheckAction.jsp 디버깅 구분선
 	System.out.println("----------selectCategoryNameCheckAction.jsp----------");
@@ -33,10 +34,13 @@
 	// 입력받은 categoryNameCheck를 중복값인지 확인하는 selectCategoryName 메서드를 호출하여 리턴값을 result에 저장
 	String result = CategoryDao.selectCategoryName(categoryNameCheck);
 	
+	// 전송 문자 UTF-8 인코딩
+	String encText = URLEncoder.encode(categoryNameCheck, "UTF-8");
+	
 	
 	// result 값이 null이면 사용 가능한 카테고리 이름, 아니라면 이미 사용중인 카테고리 이름
 	if(result == null) {
-		response.sendRedirect(request.getContextPath()+"/admin/insertCategoryForm.jsp?categoryNameCheck="+categoryNameCheck);
+		response.sendRedirect(request.getContextPath()+"/admin/insertCategoryForm.jsp?categoryNameCheck="+encText);
 	} else {
 		response.sendRedirect(request.getContextPath()+"/admin/insertCategoryForm.jsp?nameCheckResult=Y");
 	}

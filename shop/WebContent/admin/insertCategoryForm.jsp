@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="vo.*" %>
+<%@ page import = "java.net.URLDecoder" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,8 @@
 </head>
 <body>
 <%
+	request.setCharacterEncoding("utf-8");
+
 	// adminPage의 방어코드 :  관리자 로그인 상태가 아니라면 페이지 접근 불가
 	// session에 저장된 loginMember를 받아옴
 	Member loginMember = (Member)session.getAttribute("loginMember");

@@ -43,7 +43,7 @@
 	paramNotice.setNoticeContent(noticeContent);
 	paramNotice.setMemberNo(memberNo);
 	
-	// 공지사항의 게시글을 입력하는 categoryDao의 insertCategory 메서드 호출
+	// 공지사항의 게시글을 입력하는 noticeDao의 insertNoticeByAdmin 메서드 호출
 	if(noticeDao.insertNoticeByAdmin(paramNotice)) {
 		System.out.println("공지사항 입력 성공");
 	} else {
