@@ -13,9 +13,7 @@ public class QnaCommentDao {
 		boolean result = false;
 		
 		// 매개변수 값을 디버깅
-		System.out.println(comment.getQnaNo() + "<--- QnaCommentDao.insertQnaComment parem : qnaNo");
-		System.out.println(comment.getMemberNo() + "<--- QnaCommentDao.insertQnaComment parem : memberNo");
-		System.out.println(comment.getQnaCommentContent() + "<--- QnaCommentDao.insertQnaComment parem : qnaCommentContent");
+		System.out.println(comment + "<--- QnaCommentDao.insertQnaComment parem : comment");
 		
 		// DB 실행
 		// dbUtil 객체 생성

@@ -25,6 +25,23 @@
 #ebookList:hover a {
 	color : white;
 }
+
+#rangEbookList {
+	background-color : white;
+}
+#rangEbookList:hover {
+	background-color : #28a745;
+	color : white;
+	box-shadow : 0px 0px 15px rgba(140, 140, 140, 0.75);
+	transition : all 0.3s ease-in-out;
+	margin-top : -5px;
+}
+#rangEbookList a {
+	color : black;
+}
+#rangEbookList:hover a {
+	color : white;
+}
 </style>
 </head>
 <body>
@@ -81,21 +98,22 @@
 				ebookList = ebookDao.selectEbookListBySearch(beginRow, ROW_PER_PAGE, searchEbookTitle);
 			} 
 			
-			// 인기 목록 5개(많이 주문된 5개의 ebook)
+			// 인기 목록 4개(많이 주문된 4개의 ebook)
 			ArrayList<Ebook> popularEbookList = ebookDao.selectPopularEbookList();
 			
-			// 최신 전자책 목록 5개(가장 최근 update된 5개의 ebook)
+			// 최신 전자책 목록 4개(가장 최근 update된 4개의 ebook)
 			ArrayList<Ebook> createEbookList = ebookDao.selectCreateEbookList();
 		%>
 		
 		
-			<h2>인기 상품 목록</h2>
-			<div class="row">
+			<!-- 인기목록 -->
+			<div class="row rounded-lg" style="background-color : #f4f4f5;">
+				<div class="col-sm-12 m-3"><span style="font-size:20px; font-weight:bold;">BESTSELLER</span></div>
 		<%
 				for(Ebook e : popularEbookList) {
 		%>
 			    <div class="col-sm-3 p-3" >
-			    	<div id="ebookList"class="col mr-3 rounded-lg p-4 mb-2">
+			    	<div id="rangEbookList"class="col mr-3 rounded-lg p-4 mb-2">
 				    	<div>
 	       					<a href="<%=request.getContextPath()%>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>">
 	       						<img src="<%=request.getContextPath()%>/image/<%=e.getEbookImg()%>" width="200" height="200">
@@ -115,13 +133,14 @@
 		%>
 			</div>
 			
-			<h2>최신 상품 목록</h2>
-			<div class="row">
+			<!-- 최신목록 -->
+			<div class="row rounded-lg mt-5" style="background-color : #f4f4f5;">
+				<div class="col-sm-12 m-3"><span style="font-size:20px; font-weight:bold;">LATEST E-BOOK</span></div>
 		<%
 				for(Ebook e : createEbookList) {
 		%>
 			    <div class="col-sm-3 p-3" >
-			    	<div id="ebookList"class="col mr-3 rounded-lg p-4 mb-2">
+			    	<div id="rangEbookList"class="col mr-3 rounded-lg p-4 mb-2">
 				    	<div>
 	       					<a href="<%=request.getContextPath()%>/selectEbookOne.jsp?ebookNo=<%=e.getEbookNo()%>">
 	       						<img src="<%=request.getContextPath()%>/image/<%=e.getEbookImg()%>" width="200" height="200">
@@ -139,6 +158,11 @@
 		<%
 				}
 		%>
+			</div>
+			
+			<!-- 공지사항 출력 -->
+			<div class="row">
+				
 			</div>
 			
 			

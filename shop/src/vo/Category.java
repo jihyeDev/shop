@@ -30,4 +30,9 @@ public class Category {
 		this.createDate = createDate;
 	}
 	
+	@Override
+	public String toString() {
+		return "Category [categoryName=" + categoryName + ", categoryState=" + categoryState + ", updateDate="
+				+ updateDate + ", createDate=" + createDate + "]";
+	}
 }

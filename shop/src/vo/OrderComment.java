@@ -43,4 +43,11 @@ public class OrderComment {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
+	
+	@Override
+	public String toString() {
+		return "OrderComment [orderNo=" + orderNo + ", ebookNo=" + ebookNo + ", orderScore=" + orderScore
+				+ ", orderCommentContent=" + orderCommentContent + ", createDate=" + createDate + ", updateDate="
+				+ updateDate + "]";
+	}
 }

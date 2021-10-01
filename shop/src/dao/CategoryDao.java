@@ -89,8 +89,7 @@ public class CategoryDao {
 		boolean result = false;
 		
 		// 매개변수 값을 디버깅
-		System.out.println(category.getCategoryName() + "<--- CategoryDao.insertCategory parem : categoryName");
-		System.out.println(category.getCategoryState() + "<--- CategoryDao.insertCategory parem : categoryState");
+		System.out.println(category + "<--- CategoryDao.insertCategory parem : Category");
 		
 		// DB 실행
 		DBUtil dbUtil = new DBUtil();
@@ -125,7 +124,7 @@ public class CategoryDao {
 		boolean result = false;
 		
 		// 매개변수값은 무조건! 디버깅
-		System.out.println(category.getCategoryName() + "<--- CategoryDao.updateCategoryState parem : categoryName");
+		System.out.println(category + "<--- CategoryDao.updateCategoryState parem : Category");
 		System.out.println(categoryNewState + "<--- CategoryDao.updateCategoryState parem : categoryNewState");
 						
 		// DB 실행
