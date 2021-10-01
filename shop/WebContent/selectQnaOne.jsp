@@ -70,6 +70,7 @@
 			Member loginMember = (Member)session.getAttribute("loginMember");
 			// Qna가 비밀글일 때
 			if(returnQna.getQnaSecret().equals("Y")){
+				System.out.println("Qna = 비밀글");
 				// 로그인 session이 없을 때 출력해줌
 				if(loginMember == null){
 		%>
@@ -126,6 +127,7 @@
 				}
 			} else {
 				// Qna가 비밀글이 아닐 때 상세정보 출력
+				System.out.println("Qna = 비밀글 아님");
 		%>
 				<table class="table mt-3">
 					<tr>
@@ -165,21 +167,6 @@
 		
 		<div>
 		<%
-			// qna 질문글의 작성자가 글쓴이라면 수정, 삭제 버튼을 누를수 있게끔 추가
-			if(loginMember.getMemberNo() == returnQna.getMemberNo()){
-		%>
-				<div class="text-center">
-					<a class="btn btn-outline-secondary center-block" href="<%=request.getContextPath()%>/updateQnaForm.jsp">수정</a>
-					<a class="btn btn-outline-secondary center-block" href="<%=request.getContextPath()%>/deleteQna.jsp">삭제</a>
-				</div>
-		<%
-			}
-			
-		%>
-		</div>
-		
-		<div>
-		<%
 			// qna의 답변을 SELECT하는 qnaCommentDao의 selectQnaComment 메서드
 			// 성공시 : comment 객체에 저장시켜서 출력함
 			// 실패시 : null
@@ -213,6 +200,28 @@
 			}
 		%>
 		
+		</div>
+		
+		<div>
+		<%
+			// qna 질문글의 작성자가 글쓴이라면 수정, 삭제 버튼을 누를수 있게끔 추가
+			if(loginMember.getMemberNo() == returnQna.getMemberNo()){
+		%>
+				<div class="text-center m-5">
+					<a class="btn btn-outline-secondary center-block" href="<%=request.getContextPath()%>/updateQnaForm.jsp?qnaNo=<%=returnQna.getQnaNo()%>">수정</a>
+					<a class="btn btn-outline-secondary center-block" href="<%=request.getContextPath()%>/deleteQna.jsp?qnaNo=<%=returnQna.getQnaNo()%>">삭제</a>
+					<a class="btn btn-outline-secondary center-block" href="<%=request.getContextPath()%>/selectQnaList.jsp">목록</a>
+				</div>
+		<%
+			} else {
+		%>
+				<div class="text-center m-5">
+					<a class="btn btn-outline-secondary center-block" href="<%=request.getContextPath()%>/selectQnaList.jsp">목록</a>
+				</div>
+		<%
+			}
+			
+		%>
 		</div>
 		
 		
