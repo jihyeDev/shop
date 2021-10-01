@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "dao.*"%>
 <%@ page import = "vo.*"%>
-<%@ page import = "java.net.URLEncoder" %>
+<!-- URLEncoder 추가 -->
+<%@ page import = "java.net.URLEncoder"%>
 <%
 	// selectCategoryNameCheckAction.jsp 디버깅 구분선
 	System.out.println("----------selectCategoryNameCheckAction.jsp----------");
@@ -34,7 +35,7 @@
 	// 입력받은 categoryNameCheck를 중복값인지 확인하는 selectCategoryName 메서드를 호출하여 리턴값을 result에 저장
 	String result = CategoryDao.selectCategoryName(categoryNameCheck);
 	
-	// 전송 문자 UTF-8 인코딩
+	// 전송 문자 UTF-8 인코딩 추가하여 encText로 전송
 	String encText = URLEncoder.encode(categoryNameCheck, "UTF-8");
 	
 	
