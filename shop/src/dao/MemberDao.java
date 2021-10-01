@@ -53,11 +53,7 @@ public class MemberDao {
 		boolean result = false;
 		
 		// 매개변수 값을 디버깅
-		System.out.println(member.getMemberId() + "<--- MemberDao.insertMember parem : memberId");
-		System.out.println(member.getMemberPw() + "<--- MemberDao.insertMember parem : memberPw");
-		System.out.println(member.getMemberName() + "<--- MemberDao.insertMember parem : memberName");
-		System.out.println(member.getMemberAge() + "<--- MemberDao.insertMember parem : memberAge");
-		System.out.println(member.getMemberGender() + "<--- MemberDao.insertMember parem : memberGender");
+		System.out.println(member + "<--- MemberDao.insertMember parem : member");
 		
 		// DB 실행
 		// dbUtil 객체 생성
@@ -101,8 +97,7 @@ public class MemberDao {
 		Member returnMember = null;
 		
 		// 매개변수 값을 디버깅
-		System.out.println(member.getMemberId() + "<--- MemberDao.deleteMember parem : memberId");
-		System.out.println(member.getMemberPw() + "<--- MemberDao.deleteMember parem : memberPw");
+		System.out.println(member + "<--- MemberDao.deleteMember parem : member");
 		
 		// DB 실행
 		// dbUtil 객체 생성
@@ -361,7 +356,7 @@ public class MemberDao {
 		boolean result = false;
 		
 		// 매개변수값은 무조건! 디버깅
-		System.out.println(member.getMemberNo() + "<--- MemberDao.updateMemberLevelByAdmin parem : memberNo");
+		System.out.println(member + "<--- MemberDao.updateMemberLevelByAdmin parem : member");
 		System.out.println(memberNewLevel + "<--- MemberDao.updateMemberLevelByAdmin parem : memberNewLevel");
 						
 		// DB 실행
@@ -396,7 +391,7 @@ public class MemberDao {
 		boolean result = false;
 		
 		// 매개변수값은 무조건! 디버깅
-		System.out.println(member.getMemberNo() + "<--- MemberDao.updateMemberPwByAdmin parem : memberNo");
+		System.out.println(member + "<--- MemberDao.updateMemberPwByAdmin parem : member");
 		System.out.println(memberNewPw + "<--- MemberDao.updateMemberPwByAdmin parem : memberNewPw");
 								
 		// DB 실행
@@ -452,5 +447,32 @@ public class MemberDao {
 		conn.close();
 		
 		return result;
+	}
+	
+	// [관리자] 전체 회원의 수를 알 수 있는 메서드
+	// totalMember(전체 회원)의 값을 구해서 리턴해줌
+	public int selectTotalMember() throws ClassNotFoundException, SQLException{
+		int totalMember = 0;
+			
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT count(*) FROM member";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		ResultSet rs = stmt.executeQuery();
+		// 디버깅 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println("총 행의 개수 stmt : "+stmt);
+		
+		// totalMember 저장
+		if(rs.next()) {
+			totalMember = rs.getInt("count(*)");
+		}
+			
+		rs.close();
+		stmt.close();
+		conn.close();
+			
+		return totalMember;
 	}
 }

@@ -16,10 +16,7 @@ public class OrderCommentDao {
 		boolean result = false;
 		
 		// 매개변수 값을 디버깅
-		System.out.println(comment.getOrderNo() + "<--- OrderCommentDao.insertOrderComment parem : OrderNo");
-		System.out.println(comment.getEbookNo() + "<--- OrderCommentDao.insertOrderComment parem : EbookNo");
-		System.out.println(comment.getOrderScore() + "<--- OrderCommentDao.insertOrderComment parem : OrderScore");
-		System.out.println(comment.getOrderCommentContent() + "<--- OrderCommentDao.insertOrderComment parem : OrderCommentContent");
+		System.out.println(comment + "<--- OrderCommentDao.insertOrderComment parem : comment");
 		
 		// DB 실행
 		// dbUtil 객체 생성
@@ -166,5 +163,44 @@ public class OrderCommentDao {
 		conn.close();
 				
 		return lastPage;
+	}
+	
+	// [사용자 & 관리자] 상품평 중에 최근 올라온 5개의 상품평을 SELECT하는 메서드
+	// SELECT 한 값을 자료구조화 하여 list 생성 후 리턴
+	public ArrayList<OrderComment> selectCreateOrderCommentList() throws ClassNotFoundException, SQLException {
+		// list라는 리스트를 사용하기 위해 생성
+		ArrayList<OrderComment> list = new ArrayList<OrderComment>();
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT order_no orderNo, ebook_no ebookNo, order_score orderScore, order_comment_content orderCommentContent, create_date createDate, update_date updateDate FROM order_comment ORDER BY create_date DESC LIMIT 0,5;";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// 데이터 가공 (자료구조화)
+		// ResultSet이라는 특수한 타입에서 ArrayList라는 일반화된 타입으로 변환(가공)
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			// notice 객체 생성 후 저장
+			OrderComment orderComment = new OrderComment();
+			orderComment.setOrderNo(rs.getInt("orderNo"));
+			orderComment.setEbookNo(rs.getInt("ebookNo"));
+			orderComment.setOrderScore(rs.getInt("orderScore"));
+			orderComment.setOrderCommentContent(rs.getString("orderCommentContent"));
+			orderComment.setCreateDate(rs.getString("createDate"));
+			orderComment.setUpdateDate(rs.getString("updateDate"));
+			list.add(orderComment);
+		}
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+				
+		//list를 return
+		return list;
 	}
 }

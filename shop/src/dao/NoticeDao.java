@@ -221,10 +221,7 @@ public class NoticeDao {
 		boolean result = false;
 		
 		// 매개변수 값을 디버깅
-		System.out.println(notice.getNoticeNo() + "<--- NoticeDao.updateNoticeByAdmin parem : noticeNo");
-		System.out.println(notice.getNoticeTitle() + "<--- NoticeDao.updateNoticeByAdmin parem : noticeTitle");
-		System.out.println(notice.getNoticeContent() + "<--- NoticeDao.updateNoticeByAdmin parem : noticeContent");
-		System.out.println(notice.getMemberNo() + "<--- NoticeDao.updateNoticeByAdmin parem : memberNo");
+		System.out.println(notice + "<--- NoticeDao.updateNoticeByAdmin parem : notice");
 		
 		// DB 실행
 		// dbUtil 객체 생성
@@ -291,9 +288,7 @@ public class NoticeDao {
 		boolean result = false;
 		
 		// 매개변수 값을 디버깅
-		System.out.println(notice.getNoticeTitle() + "<--- NoticeDao.insertNoticeByAdmin parem : noticeTitle");
-		System.out.println(notice.getNoticeContent() + "<--- NoticeDao.insertNoticeByAdmin parem : noticeContent");
-		System.out.println(notice.getMemberNo() + "<--- NoticeDao.insertNoticeByAdmin parem : memberNo");
+		System.out.println(notice + "<--- NoticeDao.insertNoticeByAdmin parem : notice");
 		
 		// DB 실행
 		// dbUtil 객체 생성
@@ -321,5 +316,44 @@ public class NoticeDao {
 		
 		// 성공 : result = true, 실패 : false
 		return result;
+	}
+	
+	// [사용자 & 관리자] 공지사항 중에 최근 올라온 5개의 공지사항을 SELECT하는 메서드
+	// SELECT 한 값을 자료구조화 하여 list 생성 후 리턴
+	public ArrayList<Notice> selectCreateNoticeList() throws ClassNotFoundException, SQLException {
+		// list라는 리스트를 사용하기 위해 생성
+		ArrayList<Notice> list = new ArrayList<Notice>();
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT notice_no noticeNo, notice_title noticeTitle, notice_content noticeContent, member_no memberNo, create_date createDate, update_date updateDate FROM notice ORDER BY create_date DESC LIMIT 0,5;";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// 데이터 가공 (자료구조화)
+		// ResultSet이라는 특수한 타입에서 ArrayList라는 일반화된 타입으로 변환(가공)
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			// notice 객체 생성 후 저장
+			Notice notice = new Notice();
+			notice.setNoticeNo(rs.getInt("noticeNo"));
+			notice.setNoticeTitle(rs.getString("noticeTitle"));
+			notice.setNoticeContent(rs.getString("noticeContent"));
+			notice.setMemberNo(rs.getInt("memberNo"));
+			notice.setCreateDate(rs.getString("createDate"));
+			notice.setUpdateDate(rs.getString("updateDate"));
+			list.add(notice);
+		}
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+				
+		//list를 return
+		return list;
 	}
 }

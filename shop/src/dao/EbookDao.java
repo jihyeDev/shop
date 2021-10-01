@@ -103,7 +103,7 @@ public class EbookDao {
 		return list;
 	}
 	
-	// [사용자] 전자책 중에 가장 많이 주문된 5개의 전자책을 SELECT하는 메서드
+	// [사용자] 전자책 중에 가장 많이 주문된 4개의 전자책을 SELECT하는 메서드
 	// SELECT 한 값을 자료구조화 하여 list 생성 후 리턴
 	public ArrayList<Ebook> selectPopularEbookList() throws ClassNotFoundException, SQLException {
 		// list라는 리스트를 사용하기 위해 생성
@@ -113,7 +113,7 @@ public class EbookDao {
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "SELECT t.ebook_no ebookNo, e.category_name categoryName, e.ebook_title ebookTitle, e.ebook_img ebookImg, e.ebook_price ebookPrice, e.ebook_author ebookAuthor, e.ebook_company ebookCompany FROM ebook e INNER JOIN (SELECT ebook_no, COUNT(ebook_no) cnt FROM orders GROUP BY ebook_no ORDER BY COUNT(ebook_no) DESC LIMIT 0,5) t ON e.ebook_no = t.ebook_no ORDER BY cnt DESC;";
+		String sql = "SELECT t.ebook_no ebookNo, e.category_name categoryName, e.ebook_title ebookTitle, e.ebook_img ebookImg, e.ebook_price ebookPrice, e.ebook_author ebookAuthor, e.ebook_company ebookCompany FROM ebook e INNER JOIN (SELECT ebook_no, COUNT(ebook_no) cnt FROM orders GROUP BY ebook_no ORDER BY COUNT(ebook_no) DESC LIMIT 0,4) t ON e.ebook_no = t.ebook_no ORDER BY cnt DESC;";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
 		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
@@ -143,7 +143,7 @@ public class EbookDao {
 		return list;
 	}
 	
-	// [사용자] 전자책 중에 최근 올라온 5개의 전자책을 SELECT하는 메서드
+	// [사용자] 전자책 중에 최근 올라온 4개의 전자책을 SELECT하는 메서드
 	// SELECT 한 값을 자료구조화 하여 list 생성 후 리턴
 	public ArrayList<Ebook> selectCreateEbookList() throws ClassNotFoundException, SQLException {
 		// list라는 리스트를 사용하기 위해 생성
@@ -153,7 +153,7 @@ public class EbookDao {
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "SELECT ebook_no ebookNo, category_name categoryName, ebook_title ebookTitle, ebook_img ebookImg, ebook_price ebookPrice, ebook_author ebookAuthor, ebook_company ebookCompany FROM ebook ORDER BY create_date DESC LIMIT 0,5;";
+		String sql = "SELECT ebook_no ebookNo, category_name categoryName, ebook_title ebookTitle, ebook_img ebookImg, ebook_price ebookPrice, ebook_author ebookAuthor, ebook_company ebookCompany FROM ebook ORDER BY create_date DESC LIMIT 0,4;";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
 		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
@@ -412,8 +412,7 @@ public class EbookDao {
 		boolean result = false;
 		
 		// 매개변수 값을 디버깅
-		System.out.println(ebook.getEbookImg() + "<--- EbookDao.updateEbookImg parem : ebookImg");
-		System.out.println(ebook.getEbookNo() + "<--- EbookDao.updateEbookImg parem : ebookNo");
+		System.out.println(ebook + "<--- EbookDao.updateEbookImg parem : Ebook");
 		
 		// DB 실행
 		// dbUtil 객체 생성
@@ -446,8 +445,7 @@ public class EbookDao {
 		boolean result = false;
 		
 		// 매개변수 값을 디버깅
-		System.out.println(ebook.getEbookPrice() + "<--- EbookDao.updateEbookPrice parem : ebookPrice");
-		System.out.println(ebook.getEbookNo() + "<--- EbookDao.updateEbookPrice parem : ebookNo");
+		System.out.println(ebook + "<--- EbookDao.updateEbookPrice parem : Ebook");
 		
 		// DB 실행
 		// dbUtil 객체 생성
@@ -480,7 +478,7 @@ public class EbookDao {
 		boolean result = false;
 		
 		// 매개변수 값을 디버깅
-		System.out.println(ebook.getEbookNo() + "<--- EbookDao.deleteEbook parem : ebookNo");
+		System.out.println(ebook + "<--- EbookDao.deleteEbook parem : Ebook");
 		
 		// DB 실행
 		// dbUtil 객체 생성
@@ -548,16 +546,7 @@ public class EbookDao {
 		boolean result = false;
 		
 		// 매개변수 값을 디버깅
-		System.out.println(ebook.getEbookISBN() + "<--- EbookDao.insertEbook parem : ebookInsb");
-		System.out.println(ebook.getCategoryName() + "<--- EbookDao.insertEbook parem : categoryName");
-		System.out.println(ebook.getEbookTitle() + "<--- EbookDao.insertEbook parem : ebookTitle");
-		System.out.println(ebook.getEbookAuthor() + "<--- EbookDao.insertEbook parem : ebookAuthor");
-		System.out.println(ebook.getEbookCompany() + "<--- EbookDao.insertEbook parem : ebookCompany");
-		System.out.println(ebook.getEbookPageCount() + "<--- EbookDao.insertEbook parem : ebookPageCount");
-		System.out.println(ebook.getEbookPrice() + "<--- EbookDao.insertEbook parem : ebookPrice");
-		System.out.println(ebook.getEbookImg() + "<--- EbookDao.insertEbook parem : ebookImg");
-		System.out.println(ebook.getEbookSummary() + "<--- EbookDao.insertEbook parem : ebookSummary");
-		System.out.println(ebook.getEbookState() + "<--- EbookDao.insertEbook parem : ebookState");
+		System.out.println(ebook + "<--- EbookDao.insertEbook parem : Ebook");
 		
 		// DB 실행
 		// dbUtil 객체 생성
@@ -592,5 +581,71 @@ public class EbookDao {
 		
 		// 성공 : result = true, 실패 : false
 		return result;
+	}
+	
+	// [관리자] 주문목록 중에 가장 많이 팔린 ebook을 SELECT하는 메서드
+	// ebook이라는 객체에 저장하여서 리턴 해줌
+	public Ebook selectPopularOrder() throws ClassNotFoundException, SQLException {
+		// ebook 객체를 사용하기 위해 null로 초기화
+		Ebook ebook = null;
+				
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT e.ebook_title ebookTitle, e.ebook_img ebookImg, e.ebook_author ebookAuthor, e.ebook_company ebookCompany, t.ebook_no ebookNo, t.ctn ctn FROM ebook e INNER JOIN (SELECT ebook_no, COUNT(ebook_no) ctn FROM orders GROUP BY ebook_no) t ON e.ebook_no = t.ebook_no ORDER BY t.ctn DESC LIMIT 0,1;";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// 데이터 가공 (자료구조화)
+		// ResultSet이라는 특수한 타입에서 ArrayList라는 일반화된 타입으로 변환(가공)
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			ebook= new Ebook();
+			ebook.setEbookNo(rs.getInt("ebookNo"));
+			ebook.setEbookTitle(rs.getString("ebookTitle"));
+			ebook.setEbookImg(rs.getString("ebookImg"));
+			ebook.setEbookAuthor(rs.getString("ebookAuthor"));
+			ebook.setEbookCompany(rs.getString("ebookCompany"));
+		}
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+				
+		//list를 return
+		return ebook;
+	}
+	
+	// [관리자] ebook의 총매출(주문된 ebook_price 값을 sum()을 사용해 더함)을 SELECT하는 메서드
+	// int totalSales에 저장하여 리턴해줌
+	public int selectTotalEbookPrice() throws ClassNotFoundException, SQLException {
+		// 리턴해줄 totalSales 초기화
+		int totalSales=0;
+				
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT SUM(e.ebook_price) sum FROM orders o INNER JOIN ebook e ON o.ebook_no = e.ebook_no;";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// SELECT 한 값을 totalSales에 저장
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			totalSales=rs.getInt("sum");
+		}
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+				
+		//totalSales를 return
+		return totalSales;
 	}
 }

@@ -263,9 +263,7 @@ public class OrderDao {
 		boolean result = false;
 		
 		// 매개변수 값을 디버깅
-		System.out.println(order.getEbookNo() + "<--- OrderDao.insertOrder parem : EbookNo");
-		System.out.println(order.getMemberNo() + "<--- OrderDao.insertOrder parem : MemberNo");
-		System.out.println(order.getOrderPrice() + "<--- OrderDao.insertOrder parem : OrderOrderPrice");
+		System.out.println(order + "<--- OrderDao.insertOrder parem : order");
 		
 		// DB 실행
 		// dbUtil 객체 생성
@@ -291,6 +289,86 @@ public class OrderDao {
 		stmt.close();
 		conn.close();
 		
+		// 성공 : result = true, 실패 : false
+		return result;
+	}
+	
+	// [관리자] 주문 중에 최근 주문한 5개의 주문내역을 SELECT하는 메서드
+	// SELECT 한 값을 자료구조화 하여 list 생성 후 리턴
+	public ArrayList<OrderEbookMember> selectCreateOrderList() throws ClassNotFoundException, SQLException {
+		// list라는 리스트를 사용하기 위해 생성
+		ArrayList<OrderEbookMember> list = new ArrayList<OrderEbookMember>();
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT o.order_no orderNo, e.ebook_no ebookNo, e.ebook_title ebookTitle, m.member_no memberNo, m.member_id memberId, o.order_price orderPrice, o.create_date createDate FROM orders o INNER JOIN ebook e INNER JOIN member m ON o.ebook_no = e.ebook_no AND o.member_no = m.member_no ORDER BY o.create_date DESC LIMIT 0,5;";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// 데이터 가공 (자료구조화)
+		// ResultSet이라는 특수한 타입에서 ArrayList라는 일반화된 타입으로 변환(가공)
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			OrderEbookMember oem = new OrderEbookMember();
+			Order o = new Order();
+			o.setOrderNo(rs.getInt("orderNo"));
+			o.setOrderPrice(rs.getInt("orderPrice"));
+			o.setCreateDate(rs.getString("createDate"));
+			oem.setOrder(o);
+			
+			Ebook e = new Ebook();
+			e.setEbookNo(rs.getInt("ebookNo"));
+			e.setEbookTitle(rs.getString("ebookTitle"));
+			oem.setEbook(e);
+			
+			Member m = new Member();
+			m.setMemberNo(rs.getInt("memberNo"));
+			m.setMemberId(rs.getString("memberId"));
+			oem.setMember(m);
+			
+			list.add(oem);
+		}
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+				
+		//list를 return
+		return list;
+	}
+	
+	// [관리자] 특정 주문을 취소하는 메서드
+	// 받아온 orderNo을 가지고 있는 order 테이블의 행 삭제
+	public boolean deleteOrderByAdmin(int orderNo) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(orderNo + "<--- orderDao.deleteOrderByAdmin parem : orderNo");
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "DELETE FROM orders WHERE order_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, orderNo);
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// DELETE 실행
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
+		// 종료
+		stmt.close();
+		conn.close();
+				
 		// 성공 : result = true, 실패 : false
 		return result;
 	}
