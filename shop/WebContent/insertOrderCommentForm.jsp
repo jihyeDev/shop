@@ -46,6 +46,8 @@
 	
 	// ebookDao 객체 생성
 	EbookDao ebookDao = new EbookDao();
+	// orderCommentDao 객체 생성
+	OrderCommentDao orderCommentDao = new OrderCommentDao();
 	
 	//login된 회원인지 확인하는 방어코드
 	// session에 저장된 loginMember를 받아옴
@@ -70,6 +72,14 @@
 	// requst 매개값 디버깅 코드
 	System.out.println(orderNo+"<-- orderNo");
 	System.out.println(ebookNo+"<-- ebookNo");
+	
+	// 전자책 구입 후기 중복입력 방지 메서드 = 중복 : result = true, 중복X(후기작성가능) : false
+	boolean commentCheck = false;
+	if(commentCheck = orderCommentDao.insertOrderCommentCheck(orderNo,ebookNo)) {
+		System.out.println("전자책 구입 후기 중복입력입니다.");
+		response.sendRedirect(request.getContextPath()+"/selectEbookOne.jsp?ebookNo="+ebookNo);
+		return;
+	}
 	
 	// 주문한 전자책의 정보를 불러오는 selectEbookOne 메서드 호출
 	// 성공시 : returnEbook라는 객체에 저장시켜서 출력함

@@ -10,6 +10,44 @@ import vo.*;
 import commons.*;
 
 public class OrderCommentDao {
+	// [회원] 전자책 구입 후기 중복입력 방지
+	// order_comment 테이블에 한 행의 order_no과 ebook_no가 매개변수의 값과 같다면 중복
+	// 이미 작성된 후기 = true로 return
+	public boolean insertOrderCommentCheck(int orderNo, int ebookNo) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(orderNo + "<--- OrderCommentDao.insertOrderCommentCheck parem : orderNo");
+		System.out.println(ebookNo + "<--- OrderCommentDao.insertOrderCommentCheck parem : ebookNo");
+		
+		// DB 실행
+		DBUtil dbUtil = new DBUtil();
+		// dbUtil의 getConnection메서드를 사용하여 DB 연결
+		Connection conn = dbUtil.getConnection();
+		System.out.println(conn + "<--- conn");
+		String sql = "SELECT order_no, ebook_no FROM order_comment WHERE order_no=? && ebook_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, orderNo);
+		stmt.setInt(2, ebookNo);
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// SELECT 실행 값을 rs에 저장
+		ResultSet rs = stmt.executeQuery();
+		
+		if(rs.next()) {
+			result = true;
+		}
+				
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+		
+		// 중복 : result = true, 중복X(후기작성가능) : false
+		return result;
+	}
+	
 	// [회원] 후기를 입력(추가) 하는 메서드
 	// OrderComment 객체로 입력받아온 값을 DB에 insert 함
 	public boolean insertOrderComment(OrderComment comment) throws ClassNotFoundException, SQLException {

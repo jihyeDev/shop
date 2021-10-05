@@ -16,6 +16,8 @@
 	
 	// orderDao 객체 생성
 	OrderDao orderDao = new OrderDao();
+	// orderCommentDao 객체 생성
+	OrderCommentDao orderCommentDao = new OrderCommentDao();
 	
 	// login된 회원인지 확인하는 방어코드
 	// session에 저장된 loginMember를 받아옴
@@ -67,8 +69,23 @@
 							<td><%=oem.getOrder().getOrderPrice()%></td>
 							<td><%=oem.getOrder().getCreateDate()%></td>
 							<td><%=oem.getMember().getMemberId()%></td>
-							<td><a href="">상세주문내역</a>
-							<td><a href="<%=request.getContextPath()%>/insertOrderCommentForm.jsp?orderNo=<%=oem.getOrder().getOrderNo()%>&ebookNo=<%=oem.getEbook().getEbookNo()%>">ebook후기</a>
+							<td><a href="">상세주문내역</a></td>
+							<td>
+				<%
+							// 전자책 구입 후기 중복입력 방지 메서드 = 중복 : result = true, 중복X(후기작성가능) : false
+							// 이미 후기를 입력했을 시 주문 후기 입력창 연결 X
+							boolean commentCheck = false;
+							if(commentCheck = orderCommentDao.insertOrderCommentCheck(oem.getOrder().getOrderNo(),oem.getEbook().getEbookNo())) {
+				%>
+								후기입력완료
+				<%
+							} else {
+				%>
+								<a href="<%=request.getContextPath()%>/insertOrderCommentForm.jsp?orderNo=<%=oem.getOrder().getOrderNo()%>&ebookNo=<%=oem.getEbook().getEbookNo()%>">ebook후기</a>
+				<%
+							}
+				%>
+							</td>
 						</tr>
 				<%		
 					}

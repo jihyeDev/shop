@@ -3,6 +3,7 @@
 <%@ page import = "dao.*" %>
 <%@ page import="com.oreilly.servlet.MultipartRequest"%> <!-- request 대신 -->
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%> <!-- 파일이름 중복 피할 수 있도록 -->
+<%@ page import="java.io.File" %> <!-- 파일을 다루는 메서드, 삭제하기 위해 import -->
 <%
 	// updateEbookImgAction.jsp 디버깅 구분선
 	System.out.println("----------updateEbookImgAction.jsp----------");
@@ -26,7 +27,7 @@
 	
 	// 입력값 방어 코드
 	// 이미지를 수정할 특정 전자책의 ebookNo과 수정할 이미지 파일을 입력 받았는지 유효성 검사
-	if(mr.getParameter("ebookNo")==null || mr.getParameter("ebookNo").equals("") || mr.getFilesystemName("ebookImg")==null || mr.getFilesystemName("ebookImg").equals("")) {
+	if(mr.getParameter("ebookNo")==null || mr.getParameter("ebookNo").equals("") || mr.getFilesystemName("ebookImg")==null || mr.getFilesystemName("ebookImg").equals("") || mr.getParameter("beforeEbookImg")==null || mr.getParameter("beforeEbookImg").equals("")) {
 		response.sendRedirect(request.getContextPath()+"/admin/selectEbookList.jsp");
 		return;
 	}
@@ -35,10 +36,22 @@
 	// mr 값 저장
 	int ebookNo = Integer.parseInt(mr.getParameter("ebookNo"));
 	String ebookImg = mr.getFilesystemName("ebookImg");
+	String beforeEbookImg = mr.getParameter("beforeEbookImg");
 
 	// mr 매개값 디버깅 코드
 	System.out.println(ebookNo+" <-- ebookNo");
 	System.out.println(ebookImg+" <-- ebookImg");
+	System.out.println(beforeEbookImg+" <-- beforeEbookImg");
+	
+	// 수정 전의 이미지를 삭제하기 전에 기본이미지인 noimage는 삭제되면 안됨으로 방어코드
+	// 수정 전의 이미지 파일 명이 noimage.png가 아닐 때 삭제 실행
+	if(beforeEbookImg.equals("noimage.png") == false) {
+		// 수정 전의 이미지를 삭제하기 위해 수정 전의 이미지 경로로 저장
+		File beforeImg = new File("D:/구디아카데미/git-shop/shop/WebContent/image/" + beforeEbookImg);
+		System.out.println(beforeImg+"<---beforeImg");
+		// 수정 전 이미지(beforeImg) 삭제
+		beforeImg.delete();
+	}
 	
 	// paramEbook 객체 생성 후, 받아온 값 저장
 	Ebook paramEbook = new Ebook();

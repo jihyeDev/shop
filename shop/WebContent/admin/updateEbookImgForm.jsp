@@ -87,7 +87,11 @@
 						</tr>
 						<tr>
 							<td>IMG</td>
-							<td><img src="<%=request.getContextPath()%>/image/<%=returnEbook.getEbookImg()%>"></td>
+							<td>
+								<img src="<%=request.getContextPath()%>/image/<%=returnEbook.getEbookImg()%>">
+								<!-- 수정 전의 이미지를 삭제하려고 수정전의 이미지값도 beforeEbookImg로 넘겨줌 -->
+								<input type="hidden" name="beforeEbookImg" value="<%=returnEbook.getEbookImg()%>">
+							</td>
 						</tr>
 						<tr>
 							<td>NEW IMG <span class="text-danger">*</span></td>
