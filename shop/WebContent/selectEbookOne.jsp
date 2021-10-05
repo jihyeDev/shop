@@ -66,20 +66,26 @@
 		response.sendRedirect(request.getContextPath()+"/selectEbookList.jsp");
 	} else {
 		System.out.println("전자책 정보 불러오기 성공");
-		System.out.println(returnEbook.getEbookNo()+"<--- returnMember.getEbookNo()");
-		System.out.println(returnEbook.getEbookISBN()+"<--- returnMember.getEbookISBN()");
-		System.out.println(returnEbook.getCategoryName()+"<--- returnMember.getCategoryName()");
-		System.out.println(returnEbook.getEbookTitle()+"<--- returnMember.getEbookTitle()");
-		System.out.println(returnEbook.getEbookAuthor()+"<--- returnMember.getEbookAuthor()");
-		System.out.println(returnEbook.getEbookCompany()+"<--- returnMember.getEbookCompany()");
-		System.out.println(returnEbook.getEbookPageCount()+"<--- returnMember.getEbookPageCount()");
-		System.out.println(returnEbook.getEbookPrice()+"<---returnMember.getEbookPrice()");
-		System.out.println(returnEbook.getEbookImg()+"<---returnMember.getEbookImg()");
-		System.out.println(returnEbook.getEbookSummary()+"<---returnMember.getEbookSummary()");
-		System.out.println(returnEbook.getEbookState()+"<---returnMember.getEbookState()");
-		System.out.println(returnEbook.getUpdateDate()+"<---returnMember.getUpdateDate()");
-		System.out.println(returnEbook.getCreateDate()+"<---returnMember.getCreateDate()");
+		System.out.println(returnEbook.getEbookNo()+"<--- returnEbook.getEbookNo()");
+		System.out.println(returnEbook.getEbookISBN()+"<--- returnEbook.getEbookISBN()");
+		System.out.println(returnEbook.getCategoryName()+"<--- returnEbook.getCategoryName()");
+		System.out.println(returnEbook.getEbookTitle()+"<--- returnEbook.getEbookTitle()");
+		System.out.println(returnEbook.getEbookAuthor()+"<--- returnEbook.getEbookAuthor()");
+		System.out.println(returnEbook.getEbookCompany()+"<--- returnEbook.getEbookCompany()");
+		System.out.println(returnEbook.getEbookPageCount()+"<--- returnEbook.getEbookPageCount()");
+		System.out.println(returnEbook.getEbookPrice()+"<---returnEbook.getEbookPrice()");
+		System.out.println(returnEbook.getEbookImg()+"<---returnEbook.getEbookImg()");
+		System.out.println(returnEbook.getEbookSummary()+"<---returnEbook.getEbookSummary()");
+		System.out.println(returnEbook.getEbookState()+"<---returnEbook.getEbookState()");
+		System.out.println(returnEbook.getUpdateDate()+"<---returnEbook.getUpdateDate()");
+		System.out.println(returnEbook.getCreateDate()+"<---returnEbook.getCreateDate()");
 	}
+	
+	/*[설 명] 가격을 화폐단위로 변경
+	 * 1. String.format 을 사용해서 원하는 형태의 문자열로 만들 수 있다
+	 * 2. %,(콤마)d - 화폐단위로 정수값을 표시하겠다는 의미이다
+	 */
+	String price = String.format("%,d", returnEbook.getEbookPrice());
 %>
 
 	<div class="container pt-3">
@@ -111,7 +117,7 @@
 					</tr>
 					<tr>
 						<td><small>판매가</small></td>
-						<td><span class="font-weight-bold" style="font-size:18px;"><%=returnEbook.getEbookPrice()%></span><small>원</small></td>
+						<td><span class="font-weight-bold" style="font-size:18px;"><%=price%></span><small>원</small></td>
 					</tr>
 				</table>
 				

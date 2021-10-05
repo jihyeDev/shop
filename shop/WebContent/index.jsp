@@ -88,6 +88,11 @@
 				<div class="col-sm-12 m-3"><span style="font-size:20px; font-weight:bold; color:#135200;">BESTSELLER</span></div>
 		<%
 				for(Ebook e : popularEbookList) {
+					/*[설 명]
+					 * 1. String.format 을 사용해서 원하는 형태의 문자열로 만들 수 있다
+					 * 2. %,(콤마)d - 화폐단위로 정수값을 표시하겠다는 의미이다
+					 */
+					String price = String.format("%,d", e.getEbookPrice());
 		%>
 			    <div class="col-sm-3 p-3" >
 			    	<div id="rankEbookList"class="col mr-3 rounded-lg p-4 mb-2">
@@ -102,7 +107,7 @@
 	       					</a>
 	       				</div>
 	       				<small class="mt-2"><%=e.getEbookAuthor()%> | <%=e.getEbookCompany()%></small>
-	       				<div class="font-weight-bold mt-3"><%=e.getEbookPrice()%><small class="font-weight-normal">원</small></div>
+	       				<div class="font-weight-bold mt-3"><%=price%><small class="font-weight-normal">원</small></div>
        				</div>
 			    </div>
 		<%
@@ -171,6 +176,11 @@
 				<div class="col-sm-12 m-3"><span style="font-size:20px; font-weight:bold;">LATEST E-BOOK</span></div>
 		<%
 				for(Ebook e : createEbookList) {
+					/*[설 명]
+					 * 1. String.format 을 사용해서 원하는 형태의 문자열로 만들 수 있다
+					 * 2. %,(콤마)d - 화폐단위로 정수값을 표시하겠다는 의미이다
+					 */
+					String price = String.format("%,d", e.getEbookPrice());
 		%>
 			    <div class="col-sm-3 p-3" >
 			    	<div id="cEbookList"class="col mr-3 rounded-lg p-4 mb-2">
@@ -185,7 +195,7 @@
 	       					</a>
 	       				</div>
 	       				<small class="mt-2"><%=e.getEbookAuthor()%> | <%=e.getEbookCompany()%></small>
-	       				<div class="font-weight-bold mt-3"><%=e.getEbookPrice()%><small class="font-weight-normal">원</small></div>
+	       				<div class="font-weight-bold mt-3"><%=price%><small class="font-weight-normal">원</small></div>
        				</div>
 			    </div>
 		<%

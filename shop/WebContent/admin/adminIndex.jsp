@@ -32,6 +32,12 @@
 	Ebook popular = ebookDao.selectPopularOrder();
 	// 총 매출을 출력하기 위한 ebookDao의 selectTotalEbookPrice 호출
 	int totalSales = ebookDao.selectTotalEbookPrice();
+	/*[설 명]
+	 * 1. String.format 을 사용해서 원하는 형태의 문자열로 만들 수 있다
+	 * 2. %,(콤마)d - 화폐단위로 정수값을 표시하겠다는 의미이다
+	 */
+	String format = String.format("%,d", totalSales);
+	
 	// 총 회원수를 출력하기 위한 memberDao의 selectTotalMember 호출
 	int totalMember = memberDao.selectTotalMember();
 	
@@ -93,6 +99,7 @@
 		       					<a href="<%=request.getContextPath()%>/selectEbookOne.jsp?ebookNo=<%=popular.getEbookNo()%>">
 		       						<span style="font-size:20px;"><%=popular.getEbookTitle()%></span>
 		       					</a>
+		       					<br>
 		       					<small class="mt-2"><%=popular.getEbookAuthor()%> | <%=popular.getEbookCompany()%></small>
 		       				</div>
 		       			</div>
@@ -102,7 +109,7 @@
 					<div id="article2" class="col-sm-3 ml-3 rounded-lg p-4">
 						<div style="color:#00474f; font-size:15px;" class="mb-5">Total sales</div>
 						<div style="color:#00474f;" class="text-center">
-							<span style="font-size:32px;" class="font-weight-bold"><%=totalSales%></span> <small>원</small>
+							<span style="font-size:32px;" class="font-weight-bold"><%=format%></span> <small>원</small>
 						</div>
 					</div>
 					

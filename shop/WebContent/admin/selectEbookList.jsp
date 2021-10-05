@@ -59,7 +59,7 @@
 	// ebookList라는 리스트를 사용하기 위해 생성
 	ArrayList<Ebook> ebookList = new ArrayList<Ebook>();
 	if(request.getParameter("searchEbookTitle") != null) { // 검색어가 있을때
-		ebookList = ebookDao.selectEbookListBySearch(beginRow, ROW_PER_PAGE, searchEbookTitle);
+		ebookList = ebookDao.selectEbookListBySearch(searchEbookTitle);
 	} else if(categoryName.equals("")) { // 선택된 카테고리가 없을때
 		ebookList = ebookDao.selectEbookList(beginRow, ROW_PER_PAGE);
 	}else { // 선택된 카테고리가 있을때
@@ -181,6 +181,12 @@
 						
 						// 디버깅
 						System.out.println("startPage(화면에 보여질 시작 페이지 번호) : "+startPage+", endPage(화면에 보여질 마지막 페이지 번호) : "+endPage);
+						
+						// 검색어가 있을 시 페이징 버튼이 안나오게 하는 if문
+						// return을 사용해 이후의 코드들을 실행 못하게 해줌
+						if(searchEbookTitle.equals("") == false) {
+							return;
+						}
 						
 						// 처음으로 버튼
 						// 제일 첫번째 페이지로 이동할때 = 1 page로 이동

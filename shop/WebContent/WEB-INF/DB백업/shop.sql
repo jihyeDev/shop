@@ -70,11 +70,11 @@ INSERT INTO `ebook` (`ebook_no`, `ebook_isbn`, `category_name`, `ebook_title`, `
 	(3, '255409824-7', 'IT', 'Pannier', 'Innis', 'Kwilith', 428, 28315, 'noimage.png', 'nulla ultrices aliquet maecenas leo odio condimentum id luctus nec molestie', '판매중', '2020-09-28 00:00:00', '2021-09-23 00:00:00'),
 	(4, '333005191-4', '만화', 'Zathin', 'Cheri', 'Abata', 980, 5066, 'noimage.png', 'adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin', '품절', '2021-07-01 00:00:00', '2021-09-23 00:00:00'),
 	(5, '382668498-2', '여행', 'Matsoft', 'Jo-anne', 'Mynte', 975, 14341, 'noimage.png', 'quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla', '절판', '2021-04-20 00:00:00', '2021-09-23 00:00:00'),
-	(6, '853551720-0', '외국어', 'Y-Solowarm', 'Ethelda', 'Ooba', 242, 21397, 'noimage.png', 'aliquam sit amet diam in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt eu felis fusce', '판매중', '2020-12-16 00:00:00', '2021-09-23 00:00:00'),
+	(6, '853551720-0', '소설', '달러구트 꿈 백화점 2', '이미예', '팩토리나인', 242, 12420, 'XL.jpeg', '[어서오세요 꿈 백화점에!] 어른을 위한 힐링 판타지 〈달러구트 꿈 백화점〉 두 번째 책. 1년 넘게 꿈 백화점에서 일하면서 이제 제법 능숙한 직원이 된 페니, 그는 단골 손님이 남긴 알쏭달쏭한 민원을 해결하고 손님을 되찾을 수 있을까? ‘달러구트’의 세계관 아래에서 다시 한번 신비롭고 따뜻한 이야기가 펼쳐진다. -소설MD 박형욱', '판매중', '2020-12-16 00:00:00', '2021-10-02 01:16:19'),
 	(7, '967371949-7', '소설', 'Temp', 'Gail', 'Tagtune', 613, 9965, 'noimage.png', 'quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in', '품절', '2021-07-07 00:00:00', '2021-09-23 00:00:00'),
 	(8, '008837829-2', '만화', 'Tempsoft', 'Towney', 'Voolia', 637, 8770, 'noimage.png', 'diam cras pellentesque volutpat dui maecenas tristique est et tempus semper est quam pharetra magna ac consequat metus', '판매중', '2021-03-03 00:00:00', '2021-09-23 00:00:00'),
-	(9, '051294654-X', '소설', 'Keylex', 'Gustavo', 'Skipstorm', 300, 19896, 'noimage.png', 'odio cras mi pede malesuada in imperdiet et commodo vulputate justo in blandit ultrices', '판매중', '2021-04-02 00:00:00', '2021-09-23 00:00:00'),
-	(10, '328935467-9', '만화', 'Stronghold', 'Klara', 'Quinu', 647, 16627, 'noimage.png', 'arcu adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus', '품절', '2021-09-07 00:00:00', '2021-09-23 00:00:00'),
+	(9, '051294654-X', '여행', '식객 허영만의 백반기행', '허영만', '가디언', 720, 30600, 'XL (2).jpeg', '『식객 허영만의 백반기행』 1, 2권이 세트로 찾아왔다!\r\n서울부터 제주까지, 2년에 걸쳐 집대성한 전국 맛집 400여 곳\r\n휴가철 전국 어디를 가든지 맛집 고민은 이제 끝!', '판매중', '2021-04-02 00:00:00', '2021-10-02 01:27:58'),
+	(10, '328935467-9', 'IT', '혼자 공부하는 머신러닝', '박해선', '한빛미디어', 580, 23400, 'XL (1).jpeg', '- 혼자 해도 충분하다! 1:1 과외하듯 배우는 인공지능 자습서\r\n이 책은 수식과 이론으로 중무장한 머신러닝, 딥러닝 책에 지친 ‘독학하는 입문자’가 ‘꼭 필요한 내용을 제대로’ 학습할 수 있도록 구성했다. 구글 머신러닝 전문가(Google ML expert)로 활동하고 있는 저자는 여러 차례의 입문자들과 함께한 머신러닝&딥러닝 스터디와 번역·집필 경험을 통해 ‘무엇을’ ‘어떻게’ 학습해야 할지 모르는 입문자의 막연함을 이해하고, 과외 선생님이 알려주듯 친절하게 핵심적인 내용을 콕콕 집어준다. 컴퓨터 앞에서 [손코딩]을 따라하고, 확인 문제를 풀다 보면 그간 어렵기만 했던 머신러닝과 딥러닝을 개념을 스스로 익힐 수 있을 것이다!', '판매중', '2021-09-07 00:00:00', '2021-10-02 01:24:32'),
 	(11, '167903035-3', '외국어', 'Wrapsafe', 'Kyle', 'Izio', 220, 19266, 'noimage.png', 'semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus at diam', '절판', '2021-04-30 00:00:00', '2021-09-23 00:00:00'),
 	(12, '925824981-X', '만화', 'Sub-Ex', 'Hobard', 'Wordware', 323, 7776, 'noimage.png', 'neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus in sagittis dui vel nisl duis ac nibh', '판매중', '2021-07-04 00:00:00', '2021-09-23 00:00:00'),
 	(13, '592262069-X', '경제', 'Tampflex', 'Gayler', 'Talane', 191, 29955, 'noimage.png', 'mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean', '판매중', '2021-01-22 00:00:00', '2021-09-23 00:00:00'),
@@ -1083,7 +1083,7 @@ CREATE TABLE IF NOT EXISTS `member` (
   `create_date` datetime NOT NULL,
   PRIMARY KEY (`member_no`) USING BTREE,
   UNIQUE KEY `member_id` (`member_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb3;
 
 -- 테이블 데이터 shop.member:~102 rows (대략적) 내보내기
 DELETE FROM `member`;
@@ -1190,7 +1190,8 @@ INSERT INTO `member` (`member_no`, `member_id`, `member_pw`, `member_level`, `me
 	(100, '514275807-2', '*A4B6157319038724E3560894F7F932C8886EBFCF', 0, 'Ferrell', 93, '남', '2021-09-15 00:00:00', '2021-09-15 00:00:00'),
 	(101, '422384179-3', '*A4B6157319038724E3560894F7F932C8886EBFCF', 0, 'Roseanne', 59, '여', '2021-09-15 00:00:00', '2021-09-15 00:00:00'),
 	(102, '401585780-1', '*A4B6157319038724E3560894F7F932C8886EBFCF', 0, 'Germayne', 62, '남', '2021-09-15 00:00:00', '2021-09-15 00:00:00'),
-	(103, '502444530-9', '*A4B6157319038724E3560894F7F932C8886EBFCF', 0, 'Rolfe', 30, '여', '2021-09-15 00:00:00', '2021-09-15 00:00:00');
+	(103, '502444530-9', '*A4B6157319038724E3560894F7F932C8886EBFCF', 0, 'Rolfe', 30, '여', '2021-09-15 00:00:00', '2021-09-15 00:00:00'),
+	(105, 'soymilk0322', '*A4B6157319038724E3560894F7F932C8886EBFCF', 0, '최지혜', 23, '여', '2021-09-30 17:41:43', '2021-09-30 17:41:43');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 
 -- 테이블 shop.notice 구조 내보내기
@@ -1203,13 +1204,17 @@ CREATE TABLE IF NOT EXISTS `notice` (
   `create_date` datetime NOT NULL,
   `update_date` datetime NOT NULL,
   PRIMARY KEY (`notice_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 shop.notice:~1 rows (대략적) 내보내기
+-- 테이블 데이터 shop.notice:~5 rows (대략적) 내보내기
 DELETE FROM `notice`;
 /*!40000 ALTER TABLE `notice` DISABLE KEYS */;
 INSERT INTO `notice` (`notice_no`, `notice_title`, `notice_content`, `member_no`, `create_date`, `update_date`) VALUES
-	(1, '쇼핑몰 서버 작업 공지 (9/29 04:00~06:00)', '안녕하세요. <br>e북 쇼핑몰 입니다.<br><br>쇼핑몰 서버점검 작업 관련 공지 드립니다.<br><br>작업시간: 9월 29일 (수) 새벽 04:00 ~ 06:00<br>작업내용: 서버 점검 작업<br><br>해당 작업시간에는 사이트 접속이 불가능하며, 도서 다운로드 시 오류가 발생할 수 있습니다.<br>서버점검 시간은 작업에 따라 시간이 단축 또는 연장될 수 있습니다.<br><br>더 좋은 서비스로 보답 드릴 것을 약속드리며 회원님들의 많은 양해 부탁드립니다.<br><br>e북 쇼핑몰 드림.', 4, '2021-09-29 12:03:14', '2021-09-29 14:09:19');
+	(1, '쇼핑몰 서버 작업 공지 (9/29 04:00~06:00)', '안녕하세요. <br>e북 쇼핑몰 입니다.<br><br>쇼핑몰 서버점검 작업 관련 공지 드립니다.<br><br>작업시간: 9월 29일 (수) 새벽 04:00 ~ 06:00<br>작업내용: 서버 점검 작업<br><br>해당 작업시간에는 사이트 접속이 불가능하며, 도서 다운로드 시 오류가 발생할 수 있습니다.<br>서버점검 시간은 작업에 따라 시간이 단축 또는 연장될 수 있습니다.<br><br>더 좋은 서비스로 보답 드릴 것을 약속드리며 회원님들의 많은 양해 부탁드립니다.<br><br>e북 쇼핑몰 드림.', 4, '2021-09-29 12:03:14', '2021-09-29 14:09:19'),
+	(3, 'iOS 앱 최소 지원 사양 변경 안내', '안녕하세요.<br>\r\n쇼핑몰입니다.<br><br>\r\n\r\n iOS 앱의 안전하고 편리한 사용을 위하여 최소 지원 버전이 변경될 예정입니다.<br><br>\r\n\r\niOS 최소 지원 사양<br>\r\niOS 10.0 이상<br><br>\r\n\r\n적용 앱 버전<br>\r\n8.3.0.2<br><br>\r\n\r\n고객님의 정보 보안을 강화하고, 보다 안정적인 서비스 제공을 위해 지원 사양이 조정되는 점 많은 양해 부탁드립니다.<br>\r\n앞으로도 더 나은 서비스 제공을 위해 노력하겠습니다.<br><br>\r\n\r\n감사합니다.<br><br>\r\n\r\n전자책 쇼핑몰 드림.', 4, '2021-09-30 16:20:13', '2021-10-02 01:09:58'),
+	(4, '안드로이드 앱(v2.2.8) 업데이트 공지', '안녕하세요.<br><br>\r\n\r\n안드로이드 앱 업데이트 관련하여 공지드립니다.<br><br>\r\n\r\n업데이트 일자<br>\r\n2020년 3월 26일 (목)<br><br>\r\n\r\n버전정보<br>\r\nv2.2.8', 4, '2021-09-30 16:21:37', '2021-09-30 16:21:37'),
+	(5, '넘버원 쿠폰 및 회원별 혜택 변경 안내', '1. 넘버원 쿠폰 (1~3차) <br>\r\n- 10% 할인 쿠폰 수량 증대 : 3장 > 5장 <br>\r\n▶ 변경 사항은 8월 1일 넘버원 쿠폰부터 적용 <br><br>\r\n\r\n2. 회원별 혜택<br>\r\n- 전 월 결제금액에 따른 혜택 제공사항 변경<br>\r\n- 북캐시 또는 실결제 (적립금 사용 금액 제외)한 금액 및 다운로드 완료된 건에 한하여 제공<br><br>\r\n\r\n1) 1만원 이상<br>\r\n- 변경 전 : 10% 할인 쿠폰 X 1장<br>\r\n- 변경 후 : 10% 할인 쿠폰 X 3장\r\n', 4, '2021-09-30 16:21:45', '2021-10-02 01:12:11'),
+	(6, '전자책 쇼핑몰 웹툰 서비스 재개 안내', '먼저 저희 쇼핑몰을 사랑하고 이용해 주시는 고객님께 웹툰 이용에 불편을 드린 점 진심으로 사과의 말씀을 드립니다. <br>\r\n10월 2일(토) 16시부터 웹툰 서비스 재개되었습니다.<br><br>\r\n\r\n웹툰 서비스 재개와 관련 조치사항 및 안내사항<br>\r\n1. 서버 장애 발생 시점(10월 4일(월) 19시) 기준 대여 이용기간이 남아있던 이용 회차는 웹툰 서비스 재오픈에 맞춰 일괄 대여만료기간을 3일 연장처리<br>\r\n2. 연재일이 지난 미등록 신규 회차 및 신규작품은 관리시스템 정상화되면 순차적으로 업로드 될 예정(작품별 등록 확인)<br>\r\n3. 신작 오픈 이벤트는 별도 일정 재협의 후 진행예정<br><br>\r\n\r\n다시 한번, 이용에 불편을 끼쳐드린 고객님께 사과 말씀드립니다.<br><br>\r\n\r\n감사합니다.', 4, '2021-09-30 16:21:50', '2021-10-02 01:14:01');
 /*!40000 ALTER TABLE `notice` ENABLE KEYS */;
 
 -- 테이블 shop.orders 구조 내보내기
@@ -1224,9 +1229,9 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`order_no`),
   KEY `FK_orders_ebook` (`ebook_no`),
   KEY `FK_orders_member` (`member_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 shop.orders:~51 rows (대략적) 내보내기
+-- 테이블 데이터 shop.orders:~54 rows (대략적) 내보내기
 DELETE FROM `orders`;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
 INSERT INTO `orders` (`order_no`, `ebook_no`, `member_no`, `order_price`, `create_date`, `update_date`) VALUES
@@ -1280,7 +1285,17 @@ INSERT INTO `orders` (`order_no`, `ebook_no`, `member_no`, `order_price`, `creat
 	(48, 1, 5, 1000, '2021-09-24 00:00:00', '2021-09-24 00:00:00'),
 	(49, 3, 9, 1000, '2021-09-24 00:00:00', '2021-09-24 00:00:00'),
 	(50, 6, 7, 1000, '2021-09-24 00:00:00', '2021-09-24 00:00:00'),
-	(51, 6, 5, 21397, '2021-09-28 16:04:29', '2021-09-28 16:04:29');
+	(51, 6, 5, 21397, '2021-09-28 16:04:29', '2021-09-28 16:04:29'),
+	(53, 1002, 105, 500000, '2021-09-30 17:41:58', '2021-09-30 17:41:58'),
+	(54, 1001, 105, 8500, '2021-09-30 17:42:03', '2021-09-30 17:42:03'),
+	(55, 1002, 2, 500000, '2021-09-30 17:43:00', '2021-09-30 17:43:00'),
+	(56, 1001, 2, 8500, '2021-09-30 17:43:06', '2021-09-30 17:43:06'),
+	(57, 1002, 5, 500000, '2021-09-30 17:43:36', '2021-09-30 17:43:36'),
+	(58, 1001, 5, 8500, '2021-09-30 17:43:40', '2021-09-30 17:43:40'),
+	(59, 1002, 6, 500000, '2021-09-30 17:43:58', '2021-09-30 17:43:58'),
+	(60, 1002, 7, 500000, '2021-09-30 17:44:15', '2021-09-30 17:44:15'),
+	(61, 1002, 8, 500000, '2021-09-30 17:44:33', '2021-09-30 17:44:33'),
+	(62, 1002, 9, 500000, '2021-09-30 17:44:50', '2021-09-30 17:44:50');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
 -- 테이블 shop.order_comment 구조 내보내기
@@ -1294,7 +1309,7 @@ CREATE TABLE IF NOT EXISTS `order_comment` (
   `update_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 shop.order_comment:~10 rows (대략적) 내보내기
+-- 테이블 데이터 shop.order_comment:~11 rows (대략적) 내보내기
 DELETE FROM `order_comment`;
 /*!40000 ALTER TABLE `order_comment` DISABLE KEYS */;
 INSERT INTO `order_comment` (`order_no`, `ebook_no`, `order_score`, `order_comment_content`, `create_date`, `update_date`) VALUES
@@ -1307,7 +1322,8 @@ INSERT INTO `order_comment` (`order_no`, `ebook_no`, `order_score`, `order_comme
 	(27, 6, 4, '4444', '2021-09-28 13:42:51', '2021-09-28 13:42:50'),
 	(34, 6, 3, '5555', '2021-09-28 13:43:16', '2021-09-28 13:43:18'),
 	(37, 6, 4, '6666', '2021-09-28 13:43:28', '2021-09-28 13:43:27'),
-	(43, 6, 5, '7777', '2021-09-28 13:43:49', '2021-09-28 13:43:53');
+	(43, 6, 5, '7777', '2021-09-28 13:43:49', '2021-09-28 13:43:53'),
+	(57, 1002, 5, '비싼 만큼 재미있음! 추천', '2021-10-01 17:53:55', '2021-10-01 17:53:55');
 /*!40000 ALTER TABLE `order_comment` ENABLE KEYS */;
 
 -- 테이블 shop.qna 구조 내보내기
@@ -1322,14 +1338,15 @@ CREATE TABLE IF NOT EXISTS `qna` (
   `create_date` datetime NOT NULL,
   `update_date` datetime NOT NULL,
   PRIMARY KEY (`qna_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 shop.qna:~2 rows (대략적) 내보내기
+-- 테이블 데이터 shop.qna:~3 rows (대략적) 내보내기
 DELETE FROM `qna`;
 /*!40000 ALTER TABLE `qna` DISABLE KEYS */;
 INSERT INTO `qna` (`qna_no`, `qna_category`, `qna_title`, `qna_content`, `qna_secret`, `member_no`, `create_date`, `update_date`) VALUES
 	(1, '전자책관련', 'test', 'test', 'N', 1, '2021-09-29 15:03:04', '2021-09-29 15:03:07'),
-	(2, '기타', 'test2', 'test2', 'Y', 5, '2021-09-29 16:21:30', '2021-09-29 16:21:31');
+	(2, '기타', 'test2', 'test2 - 수정완', 'Y', 5, '2021-09-29 16:21:30', '2021-09-30 11:32:31'),
+	(3, '전자책관련', 'test3', 'test3', 'Y', 5, '2021-09-30 10:42:04', '2021-10-01 14:45:32');
 /*!40000 ALTER TABLE `qna` ENABLE KEYS */;
 
 -- 테이블 shop.qna_comment 구조 내보내기
@@ -1342,11 +1359,12 @@ CREATE TABLE IF NOT EXISTS `qna_comment` (
   `update_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 shop.qna_comment:~1 rows (대략적) 내보내기
+-- 테이블 데이터 shop.qna_comment:~2 rows (대략적) 내보내기
 DELETE FROM `qna_comment`;
 /*!40000 ALTER TABLE `qna_comment` DISABLE KEYS */;
 INSERT INTO `qna_comment` (`qna_no`, `qna_comment_content`, `member_no`, `create_date`, `update_date`) VALUES
-	(1, 'ㅎㅇ', 4, '2021-09-29 17:20:38', '2021-09-29 17:20:38');
+	(1, 'ㅎㅇ', 4, '2021-09-29 17:20:38', '2021-09-29 17:20:38'),
+	(2, '괜찮아?', 4, '2021-09-30 10:47:54', '2021-09-30 10:47:54');
 /*!40000 ALTER TABLE `qna_comment` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
