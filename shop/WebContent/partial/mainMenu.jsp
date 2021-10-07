@@ -33,7 +33,7 @@
 		<%
 					}
 		%>
-					<a class="btn btn-success btn-sm" href="<%=request.getContextPath()%>/selectOrderListByMember.jsp">MY PAGE</a>
+					<a class="btn btn-success btn-sm" href="<%=request.getContextPath()%>/selectMemberOneByMember.jsp">MY PAGE</a>
 				</li>
 		<%
 			}
