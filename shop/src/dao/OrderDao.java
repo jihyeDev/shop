@@ -257,6 +257,63 @@ public class OrderDao {
 		return list;
 	}
 	
+	// [회원 & 관리자] 주문의 상세 내역을 SELECT 하는 메서드
+	// JOIN SQL문
+	// orderNo을 매개변수로 받아와서 select 함
+	public OrderEbookMember selectOrderOne(int orderNo) throws ClassNotFoundException, SQLException {
+		// oem 객체를 사용하기 위해 null로 초기화
+		OrderEbookMember oem = null;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(orderNo + "<--- OrderDao.selectOrderOne parem : orderNo");
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT o.order_no orderNo, e.ebook_no ebookNo, e.ebook_title ebookTitle, e.ebook_img ebookImg, e.category_name categoryName, e.ebook_author ebookAuthor, e.ebook_company ebookCompany, e.ebook_state ebookState, m.member_no memberNo, m.member_id memberId, o.order_price orderPrice, o.create_date createDate FROM orders o INNER JOIN ebook e INNER JOIN member m ON o.ebook_no = e.ebook_no AND o.member_no = m.member_no WHERE order_no = ? ORDER BY o.create_date DESC;";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, orderNo);
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// 데이터 가공 (자료구조화)
+		// ResultSet이라는 특수한 타입에서 일반화된 타입으로 변환(가공)
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			oem = new OrderEbookMember();
+			
+			Order o = new Order();
+			o.setOrderNo(rs.getInt("orderNo"));
+			o.setOrderPrice(rs.getInt("orderPrice"));
+			o.setCreateDate(rs.getString("createDate"));
+			oem.setOrder(o);
+			
+			Ebook e = new Ebook();
+			e.setEbookNo(rs.getInt("ebookNo"));
+			e.setEbookTitle(rs.getString("ebookTitle"));
+			e.setCategoryName(rs.getString("categoryName"));
+			e.setEbookAuthor(rs.getString("ebookAuthor"));
+			e.setEbookCompany(rs.getString("ebookCompany"));
+			e.setEbookState(rs.getString("ebookState"));
+			e.setEbookImg(rs.getString("ebookImg"));
+			oem.setEbook(e);
+			
+			Member m = new Member();
+			m.setMemberNo(rs.getInt("memberNo"));
+			m.setMemberId(rs.getString("memberId"));
+			oem.setMember(m);
+		}
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+						
+		//oem을 return
+		return oem;
+	}
+	
 	// [회원] 전자책을 주문하는 메서드
 	// Oder 객체로 입력받아온 값을 DB에 insert 함
 	public boolean insertOrder(Order order) throws ClassNotFoundException, SQLException {
