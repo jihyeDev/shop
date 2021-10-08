@@ -100,7 +100,7 @@
 										%>
 												<span>회원 Level.<%=m.getMemberLevel()%></span>
 										<%
-											} else if(m.getMemberLevel() == 1) {
+											} else {
 										%>
 												<span>관리자 Level.<%=m.getMemberLevel()%></span>
 										<%

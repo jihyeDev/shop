@@ -115,7 +115,7 @@
 						<small><%=returnEbook.getEbookAuthor()%> | <%=returnEbook.getEbookCompany()%></small>
 					</div>
 					
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						<table class="mt-4">
 							<tr>
 								<td style="width:70px;"><small>상태</small></td>
@@ -127,28 +127,7 @@
 							</tr>
 						</table>
 					</div>
-					
-					<!-- 로그인 시에만 주문가능한 주문 버튼 -->
-					<div class="col-sm-2 mt-4">
-						<%
-							Member loginMember = (Member)session.getAttribute("loginMember");
-							if(loginMember == null) {
-						%>
-							<a class="btn btn-outline-success btn-sm" href="<%=request.getContextPath()%>/loginForm.jsp">로그인</a>
-							<br><small class="align-middle">후에 주문이 가능합니다</small>
-						<%
-							} else {
-						%>
-								<form method="post" action="<%=request.getContextPath()%>/insertOrderAction.jsp">
-									<input type="hidden" name="ebookNo" value="<%=returnEbook.getEbookNo() %>">
-									<input type="hidden" name="ebookPrice" value="<%=returnEbook.getEbookPrice() %>">
-									<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>">
-									<button type="submit" class="btn btn-success">주문하기</button>
-								</form>
-						<%
-							}
-						%>
-					</div>
+
 				</div>
 				
 				<hr>
@@ -158,6 +137,37 @@
 					<div><%=returnEbook.getEbookSummary()%></div>
 					<br>
 					<div>출판 <%=returnEbook.getCreateDate()%> | 업데이트 <%=returnEbook.getUpdateDate()%></div>
+				</div>
+				
+				<!-- 로그인 시에만 주문가능한 주문 버튼 -->
+				<div class="mt-4">
+					<%
+						Member loginMember = (Member)session.getAttribute("loginMember");
+						if(loginMember == null) {
+					%>
+						<a class="btn btn-outline-success btn-sm" href="<%=request.getContextPath()%>/loginForm.jsp">로그인</a>
+						<br><small class="align-middle">후에 주문이 가능합니다</small>
+					<%
+						} else {
+							// ebookState가 판매중일 때만 주문하기 버튼 출력
+							if(returnEbook.getEbookState().equals("판매중")) {
+					%>
+								<form method="post" action="<%=request.getContextPath()%>/insertOrderAction.jsp">
+									<input type="hidden" name="ebookNo" value="<%=returnEbook.getEbookNo() %>">
+									<input type="hidden" name="ebookPrice" value="<%=returnEbook.getEbookPrice() %>">
+									<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>">
+									<button type="submit" class="btn btn-success">주문하기</button>
+								</form>
+					<%
+							} else {
+					%>
+							<button type="button" class="btn btn-success">
+								<%=returnEbook.getEbookState()%> 판매중지
+							</button>
+					<%
+							}
+						}
+					%>
 				</div>
 				
 			</div>

@@ -155,7 +155,19 @@
 	       					</a>
 	       				</div>
 	       				<small class="mt-2"><%=e.getEbookAuthor()%> | <%=e.getEbookCompany()%></small>
-	       				<div class="font-weight-bold mt-3"><%=price%><small class="font-weight-normal">원</small></div>
+	       				<div class="font-weight-bold mt-3">
+	       					<%
+	       						if(e.getEbookState().equals("판매중")) {
+	       					%>
+	       							<%=price%><small class="font-weight-normal">원</small>
+	       					<%
+	       						} else {
+	       					%>
+	       						<span class="badge badge-secondary"><%=e.getEbookState()%> 판매중지</span>
+	       					<%
+	       						}
+	       					%>
+	       				</div>
        				</div>
 			    </div>
 		<%

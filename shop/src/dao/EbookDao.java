@@ -127,7 +127,7 @@ public class EbookDao {
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "SELECT t.ebook_no ebookNo, e.category_name categoryName, e.ebook_title ebookTitle, e.ebook_img ebookImg, e.ebook_price ebookPrice, e.ebook_author ebookAuthor, e.ebook_company ebookCompany FROM ebook e INNER JOIN (SELECT ebook_no, COUNT(ebook_no) cnt FROM orders GROUP BY ebook_no ORDER BY COUNT(ebook_no) DESC LIMIT 0,4) t ON e.ebook_no = t.ebook_no ORDER BY cnt DESC;";
+		String sql = "SELECT t.ebook_no ebookNo, e.category_name categoryName, e.ebook_title ebookTitle, e.ebook_img ebookImg, e.ebook_price ebookPrice, e.ebook_author ebookAuthor, e.ebook_company ebookCompany, e.ebook_state ebookState FROM ebook e INNER JOIN (SELECT ebook_no, COUNT(ebook_no) cnt FROM orders GROUP BY ebook_no ORDER BY COUNT(ebook_no) DESC LIMIT 0,4) t ON e.ebook_no = t.ebook_no ORDER BY cnt DESC;";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
 		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
@@ -146,6 +146,7 @@ public class EbookDao {
 			ebook.setEbookPrice (rs.getInt("ebookPrice"));
 			ebook.setEbookAuthor (rs.getString("ebookAuthor"));
 			ebook.setEbookCompany (rs.getString("ebookCompany"));
+			ebook.setEbookState(rs.getString("ebookState"));
 			list.add(ebook);
 		}
 		// 종료
@@ -167,7 +168,7 @@ public class EbookDao {
 		// dbUtil 객체 생성
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "SELECT ebook_no ebookNo, category_name categoryName, ebook_title ebookTitle, ebook_img ebookImg, ebook_price ebookPrice, ebook_author ebookAuthor, ebook_company ebookCompany FROM ebook ORDER BY create_date DESC LIMIT 0,4;";
+		String sql = "SELECT ebook_no ebookNo, category_name categoryName, ebook_title ebookTitle, ebook_img ebookImg, ebook_price ebookPrice, ebook_author ebookAuthor, ebook_company ebookCompany, ebook_state ebookState FROM ebook ORDER BY create_date DESC LIMIT 0,4;";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
 		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
@@ -186,6 +187,7 @@ public class EbookDao {
 			ebook.setEbookPrice (rs.getInt("ebookPrice"));
 			ebook.setEbookAuthor (rs.getString("ebookAuthor"));
 			ebook.setEbookCompany (rs.getString("ebookCompany"));
+			ebook.setEbookState(rs.getString("ebookState"));
 			list.add(ebook);
 		}
 		// 종료
