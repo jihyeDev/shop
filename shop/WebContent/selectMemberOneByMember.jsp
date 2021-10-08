@@ -91,7 +91,7 @@
 						내가 질문한 <span style="color:red;">QnA들의 모음과 답변</span>입니다.<br>궁굼한 점을 전부 해결해 보세요.
 					</div>
 					<a class="btn btn-outline-success btn-sm" href="<%=request.getContextPath()%>/selectQnaListByMember.jsp">나의 질문</a>
-					<a class="btn btn-outline-success btn-sm" href="<%=request.getContextPath()%>/selectQnaList.jsp">질문하기</a>
+					<a class="btn btn-outline-success btn-sm" href="<%=request.getContextPath()%>/insertQnaForm.jsp">질문하기</a>
 				</div>
 			</div>
 			

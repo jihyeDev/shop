@@ -96,7 +96,7 @@ public class QnaDao {
 		return lastPage;
 	}
 	
-	// [사용자] Qna의 제목을 사용하여 공지사항을 검색하는 메서드
+	// [사용자] Qna의 제목을 사용하여 Qna을 검색하는 메서드
 	public ArrayList<Qna> selectQnaListBySearch (int beginRow, int ROW_PER_PAGE, String searchQnaTitle) throws ClassNotFoundException, SQLException {
 		// list라는 리스트를 사용하기 위해 생성
 		ArrayList<Qna> list = new ArrayList<Qna>();
@@ -367,6 +367,46 @@ public class QnaDao {
 		stmt.close();
 		conn.close();
 				
+		//list를 return
+		return list;
+	}
+	
+	// [회원] 회원 본인이 작성한 Qna의 list를 select하여 출력해주는 메서드
+	public ArrayList<Qna> selectQnaListByMember (int memberNo) throws ClassNotFoundException, SQLException {
+		// list라는 리스트를 사용하기 위해 생성
+		ArrayList<Qna> list = new ArrayList<Qna>();
+			
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT qna_no qnaNo, qna_category qnaCategory, qna_title qnaTitle, qna_content qnaContent, qna_secret qnaSecret, member_no memberNo, create_date createDate, update_date updateDate FROM qna WHERE member_no=? ORDER BY createDate DESC";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, memberNo);
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+			
+		// 데이터 가공 (자료구조화)
+		// ResultSet이라는 특수한 타입에서 ArrayList라는 일반화된 타입으로 변환(가공)
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			// Qna 객체 생성 후 저장
+			Qna qna = new Qna();
+			qna.setQnaNo(rs.getInt("qnaNo"));
+			qna.setQnaCategory(rs.getString("qnaCategory"));
+			qna.setQnaTitle(rs.getString("qnaTitle"));
+			qna.setQnaContent(rs.getString("qnaContent"));
+			qna.setQnaSecret(rs.getString("qnaSecret"));
+			qna.setMemberNo(rs.getInt("memberNo"));
+			qna.setCreateDate(rs.getString("createDate"));
+			qna.setUpdateDate(rs.getString("updateDate"));
+			list.add(qna);
+		}
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+			
 		//list를 return
 		return list;
 	}

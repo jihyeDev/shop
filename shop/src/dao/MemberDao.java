@@ -304,7 +304,7 @@ public class MemberDao {
 		return lastPage;
 	}
 	
-	// [관리자] 특정회원의 정보를 SELECT하는 메서드
+	// [관리자 & 회원] 특정회원의 정보를 SELECT하는 메서드
 	// memberNo를 받아와서 한 행을 SELECT 한 뒤 자료구조화
 	public Member selectMemberOne (int memberNo) throws ClassNotFoundException, SQLException {	
 		// member 객체를 사용하기 위해 null로 초기화
@@ -449,6 +449,39 @@ public class MemberDao {
 		return result;
 	}
 	
+	// [회원] 회원 본인이 회원 탈퇴하는 메서드
+	// memberNo를 입력받아와서 삭제하는 메서드
+	public boolean deleteMemberByMember(int memberNo, String memberPw) throws ClassNotFoundException, SQLException{
+		boolean result = false;
+		
+		// 매개변수값은 무조건! 디버깅
+		System.out.println(memberNo + "<--- MemberDao.deleteMemberByMember parem : memberNo");
+		System.out.println(memberPw + "<--- MemberDao.deleteMemberByMember parem : memberPw");
+										
+		// DB 실행
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "DELETE FROM member WHERE member_no=? && member_pw=PASSWORD(?)";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, memberNo);
+		stmt.setString(2, memberPw);
+										
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+										
+		// DELETE 실행
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
+								
+		// 종료
+		stmt.close();
+		conn.close();
+		
+		return result;
+	}
+	
 	// [관리자] 전체 회원의 수를 알 수 있는 메서드
 	// totalMember(전체 회원)의 값을 구해서 리턴해줌
 	public int selectTotalMember() throws ClassNotFoundException, SQLException{
@@ -474,5 +507,41 @@ public class MemberDao {
 		conn.close();
 			
 		return totalMember;
+	}
+	
+	// [회원] 회원의 myPage에서 회원정보를 수정하는 메서드
+	// Member member : 매개값을 저장한 객체를 받아옴
+	// 받아온 memberPw와 현재 저장된 DB의 memberPw가 같아야지 변경함
+	public boolean updateMemberByMember(Member member) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
+		// 매개변수값은 무조건! 디버깅
+		System.out.println(member + "<--- MemberDao.updateMemberByMember parem : member");
+								
+		// DB 실행
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "UPDATE member SET member_name=?, member_age=?, member_gender=? , update_date=now() WHERE member_no=? && member_pw=PASSWORD(?)";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, member.getMemberName());
+		stmt.setInt(2, member.getMemberAge());
+		stmt.setString(3, member.getMemberGender());
+		stmt.setInt(4, member.getMemberNo());
+		stmt.setString(5, member.getMemberPw());
+								
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+								
+		// UPDATE 실행
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
+						
+		// 종료
+		stmt.close();
+		conn.close();
+		
+		return result;
 	}
 }
