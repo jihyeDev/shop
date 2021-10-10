@@ -2,6 +2,8 @@
 <%@ page import="vo.*" %>
 <%@ page import="dao.*" %>
 <%@ page import="java.util.*" %>
+<!-- URLDecoder 추가 -->
+<%@ page import = "java.net.URLDecoder"%>
 <%@ page import="com.oreilly.servlet.MultipartRequest"%> <!-- request 대신 -->
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%> <!-- 파일이름중복을 피할수 있도록 -->
 <!DOCTYPE html>
@@ -9,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>전자책 입력폼</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -82,7 +85,7 @@
 				</form>
 				
 				<!-- 전자책 입력 폼 -->
-				<form method="post" action="<%=request.getContextPath()%>/admin/insertEbookAction.jsp" enctype="multipart/form-data">
+				<form id="insertForm" method="post" action="<%=request.getContextPath()%>/admin/insertEbookAction.jsp" enctype="multipart/form-data">
 				<!-- multipart/form-data : 액션으로 기계어코드를 넘길때 사용 -->
 	        	<!-- application/x-www-form-urlencoded : 액션으로 문자열 넘길때 사용 -->
 	        	
@@ -90,13 +93,13 @@
 					<tr>
 						<td>TITLE </td>
 						<td>
-							<input type="text" name="ebookTitle" class="form-control" readonly="readonly" value="<%=ebookTitleCheck%>">
+							<input id="ebookTitle" type="text" name="ebookTitle" class="form-control" readonly="readonly" value="<%=ebookTitleCheck%>">
 						</td>
 					</tr>
 					<tr>
 						<td>CATEGORY </td>
 						<td>
-							<select name="categoryName" class="custom-select">
+							<select id="categoryName" name="categoryName" class="custom-select">
 								<%
 		            				for(Category c : categoryList) {
 		         				%>
@@ -109,42 +112,42 @@
 					</tr>
 					<tr>
 						<td>IMG </td>
-						<td><input type="file" name="ebookImg"></td>
+						<td><input id="ebookImg" type="file" name="ebookImg"></td>
 					</tr>
 					<tr>
 						<td>AUTHOR </td>
 						<td>
-							<input type="text" name="ebookAuthor" class="form-control">
+							<input id="ebookAuthor" type="text" name="ebookAuthor" class="form-control">
 						</td>
 					</tr>
 					<tr>
 						<td>ISBN </td>
 						<td>
-							<input type="text" name="ebookIsbn" class="form-control">
+							<input id="ebookIsbn" type="text" name="ebookIsbn" class="form-control">
 						</td>
 					</tr>
 					<tr>
 						<td>COMPANY </td>
 						<td>
-							<input type="text" name="ebookCompany" class="form-control">
+							<input id="ebookCompany" type="text" name="ebookCompany" class="form-control">
 						</td>
 					</tr>
 					<tr>
 						<td>PAGE COUNT </td>
 						<td>
-							<input type="text" name="ebookPageCount" class="form-control">
+							<input id="ebookPageCount" type="text" name="ebookPageCount" class="form-control">
 						</td>
 					</tr>
 					<tr>
 						<td>SUMMARY </td>
 						<td>
-							<input type="text" name="ebookSummary" class="form-control">
+							<textarea id="ebookSummary" name="ebookSummary" class="form-control"></textarea>
 						</td>
 					</tr>
 					<tr>
 						<td>STATE </td>
 						<td>
-							<select name="ebookState" class="custom-select">
+							<select id="ebookState" name="ebookState" class="custom-select">
 								<option value="판매중">판매중</option>
 								<option value="품절">품절</option>
 								<option value="절판">절판</option>
@@ -155,15 +158,53 @@
 					<tr>
 						<td>PRICE </td>
 						<td>
-							<input type="text" name="ebookPrice" class="form-control">
+							<input id="ebookPrice" type="text" name="ebookPrice" class="form-control">
 						</td>
 					</tr>
 				</table>
-				<button class="btn btn-outline-secondary center-block" type="submit">추가</button>
+				<button id="btn" class="btn btn-outline-secondary center-block" type="button">추가</button>
 				</form>
 			</div>
 		
 		</div>
 	</div>
+	<script>
+	$('#btn').click(function(){
+			if($('#ebookTitle').val() == '') {
+				alert('책 제목(TITLE)을 입력하세요!');
+				return;
+			}
+			if($('#ebookImg').val() == '') {
+				alert('책 이미지(IMG)를 입력하세요!');
+				return;
+			}
+			if($('#ebookAuthor').val() == '') {
+				alert('책 저자(AUTHOR)를 입력하세요!');
+				return;
+			}
+			if($('#ebookIsbn').val() == '') {
+				alert('책 ISBN을 입력하세요!');
+				return;
+			}
+			if($('#ebookCompany').val() == '') {
+				alert('책 출판사(COMPANY)를 입력하세요!');
+				return;
+			}
+			if($('#ebookPageCount').val() == '') {
+				alert('책 총 페이지(PAGE COUNT)를 입력하세요!');
+				return;
+			}
+			if($('#ebookSummary').val() == '') {
+				alert('책 요악,개요(SUMMARY)를 입력하세요!');
+				return;
+			}
+			if($('#ebookPrice').val() == '') {
+				alert('책 가격(PRICE)을 입력하세요!');
+				return;
+			}
+			
+			$('#insertForm').submit();
+		});
+	</script>
 </body>
 </html>

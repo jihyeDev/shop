@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "dao.*"%>
 <%@ page import = "vo.*"%>
+<!-- URLEncoder 추가 -->
+<%@ page import = "java.net.URLEncoder"%>
 <%
 	// selectEbookTitleCheckAction.jsp 디버깅 구분선
 	System.out.println("----------selectEbookTitleCheckAction.jsp----------");
@@ -33,10 +35,13 @@
 	// 입력받은 ebookTitleCheck를 중복값인지 확인하는 selectEbookTitle 메서드를 호출하여 리턴값을 result에 저장
 	String result = ebookDao.selectEbookTitle(ebookTitleCheck);
 	
+	// 전송 문자 UTF-8 인코딩 추가하여 encText로 전송
+	String encText = URLEncoder.encode(ebookTitleCheck, "UTF-8");
+	
 	
 	// result 값이 null이면 추가 가능한 전자책, 아니라면 이미 입력된 전자책
 	if(result == null) {
-		response.sendRedirect(request.getContextPath()+"/admin/insertEbookForm.jsp?ebookTitleCheck="+ebookTitleCheck);
+		response.sendRedirect(request.getContextPath()+"/admin/insertEbookForm.jsp?ebookTitleCheck="+encText);
 	} else {
 		response.sendRedirect(request.getContextPath()+"/admin/insertEbookForm.jsp?titleCheckResult=Y");
 	}
