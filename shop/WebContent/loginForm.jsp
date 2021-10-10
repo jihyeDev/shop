@@ -45,7 +45,14 @@
 	</div>
 	
 	<script>
-		$('#loginBtn').click(function(){
+		// 엔터키를 클릭했을 때 버튼을 누르는 클릭이벤트 실행
+		$(document).keypress(function(event){
+			if(event.keyCode == '13') {
+				$('#loginBtn').click();
+			}
+		});
+		
+		$('#loginBtn').click(function() {
 			// 버튼을 click했을 때
 			if($('#memberId').val() == '') { // id가 공백이면
 				alert('ID를 입력하세요');
