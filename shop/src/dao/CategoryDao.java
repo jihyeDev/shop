@@ -150,4 +150,37 @@ public class CategoryDao {
 		
 		return result;
 	}
+	
+	// [관리자] 특정 카테고리를 삭제하는 메서드
+	// 카테고리 삭제시 관련된 전자책도 모두 삭제 함
+	// categoryName을 받아와서 category 테이블의 카테고리를 삭제하고 ebook 테이블의 categoryName을가지고 있는 행도 삭제함
+	public boolean deleteCategoryByAdmin(String categoryName) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(categoryName + "<--- CategoryDao.deleteCategoryByAdmin parem : categoryName");
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "DELETE FROM category WHERE category_name=?;";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, categoryName);
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// DELETE 실행
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
+		// 종료
+		stmt.close();
+		conn.close();
+				
+		// 성공 : result = true, 실패 : false
+		return result;
+	}
 }

@@ -43,13 +43,14 @@
 			
 				<h3 class="font-weight-bold">카테고리 목록</h3>
 				
-				<table class="table table-bordered table-sm text-center mt-5 w-50">
+				<table class="table table-bordered table-sm text-center mt-5" style="width:70%;">
 					<thead>
 						<tr>
 							<th>CATEGORY</th>
 							<th>STATE</th>
 							<th>UPDATE</th>
 							<th>CREATE</th>
+							<th>DELETE</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -82,6 +83,7 @@
 									</td>
 									<td><%=c.getUpdateDate()%></td>
 									<td><%=c.getCreateDate()%></td>
+									<td><a href="<%=request.getContextPath()%>/admin/deleteCategoryForm.jsp?categoryName=<%=c.getCategoryName()%>" class="btn btn-light btn-sm">삭제</a></td>
 								</tr>
 						<%
 							}
