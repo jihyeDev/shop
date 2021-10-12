@@ -241,4 +241,123 @@ public class OrderCommentDao {
 		//list를 return
 		return list;
 	}
+	
+	// [관리자] 모든 상품평을 SELECT 하는 메서드
+	// 관리자가 관리할 수 있게 입력된 모든 후기를 select 한다
+	public ArrayList<OrderComment> selectCommentListByAdmin(int beginRow, int rowPerPage) throws ClassNotFoundException, SQLException{
+		// list라는 리스트를 사용하기 위해 생성
+		ArrayList<OrderComment> list = new ArrayList<OrderComment>();
+		
+		// 매개변수 값을 디버깅
+		System.out.println(beginRow + "<--- OrderCommentDao.selectCommentListByAdmin parem : beginRow");
+		System.out.println(rowPerPage + "<--- OrderCommentDao.selectCommentListByAdmin parem : rowPerPage");
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT order_no orderNo, ebook_no ebookNo, order_score orderScore, order_comment_content orderCommentContent, create_date createDate, update_date updateDate FROM order_comment ORDER BY create_date DESC LIMIT ?,?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, beginRow);
+		stmt.setInt(2, rowPerPage);
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// 데이터 가공 (자료구조화)
+		// ResultSet이라는 특수한 타입에서 ArrayList라는 일반화된 타입으로 변환(가공)
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			// orderComment 객체 생성 후 저장
+			OrderComment orderComment = new OrderComment();
+			orderComment.setOrderNo(rs.getInt("orderNo"));
+			orderComment.setEbookNo(rs.getInt("ebookNo"));
+			orderComment.setOrderScore(rs.getInt("orderScore"));
+			orderComment.setOrderCommentContent(rs.getString("orderCommentContent"));
+			orderComment.setCreateDate(rs.getString("createDate"));
+			orderComment.setUpdateDate(rs.getString("updateDate"));
+			list.add(orderComment);
+		}
+		// 종료
+		rs.close();
+		stmt.close();
+		conn.close();
+				
+		//list를 return
+		return list;
+	}
+	
+	// [관리자] 상품평 목록을 페이징하기 위해 마지막 페이지를 구하는 메서드
+	// totalCount(전체 행)의 값을 구해서 마지막 페이지의 값을 리턴해줌
+	// ROW_PER_PAGE : 한 페이지에 보여줄 행의 값
+	public int selectCommentListLastPageByAdmin(int ROW_PER_PAGE) throws ClassNotFoundException, SQLException{
+		int totalCount = 0;
+		int lastPage = 0;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(ROW_PER_PAGE + "<--- OrderCommentDao.selectCommentListLastPageByAdmin parem : ROW_PER_PAGE");
+		
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT count(*) FROM order_comment";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		ResultSet rs = stmt.executeQuery();
+		// 디버깅 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println("총 행의 개수 stmt : "+stmt);
+		
+		// totalCount 저장
+		if(rs.next()) {
+			totalCount = rs.getInt("count(*)");
+		}
+		System.out.println("totalCounnt(총 행의 개수) : "+totalCount);
+				
+		// 마지막 페이지
+		// lastPage를 전체 행의 수와 한 페이지에 보여질 행의 수(rowPerPage)를 이용하여 구한다
+		lastPage = totalCount / ROW_PER_PAGE;
+		if(totalCount % ROW_PER_PAGE != 0) {
+			lastPage+=1;
+			}
+		System.out.println("lastPage(마지막 페이지 번호) : "+lastPage);
+				
+		rs.close();
+		stmt.close();
+		conn.close();
+				
+		return lastPage;
+	}
+	
+	// [관리자] 특정 상품평을 취소하는 메서드
+	// 받아온 orderNo을 가지고 있는 orderComment의 테이블의 행 삭제
+	// <-- 상품평 입력 시 중복 입력을 못하기 때문에 가능
+	public boolean deleteOrderCommentByAdmin(int orderNo) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
+		// 매개변수 값을 디버깅
+		System.out.println(orderNo + "<--- orderCommentDao.deleteOrderCommentByAdmin parem : orderNo");
+		
+		// DB 실행
+		// dbUtil 객체 생성
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "DELETE FROM order_comment WHERE order_no=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, orderNo);
+		
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+		
+		// DELETE 실행
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
+		// 종료
+		stmt.close();
+		conn.close();
+				
+		// 성공 : result = true, 실패 : false
+		return result;
+	}
 }

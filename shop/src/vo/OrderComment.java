@@ -50,4 +50,5 @@ public class OrderComment {
 				+ ", orderCommentContent=" + orderCommentContent + ", createDate=" + createDate + ", updateDate="
 				+ updateDate + "]";
 	}
+	
 }
