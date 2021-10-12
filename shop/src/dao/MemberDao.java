@@ -544,4 +544,73 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	// [회원] 회원의 myPage에서 회원 Id를 수정하는 메서드
+	// Member member : 매개값을 저장한 객체를 받아옴
+	// 받아온 memberPw와 현재 저장된 DB의 memberPw가 같아야지 변경함
+	public boolean updateMemberIdByMember(Member member) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
+		// 매개변수값은 무조건! 디버깅
+		System.out.println(member + "<--- MemberDao.updateMemberIdByMember parem : member");
+								
+		// DB 실행
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "UPDATE member SET member_id=?, update_date=now() WHERE member_no=? && member_pw=PASSWORD(?)";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, member.getMemberId());
+		stmt.setInt(2, member.getMemberNo());
+		stmt.setString(3, member.getMemberPw());
+								
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+								
+		// UPDATE 실행
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
+						
+		// 종료
+		stmt.close();
+		conn.close();
+		
+		return result;
+	}
+	
+	// [회원] 회원의 myPage에서 회원 Pw를 수정하는 메서드
+	// Member member : 매개값을 저장한 객체를 받아옴, memberNewPw : 수정할 비밀번호
+	// 받아온 memberPw와 현재 저장된 DB의 memberPw가 같아야지 변경함
+	public boolean updateMemberPwByMember(Member member, String memberNewPw) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		
+		// 매개변수값은 무조건! 디버깅
+		System.out.println(member + "<--- MemberDao.updateMemberPwByMember parem : member");
+		System.out.println(memberNewPw + "<--- MemberDao.updateMemberPwByMember parem : memberNewPw");
+								
+		// DB 실행
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "UPDATE member SET member_pw=?, update_date=now() WHERE member_no=? && member_pw=PASSWORD(?)";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, memberNewPw);
+		stmt.setInt(2, member.getMemberNo());
+		stmt.setString(3, member.getMemberPw());
+								
+		// 디버깅 코드 : 쿼리내용과 표현식의 파라미터값 확인가능
+		System.out.println(stmt + "<--- stmt");
+								
+		// UPDATE 실행
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			result = true;
+		}
+						
+		// 종료
+		stmt.close();
+		conn.close();
+		
+		return result;
+	}
 }

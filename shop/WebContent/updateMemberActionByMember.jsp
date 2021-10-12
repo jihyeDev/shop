@@ -50,10 +50,10 @@
 	// 회원이 회원정보를 수정하는 memberDao의 updateMemberByMember 메서드 호출
 	// 회원정보 수정시 매개값의 memberPw와 DB에 저장된 member_pw가 같아야지만 수정 가능
 	if(memberDao.updateMemberByMember(paramMember)) {
-		System.out.println("PASSWORD 수정 성공!");
+		System.out.println("회원정보 수정 성공!");
 		
 	} else {
-		System.out.println("PASSWORD 수정 실패");
+		System.out.println("회원정보 수정 실패");
 	}
 	response.sendRedirect(request.getContextPath()+"/selectMemberOneByMember.jsp");
 	
