@@ -10,7 +10,7 @@ import commons.DBUtil;
 import vo.Qna;
 
 public class QnaDao {
-	// [사용자] qna를 전체 SELECT하는 메서드
+	// [관리자 & 사용자] qna를 전체 SELECT하는 메서드
 	public ArrayList<Qna> selectQnaList (int beginRow, int ROW_PER_PAGE) throws ClassNotFoundException, SQLException {
 		// list라는 리스트를 사용하기 위해 생성
 		ArrayList<Qna> list = new ArrayList<Qna>();
@@ -55,7 +55,7 @@ public class QnaDao {
 		return list;
 	}
 		
-	// [사용자] Qna 목록 페이지의 마지막 페이지를 구하는 메서드
+	// [관리자 & 사용자] Qna 목록 페이지의 마지막 페이지를 구하는 메서드
 	// totalCount(전체 행)의 값을 구해서 마지막 페이지의 값을 리턴해줌
 	// ROW_PER_PAGE : 한 페이지에 보여줄 행의 값
 	public int selectQnaListLastPage(int ROW_PER_PAGE) throws ClassNotFoundException, SQLException{
@@ -297,9 +297,9 @@ public class QnaDao {
 		return result;
 	}
 	
-	// [회원] 특정 QnA를 삭제하는 메서드
+	// [관리자 & 회원] 특정 QnA를 삭제하는 메서드
 	// 받아온 qnaNo을 가지고 있는 qna 테이블의 행 삭제
-	public boolean deleteQnaByMember(int qnaNo) throws ClassNotFoundException, SQLException {
+	public boolean deleteQna(int qnaNo) throws ClassNotFoundException, SQLException {
 		boolean result = false;
 		
 		// 매개변수 값을 디버깅
