@@ -14,10 +14,12 @@
 
 
 -- shop 데이터베이스 구조 내보내기
+DROP DATABASE IF EXISTS `shop`;
 CREATE DATABASE IF NOT EXISTS `shop` /*!40100 DEFAULT CHARACTER SET utf8mb3 */;
 USE `shop`;
 
 -- 테이블 shop.category 구조 내보내기
+DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
   `category_name` varchar(200) NOT NULL,
   `category_state` enum('Y','N') NOT NULL DEFAULT 'Y',
@@ -39,6 +41,7 @@ INSERT INTO `category` (`category_name`, `category_state`, `update_date`, `creat
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 
 -- 테이블 shop.ebook 구조 내보내기
+DROP TABLE IF EXISTS `ebook`;
 CREATE TABLE IF NOT EXISTS `ebook` (
   `ebook_no` int(11) NOT NULL AUTO_INCREMENT,
   `ebook_isbn` char(13) NOT NULL,
@@ -58,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `ebook` (
   CONSTRAINT `FK_ebook_category` FOREIGN KEY (`category_name`) REFERENCES `category` (`category_name`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1009 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 shop.ebook:~1,004 rows (대략적) 내보내기
+-- 테이블 데이터 shop.ebook:~1,003 rows (대략적) 내보내기
 DELETE FROM `ebook`;
 /*!40000 ALTER TABLE `ebook` DISABLE KEYS */;
 INSERT INTO `ebook` (`ebook_no`, `ebook_isbn`, `category_name`, `ebook_title`, `ebook_author`, `ebook_company`, `ebook_page_count`, `ebook_price`, `ebook_img`, `ebook_summary`, `ebook_state`, `create_date`, `update_date`) VALUES
@@ -1068,6 +1071,7 @@ INSERT INTO `ebook` (`ebook_no`, `ebook_isbn`, `category_name`, `ebook_title`, `
 /*!40000 ALTER TABLE `ebook` ENABLE KEYS */;
 
 -- 테이블 shop.member 구조 내보내기
+DROP TABLE IF EXISTS `member`;
 CREATE TABLE IF NOT EXISTS `member` (
   `member_no` int(11) NOT NULL AUTO_INCREMENT,
   `member_id` varchar(50) NOT NULL,
@@ -1082,7 +1086,7 @@ CREATE TABLE IF NOT EXISTS `member` (
   UNIQUE KEY `member_id` (`member_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 shop.member:~102 rows (대략적) 내보내기
+-- 테이블 데이터 shop.member:~103 rows (대략적) 내보내기
 DELETE FROM `member`;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
 INSERT INTO `member` (`member_no`, `member_id`, `member_pw`, `member_level`, `member_name`, `member_age`, `member_gender`, `update_date`, `create_date`) VALUES
@@ -1188,10 +1192,11 @@ INSERT INTO `member` (`member_no`, `member_id`, `member_pw`, `member_level`, `me
 	(101, '422384179-3', '*A4B6157319038724E3560894F7F932C8886EBFCF', 0, 'Roseanne', 59, '여', '2021-09-15 00:00:00', '2021-09-15 00:00:00'),
 	(102, '401585780-1', '*A4B6157319038724E3560894F7F932C8886EBFCF', 0, 'Germayne', 62, '남', '2021-09-15 00:00:00', '2021-09-15 00:00:00'),
 	(103, '502444530-9', '*A4B6157319038724E3560894F7F932C8886EBFCF', 0, 'Rolfe', 30, '여', '2021-09-15 00:00:00', '2021-09-15 00:00:00'),
-	(105, 'soymilk0322', '*A4B6157319038724E3560894F7F932C8886EBFCF', 0, '최지혜', 23, '여', '2021-09-30 17:41:43', '2021-09-30 17:41:43');
+	(105, 'soymilk_s2', '1801', 0, '최지혜', 23, '여', '2021-10-12 17:26:17', '2021-09-30 17:41:43');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 
 -- 테이블 shop.notice 구조 내보내기
+DROP TABLE IF EXISTS `notice`;
 CREATE TABLE IF NOT EXISTS `notice` (
   `notice_no` int(11) NOT NULL AUTO_INCREMENT,
   `notice_title` varchar(500) NOT NULL,
@@ -1214,6 +1219,7 @@ INSERT INTO `notice` (`notice_no`, `notice_title`, `notice_content`, `member_no`
 /*!40000 ALTER TABLE `notice` ENABLE KEYS */;
 
 -- 테이블 shop.orders 구조 내보내기
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `order_no` int(11) NOT NULL AUTO_INCREMENT,
   `ebook_no` int(11) NOT NULL,
@@ -1226,11 +1232,10 @@ CREATE TABLE IF NOT EXISTS `orders` (
   KEY `FK_orders_member` (`member_no`)
 ) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 shop.orders:~55 rows (대략적) 내보내기
+-- 테이블 데이터 shop.orders:~62 rows (대략적) 내보내기
 DELETE FROM `orders`;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
 INSERT INTO `orders` (`order_no`, `ebook_no`, `member_no`, `order_price`, `create_date`, `update_date`) VALUES
-	(1, 2, 5, 1000, '2021-09-24 00:00:00', '2021-09-24 00:00:00'),
 	(2, 10, 5, 1000, '2021-09-24 00:00:00', '2021-09-24 00:00:00'),
 	(3, 10, 6, 1000, '2021-09-24 00:00:00', '2021-09-24 00:00:00'),
 	(4, 3, 8, 1000, '2021-09-24 00:00:00', '2021-09-24 00:00:00'),
@@ -1295,6 +1300,7 @@ INSERT INTO `orders` (`order_no`, `ebook_no`, `member_no`, `order_price`, `creat
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
 -- 테이블 shop.order_comment 구조 내보내기
+DROP TABLE IF EXISTS `order_comment`;
 CREATE TABLE IF NOT EXISTS `order_comment` (
   `order_no` int(11) NOT NULL,
   `ebook_no` int(11) NOT NULL,
@@ -1309,7 +1315,6 @@ DELETE FROM `order_comment`;
 /*!40000 ALTER TABLE `order_comment` DISABLE KEYS */;
 INSERT INTO `order_comment` (`order_no`, `ebook_no`, `order_score`, `order_comment_content`, `create_date`, `update_date`) VALUES
 	(1, 2, 4, '헤헤', '2021-09-27 16:36:38', '2021-09-27 16:36:38'),
-	(42, 10, 1, '별점 신기하다 test', '2021-09-27 17:45:10', '2021-09-27 17:45:10'),
 	(6, 6, 5, '1111', '2021-09-28 13:41:32', '2021-09-28 13:41:35'),
 	(17, 6, 3, '2222', '2021-09-28 13:41:42', '2021-09-28 13:41:41'),
 	(24, 6, 5, '3333', '2021-09-28 13:42:26', '2021-09-28 13:42:28'),
@@ -1317,10 +1322,13 @@ INSERT INTO `order_comment` (`order_no`, `ebook_no`, `order_score`, `order_comme
 	(34, 6, 3, '5555', '2021-09-28 13:43:16', '2021-09-28 13:43:18'),
 	(37, 6, 4, '6666', '2021-09-28 13:43:28', '2021-09-28 13:43:27'),
 	(43, 6, 5, '7777', '2021-09-28 13:43:49', '2021-09-28 13:43:53'),
-	(57, 1002, 5, '비싼 만큼 재미있음! 추천', '2021-10-01 17:53:55', '2021-10-01 17:53:55');
+	(57, 1002, 5, '비싼 만큼 재미있음! 추천', '2021-10-01 17:53:55', '2021-10-01 17:53:55'),
+	(44, 10, 4, '독학할 때 도움이 정말 많이 돼요!', '2021-10-12 15:27:02', '2021-10-12 15:27:02'),
+	(42, 10, 5, '딥러닝이라는 주제를 쉽게 풀어준 책이라 좋아요', '2021-10-12 15:27:38', '2021-10-12 15:27:38');
 /*!40000 ALTER TABLE `order_comment` ENABLE KEYS */;
 
 -- 테이블 shop.qna 구조 내보내기
+DROP TABLE IF EXISTS `qna`;
 CREATE TABLE IF NOT EXISTS `qna` (
   `qna_no` int(11) NOT NULL AUTO_INCREMENT,
   `qna_category` enum('전자책관련','개인정보관련','기타') NOT NULL,
@@ -1343,6 +1351,7 @@ INSERT INTO `qna` (`qna_no`, `qna_category`, `qna_title`, `qna_content`, `qna_se
 /*!40000 ALTER TABLE `qna` ENABLE KEYS */;
 
 -- 테이블 shop.qna_comment 구조 내보내기
+DROP TABLE IF EXISTS `qna_comment`;
 CREATE TABLE IF NOT EXISTS `qna_comment` (
   `qna_no` int(11) NOT NULL,
   `qna_comment_content` text NOT NULL,
